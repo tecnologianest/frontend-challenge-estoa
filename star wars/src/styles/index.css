@@ -3,6 +3,8 @@ html{
 	margin: 0;
 	padding: 0;
 	border: 0;
+	height: 100%;
+	font-family: 'Aboreto', cursive;
 }
 
 body, div, span, applet, object, iframe,
@@ -30,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	height: 100%;
 	line-height: 1;
 }
 ol, ul {
@@ -46,4 +49,24 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+#root{
+	height: 100%;
+}
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	height: 100%;
+}
+.header_title{
+	width: 100%;
+	height: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 10px 5px 5px red;
+}
+.title{
+	font-size: 35px;
 }
