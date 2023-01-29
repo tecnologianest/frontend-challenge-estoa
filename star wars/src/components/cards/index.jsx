@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import api from '../../service/api'
 import { LiCard } from './LiCard'
 import './style.css'
 
