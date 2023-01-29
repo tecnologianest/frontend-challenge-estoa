@@ -1,7 +1,7 @@
 import './style.css'
 
 export const LiCard = ({people, setInfoCard, name, peopleData, abrirModal}) =>{
-  
+
   const getCardId = () =>{
     peopleData.filter(item => {
       if(item.name === name){

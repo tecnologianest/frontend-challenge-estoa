@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { UseContextAll } from '../../context/ContextAll'
 
 const HomePage = () => {
-  const { abrirModal, peopleData, openModal, fecharModal, setInfoCard, infoCard } =
+  const { abrirModal, peopleData, openModal, fecharModal, setInfoCard, infoCard, species } =
     useContext(UseContextAll)
 
   return (
@@ -18,6 +18,7 @@ const HomePage = () => {
         />
       </header>
       <Cards
+        species={species}
         abrirModal={abrirModal}
         peopleData={peopleData}
         setInfoCard={setInfoCard}

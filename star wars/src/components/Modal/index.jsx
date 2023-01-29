@@ -1,6 +1,6 @@
 import './style.css'
 
-export const Modal = ({fecharModal, openModal,infoCard}) =>{
+export const Modal = ({fecharModal, openModal, infoCard, }) =>{
 
   return openModal ? (
     <div className="fade_modal">

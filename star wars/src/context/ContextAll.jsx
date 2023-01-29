@@ -8,7 +8,8 @@ const AuthProvider = ({ children }) => {
   const [openModal, setOpenModal] = useState(false)
   const [peopleData, setPeoplesData] = useState([])
   const [infoCard, setInfoCard] = useState([])
-  
+  const [species, setSpecies] = useState([])
+
   useEffect(()=>{
     api.get('/people/')
     .then(res => setPeoplesData(res.data.results))
@@ -23,6 +24,12 @@ const AuthProvider = ({ children }) => {
     setOpenModal(false)
   }
 
+  useEffect(() =>{
+      api.get(`species/`)
+        .then(res => setSpecies(res.data.results))
+        .catch(err => console.log(err))
+  }, [])
+
   return(
     <UseContextAll.Provider value={{
       openModal,
@@ -30,7 +37,8 @@ const AuthProvider = ({ children }) => {
       abrirModal,
       fecharModal,
       infoCard,
-      setInfoCard
+      setInfoCard,
+      species
     }}>
       {children}
     </UseContextAll.Provider>
