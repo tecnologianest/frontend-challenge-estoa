@@ -1,7 +1,18 @@
 import './style.css'
 
-export const LiCard = ({people, abrirModal}) =>{
+export const LiCard = ({people, setInfoCard, name, peopleData, abrirModal}) =>{
   
+  const getCardId = () =>{
+    peopleData.filter(item => {
+      if(item.name === name){
+        setInfoCard(item)
+        abrirModal()
+        return item
+      }
+      return{}
+    })
+  }
+
   return(
     <li className='liCard'>
       <div className='div_texto'>
@@ -14,7 +25,7 @@ export const LiCard = ({people, abrirModal}) =>{
       </div>
       <div className='div_button'>
         <p className='description_fim'>Quer saber mais?</p>
-        <button className='button_card' onClick={abrirModal}>Clique aqui!</button>
+        <button className='button_card' onClick={getCardId}>Clique aqui!</button>
       </div>
     </li>
   )
