@@ -21,7 +21,7 @@
   padding: 20px;
   animation: rotate 2s;
   background-image: url(https://i.pinimg.com/736x/b8/9f/12/b89f125feb36b9376f0051c8f11e05e2.jpg);
-  box-shadow:  0px 0px 5px rgb(255, 255, 255);
+  box-shadow:  0px 0px 10px rgb(23, 201, 17);
 }
 .description{
   width: 80%;

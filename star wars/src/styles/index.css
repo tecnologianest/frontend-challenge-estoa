@@ -1,5 +1,5 @@
 html{
-	background-color: rgb(3, 1, 20);
+	background-color: rgb(0, 0, 0);
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -34,6 +34,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	height: 100%;
 	line-height: 1;
+	background-image: url("https://1.bp.blogspot.com/-51HMvxWaqws/Ug5uxN2IfmI/AAAAAAAADRg/zorIukayf-4/s1600/1.jpg");
 }
 ol, ul {
 	list-style: none;
@@ -52,4 +53,9 @@ table {
 }
 #root{
 	height: 100%;
+}
+@media (min-width: 700px) {
+	body{
+		background-image: none;
+	}
 }
