@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import api from "../service/api";
+import { createContext, useEffect, useState } from 'react';
+import api from '../service/api';
 
 export const UseContextAll = createContext({})
 
@@ -9,11 +9,20 @@ const AuthProvider = ({ children }) => {
   const [peopleData, setPeoplesData] = useState([])
   const [infoCard, setInfoCard] = useState([])
   const [species, setSpecies] = useState([])
+  const [planets, setPlanets] = useState({})
 
   useEffect(()=>{
     api.get('/people/')
-    .then(res => setPeoplesData(res.data.results))
-    .catch(err => console.log(err))
+        .then(res => setPeoplesData(res.data.results))
+        .catch(err => console.log(err))
+    
+    api.get(`species/`)
+        .then(res => setSpecies(res.data.results))
+        .catch(err => console.log(err))
+
+    api.get(`https://swapi.dev/api/planets/`, {baseURL: ''})
+        .then(res => setPlanets(res.data.results))
+        .catch(err => (console.log(err)))
   },[])
 
   const abrirModal = () => {
@@ -24,12 +33,6 @@ const AuthProvider = ({ children }) => {
     setOpenModal(false)
   }
 
-  useEffect(() =>{
-      api.get(`species/`)
-        .then(res => setSpecies(res.data.results))
-        .catch(err => console.log(err))
-  }, [])
-
   return(
     <UseContextAll.Provider value={{
       openModal,
@@ -38,7 +41,9 @@ const AuthProvider = ({ children }) => {
       fecharModal,
       infoCard,
       setInfoCard,
-      species
+      species,
+      setPlanets,
+      planets
     }}>
       {children}
     </UseContextAll.Provider>
