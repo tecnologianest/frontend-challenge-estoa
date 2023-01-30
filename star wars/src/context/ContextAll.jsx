@@ -1,30 +1,44 @@
-import { createContext, useEffect, useState } from 'react';
-import api from '../service/api';
+import { createContext, useEffect, useState } from 'react'
+import api from '../service/api'
 
 export const UseContextAll = createContext({})
 
 const AuthProvider = ({ children }) => {
-
   const [openModal, setOpenModal] = useState(false)
   const [peopleData, setPeoplesData] = useState([])
   const [infoCard, setInfoCard] = useState([])
-  const [species, setSpecies] = useState([])
-  const [planets, setPlanets] = useState({})
 
-  useEffect(()=>{
-    api.get('/people/')
-        .then(res => setPeoplesData(res.data.results))
-        .catch(err => console.log(err))
-    
-    api.get(`species/`)
-        .then(res => setSpecies(res.data.results))
-        .catch(err => console.log(err))
+  useEffect(() => {
+    api
+      .get('people/')
+      .then(async res => {
+        let peoples = await Promise.all(
+          res.data.results.map(async people => {
+            people.species = await Promise.all(
+              people.species.map(
+                async specie_url =>
+                  (await api.get(specie_url, { baseURL: '' })).data
+              )
+            )
 
-    api.get(`https://swapi.dev/api/planets/`, {baseURL: ''})
-        .then(res => setPlanets(res.data.results))
-        .catch(err => (console.log(err)))
-  },[])
+            people.homeworld = (await api.get(people.homeworld, { baseURL: '' })).data
 
+            people.films = await Promise.all(
+              people.films.map(
+                async film_url =>
+                  (await api.get(film_url, { baseURL: '' })).data
+              )
+            )
+
+            return people
+          })
+        )
+
+        setPeoplesData(peoples)
+      })
+      .catch(err => console.log(err))
+  }, [])
+  
   const abrirModal = () => {
     setOpenModal(true)
   }
@@ -33,18 +47,17 @@ const AuthProvider = ({ children }) => {
     setOpenModal(false)
   }
 
-  return(
-    <UseContextAll.Provider value={{
-      openModal,
-      peopleData,
-      abrirModal,
-      fecharModal,
-      infoCard,
-      setInfoCard,
-      species,
-      setPlanets,
-      planets
-    }}>
+  return (
+    <UseContextAll.Provider
+      value={{
+        openModal,
+        peopleData,
+        abrirModal,
+        fecharModal,
+        infoCard,
+        setInfoCard,
+      }}
+    >
       {children}
     </UseContextAll.Provider>
   )

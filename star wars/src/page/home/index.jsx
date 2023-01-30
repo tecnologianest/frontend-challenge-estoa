@@ -11,10 +11,7 @@ const HomePage = () => {
     openModal,
     fecharModal,
     setInfoCard,
-    infoCard,
-    species,
-    setPlanets,
-    planets
+    infoCard
   } = useContext(UseContextAll)
 
   return (
@@ -27,17 +24,15 @@ const HomePage = () => {
         />
       </header>
       <Cards
-        species={species}
         abrirModal={abrirModal}
         peopleData={peopleData}
         setInfoCard={setInfoCard}
-        planets={planets}
       />
       <Modal
         fecharModal={fecharModal}
         openModal={openModal}
         infoCard={infoCard}
-        planets={planets}
+        peopleData={peopleData}
       />
     </main>
   )

@@ -2,7 +2,7 @@ import './style.css'
 
 export const LiCard = ({people, setInfoCard, name, peopleData, abrirModal}) =>{
 
-  const getCardId = () =>{
+  const getCardWithName = () =>{
     peopleData.filter(item => {
       if(item.name === name){
         setInfoCard(item)
@@ -21,11 +21,11 @@ export const LiCard = ({people, setInfoCard, name, peopleData, abrirModal}) =>{
         <p className='description'>nascido em</p>
         <p className='infos'>{people.birth_year}</p>
         <p className='description'>sou da espécie</p>
-        <p className='infos'>{people.species}</p>
+        <p className='infos'>{people.species.name}</p>
       </div>
       <div className='div_button'>
         <p className='description_fim'>Quer saber mais?</p>
-        <button className='button_card' onClick={getCardId}>Clique aqui!</button>
+        <button className='button_card' onClick={getCardWithName}>Clique aqui!</button>
       </div>
     </li>
   )

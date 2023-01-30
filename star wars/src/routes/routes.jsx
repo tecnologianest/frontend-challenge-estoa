@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 const RoutesMain = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
+    <Route path="*" element={<HomePage />} />
   </Routes>
 )
 
