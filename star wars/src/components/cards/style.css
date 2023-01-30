@@ -1,0 +1,24 @@
+.section_list_cards{
+  max-width: 100%; 
+  height: 100%;
+}
+.list{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 100px 50px;
+  gap: 30px;
+  overflow-y: scroll;
+}
+
+@media (min-width: 700px) {
+  .list{
+    gap: 15px;
+    justify-content: center;
+    padding: 0px;
+    flex-wrap: wrap;
+    overflow-y:hidden;
+    padding-bottom: 50px;
+  }
+
+}
