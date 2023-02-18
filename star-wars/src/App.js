@@ -91,7 +91,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path='/' element={<Home/>}></Route>
-              <Route exact path='/people' element={<People data={people}/>}></Route>
+              <Route exact path='/people/' element={<People data={people} />}></Route>
               <Route exact path='/films' element={<Films data={films}/>}></Route>
             </Routes>
           )}
