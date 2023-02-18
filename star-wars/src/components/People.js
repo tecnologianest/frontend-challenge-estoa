@@ -5,50 +5,46 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Home.css';
 
 export default function People({data}) {
-    useEffect(() => { document.body.style.backgroundColor = '#fff' }, []) 
-    /* CONSTANTS TO HANDLE MODAL OPENING */
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    function sayHello(people) {
-        alert(`hello, ${people.name}`);
-      }
-    function call(people){
-        sayHello(people);
-        handleShow(); /* TODO: ARRUMAR RETORNO ERRADO */
+    /* SETS THE BACKGROUND COLOR OF THIS PAGE */
+    useEffect(() => { document.body.style.backgroundColor = '#fff' }, []);
+
+    /* CREATES THE PAGINATION ITEMS */ 
+    let active = 1;
+    let items = [];
+    for (let number = 1; number <= 7; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === active}>
+            {number}
+            </Pagination.Item>,
+        );
     }
+
     return(
         <Container>
             <h1 style={{textAlign: 'center', margin: '20px'}}>Explore our universe, by character</h1>
             <Row xs={1} md={3} className="g-4">
-                {data.map((people, i) => (
-                <Col key={i}>
-                    <Card style={{margin: '10px'}}>
-                    <Card.Body>
-                        <Card.Title>{people.name}</Card.Title>
-                        <Button variant="primary" onClick={() => call(people)}>
-                            See more
-                        </Button>
-                    </Card.Body>
-                    </Card>
-                    <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                        <Modal.Title>{people.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                        <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
-                        </Modal.Footer>
-                    </Modal>
-                </Col>
-                
+                {data.map((people, i) => ( 
+                    <Col key={i}>
+                        <Card>
+                        <Card.Body>
+                            <Card.Title>{people.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted" >Species: {people.species}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Birth: {people.birth_year}</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">Planet: {people.homeworld}</Card.Subtitle>
+                            <Button variant="primary">See more</Button>
+                        </Card.Body>
+                        </Card>
+                    </Col>
                 ))}
             </Row>
+            <Container className='align-center'>
+                <Pagination>{items}</Pagination>
+            </Container>
         </Container>
     );
 }
