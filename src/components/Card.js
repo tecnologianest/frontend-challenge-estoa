@@ -43,7 +43,7 @@ export const CharacterCard = (props) => {
           {character.name}
         </Card.Title>
         <Card.Text style={{ textAlign: "center" }}>
-          Specie: {specie.name}
+          Specie: {specie.name ? specie.name : "Human"}
         </Card.Text>
         <Card.Text style={{ textAlign: "center" }}>
           {character.birth_year}
