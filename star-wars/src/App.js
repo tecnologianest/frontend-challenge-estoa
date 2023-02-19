@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Container from 'react-bootstrap/esm/Container';
 import Spinner from 'react-bootstrap/Spinner';
+import Header from './components/Header';
 import People from './components/People';
 import Home from './components/Home';
 import Films from './components/Films';
@@ -16,40 +16,51 @@ function App() {
   const [people, setPeople] = useState([]);
   const [films, setFilms] = useState([]);
   const [load, setLoad] = useState(true);
-
+  const [page, setPage] = useState(1);
   useEffect(() => {
-
+    
     /* FETCH CHARACTERS FROM API INTO CONSTS */
     const loadAllPeople= async ()=>{
-      await axios.get('https://swapi.dev/api/people')
-        .then((response)=>{
-          var peopleCopy = response.data.results;
-          let promises = [];
-          for(let person of peopleCopy){
-            promises.push(
-              //GETS HOMEWORLD NAME
-              axios.get(person.homeworld)
-                .then((response)=>{
-                  person.homeworld = response.data.name;
-                }),
-              //GETS SPECIES NAME
-              person.species.length > 0 ?
-                axios.get(person.species[0])
+      let url = `https://swapi.dev/api/people/?page=${page}`
+        await axios.get(url)
+          .then((response)=>{
+            var peopleCopy = response.data.results;
+            let promises = [];
+            for(let person of peopleCopy){
+              promises.push(
+                //GETS HOMEWORLD NAME
+                axios.get(person.homeworld)
                   .then((response)=>{
-                    person.species = response.data.name;
-                  })
-              : person.species = 'Human'
-            )
-          }
-          //WAITS THE REQUEST LOADING
-          Promise.all(promises).then(() => {
-            setPeople(peopleCopy); 
-            setLoad(false);
-          });
-        })
-        .catch((error)=>{
-          alert('error loading data')
-        })
+                    person.homeworld = response.data.name;
+                  }),
+                person.films.map((i,index)=>{
+                  axios.get(i)
+                    .then((response)=>{
+                      //GETS FILMS BY NAME
+                      person.films[index] = response.data.title;
+                      setLoad(false);
+                    })
+                }),
+                //GETS SPECIES NAME
+                person.species.length > 0 ?
+                  axios.get(person.species[0])
+                    .then((response)=>{
+                      person.species = response.data.name;
+                    })
+                : person.species = 'Human'
+              )
+            }
+            //WAITS THE REQUEST LOADING
+            Promise.all(promises).then(() => {
+              setPeople(peopleCopy); 
+              setLoad(false);
+            });
+          })
+          .catch((error)=>{
+            //CATCHES ERRORS
+            alert('error loading data')
+          })
+      
     }
 
     /* FETCH FILMS FROM API INTO CONSTS */
@@ -91,7 +102,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path='/' element={<Home/>}></Route>
-              <Route exact path='/people/' element={<People data={people} />}></Route>
+              <Route exact path='/people/' element={<People data={people} pagina={page} paginaAumenta={() => setPage(page)}/>}></Route>
               <Route exact path='/films' element={<Films data={films}/>}></Route>
             </Routes>
           )}
