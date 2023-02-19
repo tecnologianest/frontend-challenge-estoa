@@ -36,6 +36,7 @@ export default function People(props) {
                                     </Card.Body>
                                 </Card>
                             </Col>
+                            {/* OPENS THE MODAL FROM ANOTHER COMPONENT */}
                             <PeopleSingle people={props.data} show={showLogin} close={() => setShowLogin(false)}></PeopleSingle>
                         </>
                     )

@@ -21,10 +21,8 @@ function App() {
   /* HANDLES THE CLICK ON PAGE CHANGE */
   const handlePageClick = async (data) => {
     let currentPage =data.selected + 1;
-
     console.log(currentPage);
     setPage(currentPage);
-
   }
 
   useEffect(() => {

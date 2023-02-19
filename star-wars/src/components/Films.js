@@ -27,9 +27,6 @@ export default function Films(props) {
                                 <Card.Body>
                                     <Card.Title>{films.title}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{films.opening_crawl}</Card.Subtitle>
-                                    {/*<Link to={`/films/?id=${i}`}>
-                                    <Button onClick={() => setShowLogin(true)} variant="primary">See characters</Button>
-                                    </Link>*/}
                                 </Card.Body>
                                 </Card>
                             </Col>

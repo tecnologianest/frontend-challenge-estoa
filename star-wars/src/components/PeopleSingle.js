@@ -9,6 +9,7 @@ const PeopleSingle = (props) => {
     /* SETS THE BACKGROUND COLOR OF THIS PAGE */
     useEffect(() => { document.body.style.backgroundColor = '#fff' }, []);
 
+    /* GETS THE ID OF THE CHARACTER FROM THE URL TO OPEN THE MODAL */
     const queryParams = new URLSearchParams(window.location.search);
     const id = queryParams.get('id');
 
