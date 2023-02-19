@@ -92,7 +92,7 @@ function App() {
     <>
       <Router>
         <Header />
-        <Container>
+        <Container className='site-wrapper'>
           {/* WAITS UNTIL API RETURN IS COMPLETELY LOADED */}
           {load ? (
             <Container>
