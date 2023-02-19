@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Home.css';
+import '../App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import PeopleSingle from './PeopleSingle';
 
@@ -15,18 +16,13 @@ export default function People(props) {
 
     const [showLogin, setShowLogin] = useState(false);
 
-    function aumentaPagina(){
-        props.paginaAumenta(props.page+1);
-    }
-
-    console.log(props.pagina);
     return(
         <Container>
-            <h1 style={{textAlign: 'center', marginBottom: '50px', marginTop: '10px'}}>Explore our universe, by character</h1>
-            <Row xs={1} md={3} className="g-4">
+            <h1 className='title-style'>Explore our universe, by character</h1>
+            <Row xs={1} sm={2} md={3} lg={4} className="g-4">
                 {props.data.map((people, i) => { 
                     return (
-                        <Container>
+                        <>
                             <Col key={i}>
                                 <Card>
                                     <Card.Body>
@@ -41,11 +37,10 @@ export default function People(props) {
                                 </Card>
                             </Col>
                             <PeopleSingle people={props.data} show={showLogin} close={() => setShowLogin(false)}></PeopleSingle>
-                        </Container>
+                        </>
                     )
                 })}
             </Row>
-            <Button onClick={aumentaPagina()}>Next</Button>
         </Container>
     );
 }

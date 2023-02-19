@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Home.css';
+import '../App.css';
 
 const PeopleSingle = (props) => {
     /* SETS THE BACKGROUND COLOR OF THIS PAGE */
@@ -14,29 +15,37 @@ const PeopleSingle = (props) => {
     return(
         <>
             <Modal
+                className='modal-responsive'
+                fullscreen={props.fullscreen}
                 show={props.show}
                 cancel={props.close}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                {props.show == true &&
-                    <Modal.Body>
-                        <h2>{props.people[id].name}</h2>
-                        <h4><b>Birth:</b> {props.people[id].birth_year}</h4>
-                        <h4><b>Eye:</b> {props.people[id].eye_color}</h4>
-                        <h4><b>Gender:</b> {props.people[id].gender}</h4>
-                        <h4><b>Hair:</b> {props.people[id].hair_color}</h4>
-                        <h4><b>Heigth:</b> {props.people[id].height}</h4>
-                        <h4><b>Mass:</b> {props.people[id].mass}</h4>
-                        <h4><b>Skin:</b> {props.people[id].skin_color}</h4>
-                        <h4><b>Homeworld:</b> {props.people[id].homeworld}</h4>
-                        <h4><b>Films:</b> {props.people[id].films.join(', ')}</h4>
-                        <h4><b>Species:</b> {props.people[id].species}</h4>
-                    </Modal.Body>
+                {props.show === true &&
+                    <>
+                        <Modal.Header>
+                            <Modal.Title>{props.people[id].name}</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className='modal-body'>
+                            <ul>
+                                <li><p><b>Birth:</b> {props.people[id].birth_year}</p></li>
+                                <li><p><b>Eye:</b> {props.people[id].eye_color}</p></li>
+                                <li><p><b>Gender:</b> {props.people[id].gender}</p></li>
+                                <li><p><b>Hair:</b> {props.people[id].hair_color}</p></li>
+                                <li><p><b>Heigth:</b> {props.people[id].height}</p></li>
+                                <li><p><b>Mass:</b> {props.people[id].mass}</p></li>
+                                <li><p><b>Skin:</b> {props.people[id].skin_color}</p></li>
+                                <li><p><b>Homeworld:</b> {props.people[id].homeworld}</p></li>
+                                <li><p><b>Films:</b> {props.people[id].films.join(', ')}</p></li>
+                                <li><p><b>Species:</b> {props.people[id].species}</p></li>
+                            </ul>
+                        </Modal.Body>
+                    </>
                 }
                 <Modal.Footer>
-                    <Button onClick={props.close}>Close</Button>
+                    <Button onClick={props.close} variant="outline-primary">Close</Button>
                 </Modal.Footer>
             </Modal>
         </>

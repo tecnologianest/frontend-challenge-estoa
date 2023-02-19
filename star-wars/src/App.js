@@ -9,6 +9,7 @@ import Films from './components/Films';
 import axios from 'axios';
 import './App.css';
 import './Home.css';
+import Button from 'react-bootstrap/Button';
 
 function App() {
 
@@ -16,12 +17,11 @@ function App() {
   const [people, setPeople] = useState([]);
   const [films, setFilms] = useState([]);
   const [load, setLoad] = useState(true);
-  const [page, setPage] = useState(1);
   useEffect(() => {
     
     /* FETCH CHARACTERS FROM API INTO CONSTS */
     const loadAllPeople= async ()=>{
-      let url = `https://swapi.dev/api/people/?page=${page}`
+      let url = `https://swapi.dev/api/people/`
         await axios.get(url)
           .then((response)=>{
             var peopleCopy = response.data.results;
@@ -102,7 +102,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path='/' element={<Home/>}></Route>
-              <Route exact path='/people/' element={<People data={people} pagina={page} paginaAumenta={() => setPage(page)}/>}></Route>
+              <Route exact path='/people/' element={<People data={people} />}></Route>
               <Route exact path='/films' element={<Films data={films}/>}></Route>
             </Routes>
           )}
