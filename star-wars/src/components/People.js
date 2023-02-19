@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -29,7 +30,6 @@ export default function People(props) {
                                         <Card.Title>{people.name}</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted" >Species: {people.species}</Card.Subtitle>
                                         <Card.Subtitle className="mb-2 text-muted">Birth: {people.birth_year}</Card.Subtitle>
-                                        <Card.Subtitle className="mb-2 text-muted">Planet: {people.homeworld}</Card.Subtitle>
                                         <Link to={`/people/?id=${i}`}>
                                             <Button onClick={() => setShowLogin(true)}>See more</Button>
                                         </Link>
@@ -41,6 +41,24 @@ export default function People(props) {
                     )
                 })}
             </Row>
+            {/* PAGINATION TO NAVIGATE CHARACTERS */}
+            <Container className='pagination-spacing'>
+                <ReactPaginate
+                    className={'pagination justify-content-center'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                    previousLabel={''}
+                    nextLabel={''}
+                    breakLabel={'break'}
+                    pageCount={9}
+                    marginPagesDisplayed={3}
+                    pageRangeDisplayed={6}
+                    onPageChange={props.page}
+                    renderOnZeroPageCount={null}
+                    forcePage={props.pagina-1}
+                />
+            </Container>
         </Container>
     );
 }

@@ -66,6 +66,10 @@ html,body{
   margin-top: 10px;
 }
 
+.pagination-spacing{
+  margin: 20px 0;
+}
+
 /* CUSTOM STYLES FOR THE PeopleSingle */
 
 .modal-responsive{

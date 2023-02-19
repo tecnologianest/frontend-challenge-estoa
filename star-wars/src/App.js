@@ -9,7 +9,6 @@ import Films from './components/Films';
 import axios from 'axios';
 import './App.css';
 import './Home.css';
-import Button from 'react-bootstrap/Button';
 
 function App() {
 
@@ -17,11 +16,22 @@ function App() {
   const [people, setPeople] = useState([]);
   const [films, setFilms] = useState([]);
   const [load, setLoad] = useState(true);
+  let [page, setPage] = useState(1);
+
+  /* HANDLES THE CLICK ON PAGE CHANGE */
+  const handlePageClick = async (data) => {
+    let currentPage =data.selected + 1;
+
+    console.log(currentPage);
+    setPage(currentPage);
+
+  }
+
   useEffect(() => {
-    
     /* FETCH CHARACTERS FROM API INTO CONSTS */
-    const loadAllPeople= async ()=>{
-      let url = `https://swapi.dev/api/people/`
+    const loadAllPeople = async () =>{
+      setLoad(true);
+      let url = `https://swapi.dev/api/people/?page=${page}`;
         await axios.get(url)
           .then((response)=>{
             var peopleCopy = response.data.results;
@@ -60,7 +70,6 @@ function App() {
             //CATCHES ERRORS
             alert('error loading data')
           })
-      
     }
 
     /* FETCH FILMS FROM API INTO CONSTS */
@@ -75,7 +84,7 @@ function App() {
     /* CALLS THE ASYNC FUNCTIONS */
     fetchFilms();
     loadAllPeople();
-}, []);
+  }, [page]);
 
   useEffect(() => { document.body.style.backgroundColor = '#000' }, []);
 
@@ -102,7 +111,7 @@ function App() {
           ) : (
             <Routes>
               <Route exact path='/' element={<Home/>}></Route>
-              <Route exact path='/people/' element={<People data={people} />}></Route>
+              <Route exact path='/people/' element={<People data={people} pagina={page} page={handlePageClick}/>}></Route>
               <Route exact path='/films' element={<Films data={films}/>}></Route>
             </Routes>
           )}
