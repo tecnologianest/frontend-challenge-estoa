@@ -5,7 +5,9 @@ import './App.scss';
 function App() {
 
   return (
+
     <h1 className='text-bg-primary ' >Estoa</h1>
+
   )
 }
 
