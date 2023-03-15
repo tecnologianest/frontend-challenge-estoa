@@ -17,3 +17,7 @@ export async function getUserById(id) {
 export async function getAllUsers() {
    return fetchData(`people/`);
 }
+
+export async function getSpecieName(id) {
+   return fetchData(`species/${id}/`);
+}
