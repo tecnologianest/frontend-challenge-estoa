@@ -29,3 +29,13 @@ export async function getSpecieName(id) {
 export async function searchUserByName(typeSearch, name) {
    return fetchData(`${typeSearch}/?search=${name}`);
 }
+
+export async function getNextAndBefore(url) {
+   const response = await fetch(url);
+
+   if (!response.ok) {
+      throw new Error(`Failed to fetch data from ${url}`);
+   }
+
+   return response.json();
+}
