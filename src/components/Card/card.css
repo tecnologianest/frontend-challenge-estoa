@@ -1,0 +1,15 @@
+.cardCustom {
+   width: 220px;
+   height: 195px;
+}
+
+.cart-title {
+   height: 50px;
+}
+
+@media screen and (max-width: 500px) {
+   .cardCustom {
+      width: 170px;
+      height: 195px;
+   }
+}
