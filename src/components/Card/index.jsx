@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { getUrlId } from "utils/getUrlId";
 import { getSpecieName } from "services/api";
+import { Link } from "react-router-dom";
 
 import "./card.css";
 
@@ -37,9 +38,9 @@ export const CardComponent = ({ props, type }) => {
                   <Card.Text>Lançamento: {props.release_date}</Card.Text>
                </Card.Body>
                <Card.Footer>
-                  <Button variant="primary" onClick={() => console.log("Primary")}>
+                  <Link to={"/knowmore"} className="btn btn-primary">
                      Saiba mais
-                  </Button>
+                  </Link>
                </Card.Footer>
             </Card>
          );
@@ -53,9 +54,9 @@ export const CardComponent = ({ props, type }) => {
                   <Card.Text>Ano de Nasc: {props.birth_year}</Card.Text>
                </Card.Body>
                <Card.Footer>
-                  <Button variant="primary" onClick={() => console.log("Primary")}>
+                  <Link to={"/knowmore"} className="btn btn-primary">
                      Saiba mais
-                  </Button>
+                  </Link>
                </Card.Footer>
             </Card>
          );
