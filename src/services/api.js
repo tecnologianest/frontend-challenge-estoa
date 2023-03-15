@@ -18,6 +18,14 @@ export async function getAllUsers() {
    return fetchData(`people/`);
 }
 
+export async function getAllMovies() {
+   return fetchData(`films/`);
+}
+
 export async function getSpecieName(id) {
    return fetchData(`species/${id}/`);
+}
+
+export async function searchUserByName(typeSearch, name) {
+   return fetchData(`${typeSearch}/?search=${name}`);
 }
