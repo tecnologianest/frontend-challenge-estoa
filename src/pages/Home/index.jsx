@@ -16,6 +16,7 @@ export const Home = () => {
    const [loading, setLoading] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
    const [mgsAlertError, setMgsAlertError] = useState("");
+   const [execFunc, setExecFunc] = useState(false);
    const [paginationParams, setPaginationParams] = useState({
       count: 0,
       next: "",
@@ -39,6 +40,11 @@ export const Home = () => {
 
    async function getAllData() {
       try {
+         const localstorageType = localStorage.getItem("type");
+         if (localstorageType && localstorageType !== searchValue) {
+            return;
+         }
+         setListResult([]);
          setLoading(true);
          const { count, next, previous, results } = await getHomeData(searchValue);
          setListResult(results);
@@ -75,6 +81,7 @@ export const Home = () => {
    };
 
    const changeValue = (dropdownValue, searchValue) => {
+      localStorage.removeItem("type");
       setCharacterName("");
       setDropdownValue(dropdownValue);
       setSearchValue(searchValue);
@@ -119,7 +126,7 @@ export const Home = () => {
 
    return (
       <Container className="mt-5">
-         <Alert show={showAlert} variant="danger">
+         <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)}>
             {mgsAlertError}
          </Alert>
          <Row className="justify-content-md-center">
