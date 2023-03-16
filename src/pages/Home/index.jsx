@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Container, Col, Row, Spinner, CardGroup } from "react-bootstrap";
+import { Container, Col, Row, Spinner, CardGroup, Alert } from "react-bootstrap";
 import { Search } from "components/Search";
 import { getHomeData, searchUserByName, getNextAndBefore } from "services/api";
 import { CardComponent } from "components/Card";
@@ -14,6 +14,8 @@ export const Home = () => {
    const [characterName, setCharacterName] = useState("");
    const [listResult, setListResult] = useState([]);
    const [loading, setLoading] = useState(false);
+   const [showAlert, setShowAlert] = useState(false);
+   const [mgsAlertError, setMgsAlertError] = useState("");
    const [paginationParams, setPaginationParams] = useState({
       count: 0,
       next: "",
@@ -29,7 +31,6 @@ export const Home = () => {
       if (localstorageType) {
          setSearchValue(localstorageType);
       }
-      getAllData();
    }, []);
 
    useEffect(() => {
@@ -52,17 +53,25 @@ export const Home = () => {
       } catch (error) {
          console.log(error);
          setLoading(false);
+         setMgsAlertError(error.message);
+         setShowAlert(true);
       }
    }
 
    const PaginationChange = async (page) => {
-      const { next, previous } = paginationParams;
-      const url = new URL(next || previous);
-      url.searchParams.set("page", page);
-      getNextAndBefore(url.toString()).then(({ results, next, previous }) => {
-         setPaginationParams((prev) => ({ ...prev, current: page, active: page, next, previous }));
+      try {
+         const { next, previous } = paginationParams;
+         const url = new URL(next || previous);
+         url.searchParams.set("page", page);
+         const { results, next: nextNew, previous: previousNew } = await getNextAndBefore(url.toString());
+         setPaginationParams((prev) => ({ ...prev, current: page, active: page, nextNew, previousNew }));
          setListResult(results);
-      });
+      } catch (error) {
+         console.log(error);
+         setLoading(false);
+         setMgsAlertError(error.message);
+         setShowAlert(true);
+      }
    };
 
    const changeValue = (dropdownValue, searchValue) => {
@@ -78,21 +87,26 @@ export const Home = () => {
       getAllData();
    };
 
-   const getByname = (name, searchValue) => {
+   const getByname = async (name, searchValue) => {
       setLoading(true);
-      searchUserByName(searchValue, name)
-         .then(({ results, count, next, previous }) => {
-            setListResult(results);
-            setPaginationParams({
-               count: count,
-               next: next,
-               previous: previous,
-               current: 1,
-               active: 1,
-            });
-            setLoading(false);
-         })
-         .catch((error) => console.log(error));
+
+      try {
+         const { results, count, next, previous } = await searchUserByName(searchValue, name);
+         setListResult(results);
+         setPaginationParams({
+            count: count,
+            next: next,
+            previous: previous,
+            current: 1,
+            active: 1,
+         });
+         setLoading(false);
+      } catch (error) {
+         console.log(error);
+         setLoading(false);
+         setMgsAlertError(error.message);
+         setShowAlert(true);
+      }
    };
 
    const debouncedOnChange = useCallback(_debounce(getByname, 1000), []);
@@ -105,6 +119,9 @@ export const Home = () => {
 
    return (
       <Container className="mt-5">
+         <Alert show={showAlert} variant="danger">
+            {mgsAlertError}
+         </Alert>
          <Row className="justify-content-md-center">
             <Col sx={12} md={8}>
                <Search
@@ -116,25 +133,21 @@ export const Home = () => {
                />
             </Col>
          </Row>
-         <Row className="mt-5">
-            {loading ? (
-               <Row className="justify-content-center align-items-center h-100">
-                  <Spinner animation="border" role="status" className="loading" />
-               </Row>
-            ) : (
-               <CardGroup className="gap-2 ">{listResultMemo}</CardGroup>
-            )}
-         </Row>
          {loading ? (
             <Row className="justify-content-center align-items-center h-100">
                <Spinner animation="border" role="status" className="loading" />
             </Row>
          ) : (
-            <Row className="mt-5">
-               <Col>
-                  <PaginationComponent paginationParams={paginationParams} PaginationChange={PaginationChange} />
-               </Col>
-            </Row>
+            <>
+               <Row className="mt-5">
+                  <CardGroup className="gap-2 ">{listResultMemo}</CardGroup>
+               </Row>
+               <Row className="mt-5">
+                  <Col>
+                     <PaginationComponent paginationParams={paginationParams} PaginationChange={PaginationChange} />
+                  </Col>
+               </Row>
+            </>
          )}
       </Container>
    );

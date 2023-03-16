@@ -25,6 +25,22 @@ export async function getUserById(id) {
    return fetchData(`people/${id}/`);
 }
 
+export async function getPlanetById(id) {
+   return fetchData(`planets/${id}/`);
+}
+
+export async function getSpecieById(id) {
+   return fetchData(`species/${id}/`);
+}
+
+export async function getStarshipById(id) {
+   return fetchData(`starships/${id}/`);
+}
+
+export async function getVehicleById(id) {
+   return fetchData(`vehicles/${id}/`);
+}
+
 export async function getDataById(type, id) {
    return fetchData(`${type}/${id}/`);
 }
@@ -77,15 +93,47 @@ export async function getStarships(url) {
 }
 
 async function getCharacterData(data) {
-   const promises = data.characters.map(async (character) => {
-      const characterData = await fetchDataUrl(character);
-      return {
-         name: characterData.name,
-         id: getUrlId(characterData.url),
-      };
-   });
-   const characters = await Promise.all(promises);
-   return characters;
+   if (data.residents) {
+      const promises = data.residents.map(async (character) => {
+         const characterData = await fetchDataUrl(character);
+         return {
+            name: characterData.name,
+            id: getUrlId(characterData.url),
+         };
+      });
+      const characters = await Promise.all(promises);
+      return characters;
+   } else if (data.people) {
+      const promises = data.people.map(async (character) => {
+         const characterData = await fetchDataUrl(character);
+         return {
+            name: characterData.name,
+            id: getUrlId(characterData.url),
+         };
+      });
+      const characters = await Promise.all(promises);
+      return characters;
+   } else if (data.pilots) {
+      const promises = data.pilots.map(async (character) => {
+         const characterData = await fetchDataUrl(character);
+         return {
+            name: characterData.name,
+            id: getUrlId(characterData.url),
+         };
+      });
+      const characters = await Promise.all(promises);
+      return characters;
+   } else {
+      const promises = data.characters.map(async (character) => {
+         const characterData = await fetchDataUrl(character);
+         return {
+            name: characterData.name,
+            id: getUrlId(characterData.url),
+         };
+      });
+      const characters = await Promise.all(promises);
+      return characters;
+   }
 }
 
 async function getPlanetsData(data) {
@@ -149,7 +197,7 @@ async function getFilmsData(data) {
    const promises = data.films.map(async (film) => {
       const filmData = await fetchDataUrl(film);
       return {
-         name: filmData.name,
+         name: filmData.title,
          id: getUrlId(filmData.url),
       };
    });
@@ -199,6 +247,73 @@ export async function getPeopleInfo(id) {
    }
 }
 
+export async function getPlanetsInfo(id) {
+   try {
+      const planetData = await getPlanetById(id);
+      const films = await getFilmsData(planetData);
+      const characters = await getCharacterData(planetData);
+
+      return {
+         planetData,
+         films,
+         characters,
+      };
+   } catch (error) {
+      throw new Error(`Failed to fetch data from People`);
+   }
+}
+
+export async function getStarshipsInfo(id) {
+   try {
+      const starshipsData = await getStarshipById(id);
+      const films = await getFilmsData(starshipsData);
+
+      return {
+         starshipsData,
+         films,
+      };
+   } catch (error) {
+      throw new Error(`Failed to fetch data from People`);
+   }
+}
+
+export async function getSpeciesInfo(id) {
+   try {
+      const speciesData = await getSpecieById(id);
+      const films = await getFilmsData(speciesData);
+      const characters = await getCharacterData(speciesData);
+      let homeWorld = [];
+      if (speciesData.homeworld) homeWorld = await getHomeworldName(speciesData.homeworld);
+
+      return {
+         speciesData,
+         films,
+         characters,
+         homeWorld,
+      };
+   } catch (error) {
+      throw new Error(`Failed to fetch data from People`);
+   }
+}
+
+export async function getVehiclesInfo(id) {
+   try {
+      const vehiclesData = await getVehicleById(id);
+      const films = await getFilmsData(vehiclesData);
+      const characters = await getCharacterData(vehiclesData);
+      let homeWorld = [];
+      if (vehiclesData.homeworld) homeWorld = await getHomeworldName(vehiclesData.homeworld);
+
+      return {
+         vehiclesData,
+         films,
+         characters,
+      };
+   } catch (error) {
+      throw new Error(`Failed to fetch data from People`);
+   }
+}
+
 export async function getHomeData(type) {
    switch (type) {
       case "films":
@@ -224,6 +339,14 @@ export async function getAllData(id, type) {
          return getMovieInfo(id);
       case "people":
          return getPeopleInfo(id);
+      case "planets":
+         return getPlanetsInfo(id);
+      case "species":
+         return getSpeciesInfo(id);
+      case "starships":
+         return getStarshipsInfo(id);
+      case "vehicles":
+         return getVehiclesInfo(id);
       default:
          break;
    }
