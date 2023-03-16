@@ -16,7 +16,6 @@ export const Home = () => {
    const [loading, setLoading] = useState(false);
    const [showAlert, setShowAlert] = useState(false);
    const [mgsAlertError, setMgsAlertError] = useState("");
-   const [execFunc, setExecFunc] = useState(false);
    const [paginationParams, setPaginationParams] = useState({
       count: 0,
       next: "",
