@@ -10,11 +10,15 @@ export const Search = (props) => {
    return (
       <InputGroup>
          <DropdownButton title={dropdownValue} id="dropdown-basic-button">
-            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "films")}>Filme</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "people")}>Personagem</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "people")}>Characters</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "films")}>Films</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "species")}>Species</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "starships")}>Starships</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "vehicles")}>Vehicles</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => changeValue(e.target.textContent, "planets")}>Planets</Dropdown.Item>
          </DropdownButton>
-         <Form.Control id="Teste123" value={value} type="text" placeholder="Faça sua busca" onChange={(event) => inputOnchange(event)} />
-         <Button variant="primary" onClick={clearInput}>
+         <Form.Control value={value} type="text" placeholder="Faça sua busca" onChange={(event) => inputOnchange(event)} />
+         <Button variant="primary" onClick={clearInput} disabled={value === ""}>
             Limpar
          </Button>
       </InputGroup>

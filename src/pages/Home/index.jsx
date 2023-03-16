@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Container, Col, Row, Spinner, CardGroup } from "react-bootstrap";
 import { Search } from "components/Search";
-import { getAllUsers, searchUserByName, getAllMovies, getNextAndBefore } from "services/api";
+import { getHomeData, searchUserByName, getNextAndBefore } from "services/api";
 import { CardComponent } from "components/Card";
 import { PaginationComponent } from "components/Pagination";
 import _debounce from "lodash/debounce";
@@ -10,7 +10,7 @@ import "./home.css";
 
 export const Home = () => {
    const [dropdownValue, setDropdownValue] = useState("Buscar por");
-   const [searchValue, setSearchValue] = useState("people");
+   const [searchValue, setSearchValue] = useState("films");
    const [characterName, setCharacterName] = useState("");
    const [listResult, setListResult] = useState([]);
    const [loading, setLoading] = useState(false);
@@ -22,30 +22,25 @@ export const Home = () => {
       active: 1,
    });
 
-   const listResultMemo = useMemo(
-      () =>
-         listResult?.map((user) => (
-            <Col key={user.url}>
-               <CardComponent props={user} type={searchValue} />
-            </Col>
-         )),
-      [listResult, searchValue]
-   );
+   const listResultMemo = useMemo(() => listResult?.map((user) => <CardComponent props={user} type={searchValue} />), [listResult, searchValue]);
 
    useEffect(() => {
       const localstorageType = localStorage.getItem("type");
       if (localstorageType) {
-         setSearchValue(localStorage);
+         setSearchValue(localstorageType);
       }
-      getUsers();
+      getAllData();
    }, []);
 
-   async function getUsers() {
+   useEffect(() => {
+      getAllData();
+   }, [searchValue]);
+
+   async function getAllData() {
       try {
          setLoading(true);
-         const { count, next, previous, results } = await getAllUsers();
+         const { count, next, previous, results } = await getHomeData(searchValue);
          setListResult(results);
-         setLoading(false);
          setPaginationParams({
             count: count,
             next: next,
@@ -53,30 +48,12 @@ export const Home = () => {
             current: 1,
             active: 1,
          });
+         setLoading(false);
       } catch (error) {
          console.log(error);
          setLoading(false);
       }
    }
-
-   const getMovies = async () => {
-      try {
-         setLoading(true);
-         const { results, count, next, previous } = await getAllMovies();
-         setListResult(results);
-         setPaginationParams({
-            count: count,
-            next: next,
-            previous: previous,
-            current: 1,
-            active: 1,
-         });
-         setLoading(false);
-      } catch (error) {
-         console.log(error);
-         setLoading(true);
-      }
-   };
 
    const PaginationChange = async (page) => {
       const { next, previous } = paginationParams;
@@ -93,17 +70,12 @@ export const Home = () => {
       setDropdownValue(dropdownValue);
       setSearchValue(searchValue);
       setListResult([]);
-      if (searchValue === "films") {
-         getMovies();
-      } else if (searchValue === "people") {
-         getUsers();
-      }
    };
 
    const handleClearInput = () => {
       setCharacterName("");
       setDropdownValue("Buscar por");
-      getUsers();
+      getAllData();
    };
 
    const getByname = (name, searchValue) => {
@@ -150,7 +122,7 @@ export const Home = () => {
                   <Spinner animation="border" role="status" className="loading" />
                </Row>
             ) : (
-               <CardGroup>{listResultMemo}</CardGroup>
+               <CardGroup className="gap-2 ">{listResultMemo}</CardGroup>
             )}
          </Row>
          {loading ? (
