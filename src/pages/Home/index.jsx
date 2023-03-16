@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Container, Col, Row, Spinner } from "react-bootstrap";
+import { Container, Col, Row, Spinner, CardGroup } from "react-bootstrap";
 import { Search } from "components/Search";
 import { getAllUsers, searchUserByName, getAllMovies, getNextAndBefore } from "services/api";
 import { CardComponent } from "components/Card";
@@ -33,6 +33,10 @@ export const Home = () => {
    );
 
    useEffect(() => {
+      const localstorageType = localStorage.getItem("type");
+      if (localstorageType) {
+         setSearchValue(localStorage);
+      }
       getUsers();
    }, []);
 
@@ -146,7 +150,7 @@ export const Home = () => {
                   <Spinner animation="border" role="status" className="loading" />
                </Row>
             ) : (
-               listResultMemo
+               <CardGroup>{listResultMemo}</CardGroup>
             )}
          </Row>
          {loading ? (
