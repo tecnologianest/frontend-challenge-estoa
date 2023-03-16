@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { getUrlId } from "utils/getUrlId";
 import { getSpecieName } from "services/api";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./card.css";
 
 export const CardComponent = ({ props, type }) => {
+   const navigate = useNavigate();
    const [speciesNames, setSpeciesNames] = useState([]);
    useEffect(() => {
       const fetchSpeciesNames = async () => {
          if (props.species) {
             const speciesNamesArray = await Promise.all(
                props.species.map(async (specie) => {
-                  const specieID = await getUrlId(specie);
-                  const specieName = await getSpecieName(specieID);
+                  const specieName = await getSpecieName(specie);
                   return specieName.name || "";
                })
             );
@@ -25,6 +24,11 @@ export const CardComponent = ({ props, type }) => {
 
       fetchSpeciesNames();
    }, [props?.species]);
+
+   const navigateTo = (id, type) => {
+      localStorage.setItem("type", type);
+      navigate(`/knowmore/${id}/${type}`);
+   };
 
    const cardCreator = () => {
       if (type === "films") {
@@ -38,9 +42,9 @@ export const CardComponent = ({ props, type }) => {
                   <Card.Text>Lançamento: {props.release_date}</Card.Text>
                </Card.Body>
                <Card.Footer>
-                  <Link to={"/knowmore"} className="btn btn-primary">
+                  <Button variant="primary" onClick={() => navigateTo(getUrlId(props.url), type)}>
                      Saiba mais
-                  </Link>
+                  </Button>
                </Card.Footer>
             </Card>
          );
@@ -54,9 +58,9 @@ export const CardComponent = ({ props, type }) => {
                   <Card.Text>Ano de Nasc: {props.birth_year}</Card.Text>
                </Card.Body>
                <Card.Footer>
-                  <Link to={"/knowmore"} className="btn btn-primary">
+                  <Button variant="primary" onClick={() => navigateTo(getUrlId(props.url), type)}>
                      Saiba mais
-                  </Link>
+                  </Button>
                </Card.Footer>
             </Card>
          );
