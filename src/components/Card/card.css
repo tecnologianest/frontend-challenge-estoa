@@ -1,5 +1,5 @@
 .cardCustom {
-   width: 220px;
+   min-width: 220px !important;
    height: 195px;
 }
 
