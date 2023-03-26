@@ -1,8 +1,13 @@
+import { GlobalStyle } from "./globalStyles"
+import Header from "./components/Header/header"
+import Main from "./components/Main/main"
 const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <Header />
+      <Main />
+    </>
   )
 }
 
