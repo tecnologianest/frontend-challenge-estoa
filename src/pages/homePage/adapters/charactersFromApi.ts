@@ -1,4 +1,4 @@
-interface MoviesFromApi {
+interface CharactersFromApi {
   count: number;
   next: string;
   previous: string;
@@ -41,14 +41,14 @@ export interface CharacterInformation {
   url: string;
 }
 
-interface Movies {
+interface Characters {
   count: number;
   next: string;
   previous: string;
   movies: CharacterInformation[];
 }
 
-export const moviesFromApi = (data: MoviesFromApi): Movies => {
+export const charactersFromApi = (data: CharactersFromApi): Characters => {
   return {
     count: data.count,
     next: data.next,

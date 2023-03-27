@@ -3,7 +3,10 @@ import { Loading } from "@/components/Loading";
 import { api } from "@/services/api";
 import { useCallback, useEffect, useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { moviesFromApi, CharacterInformation } from "./adapters/moviesFromApi";
+import {
+  CharacterInformation,
+  charactersFromApi,
+} from "./adapters/charactersFromApi";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import "./index.scss";
 
@@ -26,7 +29,7 @@ export const HomePage: React.FC = () => {
           },
         });
 
-        const moviesMapped = moviesFromApi(data);
+        const moviesMapped = charactersFromApi(data);
 
         setCharacters(moviesMapped.movies);
         setCount(moviesMapped.count);
