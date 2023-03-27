@@ -58,3 +58,27 @@ export const Button = styled.button`
     color: #708090;
   }
 `;
+export const Filter = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+`;
+export const FilterButton = styled.button`
+  height: 80px;
+  width: 80px;
+  border-radius: 20%;
+  border: none;
+  background-color: #708090;
+  color: #fff;
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #fff;
+    color: #708090;
+  }
+`;
