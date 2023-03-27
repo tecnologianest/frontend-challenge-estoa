@@ -9,6 +9,6 @@ export const FooterContainer = styled.div`
   background-color: #0d0d0d;
   color: #fff;
   margin-top: 25px;
-  position: fixed;
+  position: relative;
   bottom: 0;
 `;

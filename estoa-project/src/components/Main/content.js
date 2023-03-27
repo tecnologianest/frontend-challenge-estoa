@@ -63,6 +63,16 @@ export const Filter = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 50px;
+  @media (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
 `;
 export const FilterButton = styled.button`
   height: 80px;
