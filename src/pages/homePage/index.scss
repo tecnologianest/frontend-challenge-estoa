@@ -1,0 +1,50 @@
+@import "@/styles/colors.scss";
+
+.cards-container {
+  padding: 3rem 0;
+}
+
+.header-cards {
+  > input {
+    width: 100%;
+    border: 1px solid blue;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  > h1 {
+    font-size: 2rem;
+    color: $white-color;
+  }
+
+  > h2 {
+    font-size: 1rem;
+    color: $white-color;
+  }
+
+  > ul {
+    list-style: none;
+    color: $white-color;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+
+    li {
+      font-size: 1.5rem;
+      cursor: pointer;
+      &.active {
+        color: #225eb6;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.pagination {
+  margin: 2rem 0;
+  width: 100%;
+  > div {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+  }
+}
