@@ -1,0 +1,22 @@
+@import "@/styles/colors.scss";
+
+.image-container {
+  img {
+    width: 100%;
+    max-height: 700px;
+    object-fit: cover;
+  }
+}
+
+.character-informations {
+  color: #fff;
+}
+
+.back-button {
+  > a {
+    > svg {
+      font-size: 5rem;
+      fill: #ffe81f;
+    }
+  }
+}
