@@ -1,5 +1,13 @@
 # Estoa front-end challenge
 
+
+## Como rodar o projeto?
+
+- Abra a aplicação e instale as bibliotecas com o yarn ou npm install
+- rode yarn dev ou npm run dev 
+- Verifique a porta e abra a aplicação
+
+
 O objetivo do desafio consumir a api: [Star Wars](https://swapi.dev/api).
 
 ## Algumas regras
