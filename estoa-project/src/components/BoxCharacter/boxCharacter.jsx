@@ -11,6 +11,7 @@ const BoxCharacter = ({
   skincolor,
   world,
   films,
+  species,
 }) => {
   const [info, setInfo] = useState(false);
 
@@ -29,6 +30,8 @@ const BoxCharacter = ({
           <S.Info> Birth Year: {byear}</S.Info>
           <S.Info>Gender: {gender} </S.Info>
           <S.Info>Skin Color: {skincolor} </S.Info>
+          <S.Info>Species: {species} </S.Info>
+          <S.Info>World: {world} </S.Info>
         </S.Infos>
       ) : (
         <S.Infos onClick={handleInfo}>

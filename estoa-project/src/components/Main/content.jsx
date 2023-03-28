@@ -1,138 +1,80 @@
 import { useEffect, useState } from "react";
 import BoxCharacter from "../BoxCharacter/boxcharacter";
-import * as S from "./content";
+import * as S from "./styles";
+import { MoviesEp } from "../../common/mocks/moviesEp";
+
 const Content = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
+  const [dataFilter, setDataFilter] = useState([]);
   const [page, setPage] = useState(1);
-  const [link, setLink] = useState("https://swapi.dev/api/people");
 
-  const [films, setFilms] = useState([]);
-  const [homeWorld, setHomeWorld] = useState({});
+  const handleNext = () => {
+    if (page === 9) return;
+    setPage(page + 1);
+  };
 
-  const Buttons = () => {
-    const handleNext = () => {
-      if (page === 9) return;
-      setPage(page + 1);
-      setLink(`https://swapi.dev/api/people/?page=${page + 1}`);
-    };
+  const handlePrev = () => {
+    if (page === 1) return;
+    setPage(page - 1);
+  };
 
-    const handlePrev = () => {
-      if (page === 1) return;
+  const handleSelectClick = (movie) => {
+    const resultFilter = data.filter((item) => {
+      const exists = item.films.includes(
+        `https://swapi.dev/api/films/${movie}/`
+      );
 
-      setPage(page - 1);
-      setLink(`https://swapi.dev/api/people/?page=${page - 1}`);
-    };
+      return exists;
+    });
 
-    return (
-      <S.ButtonsContainer>
-        <S.Button onClick={handlePrev}>Prev</S.Button>
-        <S.Button onClick={handleNext}>Next</S.Button>
-      </S.ButtonsContainer>
-    );
+    setDataFilter(resultFilter);
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(link);
-      const data = await response.json();
-      setData(data);
+      const response = await fetch(`https://swapi.dev/api/people?page=${page}`);
+      const { results } = await response.json();
+      setData([...data, ...results]);
     };
+
     fetchData();
-    console.log(data + "data");
-  }, [link]);
-  useEffect(() => {
-    const fetchHomeWorld = async () => {
-      const response = await fetch(data.homeworld);
-      const data = await response.json();
-      setHomeWorld(data);
-    };
-    fetchHomeWorld();
-    console.log(homeWorld + "homeworld");
-  }, [data.homeworld]);
-  useEffect(() => {
-    const fetchFilms = async () => {
-      const response = await fetch(data.films);
-      const data = await response.json();
-      setFilms(data);
-    };
-    fetchFilms();
-    console.log(films + "films");
-  }, [data.films]);
-  function filterByMovie({ movie }) {
-    if (!movie) {
-      setData({ ...data, results: data.results });
-      return;
-    }
-    const filtered = data.results.filter((character) => {
-      return character.films.includes(`https://swapi.dev/api/films/${movie}/`);
-    });
-    setData({ ...data, results: filtered });
-  }
+  }, [page]);
 
   return (
     <S.MainContainer>
-      {filterByMovie && (
-        <S.Filter>
-          <S.FilterButton onClick={() => filterByMovie({ movie: 1 })}>
-            Episode I
-          </S.FilterButton>
-          <S.FilterButton onClick={() => filterByMovie({ movie: 2 })}>
-            Episode II
-          </S.FilterButton>
-          <S.FilterButton onClick={() => filterByMovie({ movie: 3 })}>
-            Episode III
-          </S.FilterButton>
-          <S.FilterButton onClick={() => filterByMovie({ movie: 4 })}>
-            Episode IV
-          </S.FilterButton>
+      {/*Button to filter by Episode*/}
+      <S.Filter>
+        {MoviesEp.map((item, index) => {
+          return (
+            <S.FilterButton
+              onClick={() => handleSelectClick(item.id)}
+              key={index}
+            >
+              {item.title}
+            </S.FilterButton>
+          );
+        })}
+      </S.Filter>
 
-          <S.FilterButton onClick={() => filterByMovie({ movie: 5 })}>
-            Episode V
-          </S.FilterButton>
-          <S.FilterButton onClick={() => filterByMovie({ movie: 6 })}>
-            Episode VI
-          </S.FilterButton>
+      <S.Grid>
+        {(dataFilter.length ? dataFilter : data).map((item, index) => (
+          <BoxCharacter
+            key={index}
+            name={item.name}
+            gender={item.gender}
+            height={item.height}
+            mass={item.mass}
+            haircolor={item.hair_color}
+            eyecolor={item.eye_color}
+            byear={item.birth_year}
+          />
+        ))}
+      </S.Grid>
 
-          <S.FilterButton onClick={() => filterByMovie({ movie: 7 })}>
-            Episode VII
-          </S.FilterButton>
-        </S.Filter>
-      )}
-      {filterByMovie ? (
-        <S.Grid>
-          {filterByMovie &&
-            data.results &&
-            data.results.map((item) => (
-              <BoxCharacter
-                key={item.name}
-                name={item.name}
-                gender={item.gender}
-                height={item.height}
-                mass={item.mass}
-                haircolor={item.hair_color}
-                eyecolor={item.eye_color}
-                byear={item.birth_year}
-              />
-            ))}
-        </S.Grid>
-      ) : (
-        <S.Grid>
-          {data.results &&
-            data.results.map((item) => (
-              <BoxCharacter
-                key={item.name}
-                name={item.name}
-                gender={item.gender}
-                height={item.height}
-                mass={item.mass}
-                haircolor={item.hair_color}
-                eyecolor={item.eye_color}
-                byear={item.birth_year}
-              />
-            ))}
-        </S.Grid>
-      )}
-      <Buttons />
+      <S.ButtonsContainer>
+        <S.Button onClick={handlePrev}>Prev</S.Button>
+        <S.Button onClick={handleNext}>Next</S.Button>
+      </S.ButtonsContainer>
     </S.MainContainer>
   );
 };
