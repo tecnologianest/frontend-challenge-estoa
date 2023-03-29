@@ -1,0 +1,61 @@
+@use '../mixins'
+
+body
+  // background-color: green
+
+.search-input
+  border: none
+  padding: 4px
+  margin-right: 5px
+
+.search-button
+  // border: none
+  padding: 2px
+  margin-right: 5px
+
+
+.container
+  display: flex
+  justify-content: space-around
+  align-items: center
+
+.container-cards
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 2500px
+  margin-bottom: 10px
+
+
+.container-birth
+  display: flex
+
+
+.ul-species
+  display: flex
+
+
+.containers-buton-card
+  width: 100%
+  padding: 8px
+  border-radius: 10px
+  margin-top: 10px
+  margin-bottom: 10px
+  background-color: white
+
+  h2
+    margin-bottom: 10px
+
+.direction-button
+  padding: 4px
+  border-radius: 4px
+  margin: 5px
+
+.img-card
+  @include mixins.img-card
+  width: 120px
+  height: 120px
+
+
+
