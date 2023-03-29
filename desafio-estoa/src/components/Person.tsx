@@ -63,7 +63,7 @@ const Person = () => {
 
   return <div >
 
-    <div className="container">
+    <div className="container-person">
 
       <img className="img" src={`https://starwars-visualguide.com/assets/img/characters/${data.url.replace(/.+\/([0-9]+).+/,(total:string, p1:string)=>p1)}.jpg`} alt={data.name}/>
 
