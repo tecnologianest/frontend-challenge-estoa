@@ -127,8 +127,8 @@ const Person = () => {
           <strong>Species:</strong>
           {data.species.length ===0 && <p>Unknown</p>}
           <p>
-            {data.species.map((specie:string)=>(
-              <span key={specie}>{specie}, </span>
+            {data.species.map((specie:string, i:number, arr:string[])=>(
+              <span key={specie}>{i!==arr.length -1?specie+", ":specie}, </span>
             ))}
           </p>
           

@@ -119,15 +119,15 @@ function People() {
                 <p>{person.birth_year}</p>
               </div>
 
-              <ul className="ul-species">
+              <p className="ul-species">
                 <strong>Species:</strong>
 
                 {person.species.length ===0 && <p>Unknown</p>}
 
-                {person.species.map((specie:string)=>(
-                  <li className="li-species" key={specie}>{specie}</li>
+                {person.species.map((specie:string, i:number, arr:string[])=>(
+                  <span className="li-species" key={specie}>{i!==arr.length -1?specie+", ":specie}</span>
                 ))}
-              </ul>
+              </p>
                 
             </div>
           </button>
