@@ -1,0 +1,16 @@
+.card {
+  background: #ad7d37;
+  border-radius: 4px;
+  max-width: 300px;
+  padding: 22px;
+}
+
+.name {
+  font-size: 32px;
+  color: yellow;
+}
+
+.specie {
+  font-size: 18px;
+  font-weight: 600;
+}
