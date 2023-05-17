@@ -1,6 +1,6 @@
+import axios, { AxiosResponse } from 'axios'
 import { ReactNode, createContext } from 'react'
 import { useQuery } from 'react-query'
-import axios, { AxiosResponse } from 'axios'
 
 export type CharacterPropsResults = Array<
   Record<
