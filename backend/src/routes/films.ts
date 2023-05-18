@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config(); // É necessário declarar o config antes de carregar nosso servidor.
+dotenv.config();
 
 import Router from "express";
 import { Request, Response } from "express";
@@ -14,7 +14,7 @@ filmsRouter.get("/films", async (req: Request, res: Response) => {
     const response = await axios.get(`${swapi}/films`);
     let films = response.data.results;
 
-    const { search } = req.query; // Obtem os parametros de busca via query
+    const { search } = req.query; 
 
     if (search) {
       // Se houver um termo de busca

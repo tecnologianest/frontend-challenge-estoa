@@ -8,6 +8,7 @@ import cors from "cors"
 import charactersRouter from "../src/routes/characters"
 import planetsRouter from "./routes/planets"
 import starshipsRouter from "./routes/starships"
+import filmsRouter from "./routes/films"
 
 const app = express()
 
@@ -15,6 +16,7 @@ const port = 3333
 app.use(cors())
 app.use(express.json())
 
+app.use('/', filmsRouter )
 app.use('/', starshipsRouter)
 app.use('/', planetsRouter)
 app.use('/', charactersRouter)
