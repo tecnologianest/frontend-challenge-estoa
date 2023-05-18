@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Card } from '../components';
 import { Loading } from '../components/Loading';
 import { CharactersContext } from '../context';
 
@@ -11,21 +12,8 @@ export function Home() {
 
   return (
     <section>
-      {characters?.map(({ name, species, birth_year }) => (
-        <ul key={name}>
-          <li>name: {name}</li>
-          {species.length > 0 && (
-            <details open>
-              <summary>Species</summary>
-              <ul>
-                {species.map((specie) => (
-                  <li key={name + '-' + specie}>{specie}</li>
-                ))}
-              </ul>
-            </details>
-          )}
-          <li>birth year: {birth_year}</li>
-        </ul>
+      {characters?.map((char) => (
+        <Card key={char.name} {...char} />
       ))}
     </section>
   );
