@@ -1,0 +1,71 @@
+import { Footer } from "@/components/Footer"
+import { Header } from "@/components/Header"
+import { Container } from "@/styles/characters"
+import axios from "axios"
+import { useEffect, useState } from "react"
+
+import { StarWarsCharacter } from "@/types/characters"
+
+import { containerVariants, childVariants } from '@/utils/animation'
+import {motion} from "framer-motion"
+
+export default function Characters() {
+  const [characters, setCharacters] = useState<StarWarsCharacter[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1); 
+
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3333/characters?page=${currentPage}`);
+        setCharacters(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar personagens:", error);
+      }
+    };
+
+    fetchCharacters();
+  }, [currentPage]);
+
+  console.log(characters)
+
+  return (
+    <>
+      <Header />
+      <Container 
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={containerVariants}
+      >
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Height</th>
+              <th>Skin Color</th>
+              <th>Eye Color</th>
+            </tr>
+          </thead>
+          <motion.tbody variants={childVariants}>
+            {characters.map(character => (
+              <motion.tr variants={childVariants} key={character.name}>
+                <motion.td variants={childVariants}>{character.name}</motion.td>
+                <motion.td variants={childVariants}>{character.gender}</motion.td>
+                <motion.td variants={childVariants}>{character.height}</motion.td>
+                <motion.td variants={childVariants}>{character.skin_color}</motion.td>
+                <motion.td variants={childVariants}>{character.eye_color}</motion.td>
+              </motion.tr>
+            ))}
+          </motion.tbody>
+        </table>
+        
+        <div>
+          <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+          <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+        </div>
+      </Container>
+      <Footer />
+    </>
+  )
+}
