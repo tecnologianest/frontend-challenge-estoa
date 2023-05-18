@@ -3,7 +3,7 @@ import { Loading } from '../components/Loading';
 import { CharactersContext } from '../context';
 
 export function Home() {
-  const { data, isLoading } = useContext(CharactersContext);
+  const { characters, isLoading } = useContext(CharactersContext);
 
   if (isLoading) {
     return <Loading />;
@@ -11,7 +11,7 @@ export function Home() {
 
   return (
     <section>
-      {data?.map(({ name, species, birth_year }) => (
+      {characters?.map(({ name, species, birth_year }) => (
         <ul key={name}>
           <li>name: {name}</li>
           {species.length > 0 && (
