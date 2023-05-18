@@ -4,9 +4,11 @@ import { useQuery } from 'react-query';
 import * as T from './CharactersContext.types';
 
 export const CharactersContext = createContext<{
-  characters: T.CharacterPropsResults;
+  characters: T.CharacterResultsListProps;
   isLoading: boolean;
-  setCharacters: React.Dispatch<React.SetStateAction<T.CharacterPropsResults>>;
+  setCharacters: React.Dispatch<
+    React.SetStateAction<T.CharacterResultsListProps>
+  >;
 }>({
   characters: [],
   isLoading: false,
@@ -15,7 +17,7 @@ export const CharactersContext = createContext<{
 });
 
 export function CharactersProvider({ children }: { children: ReactNode }) {
-  const [characters, setCharacters] = useState<T.CharacterPropsResults>([]);
+  const [characters, setCharacters] = useState<T.CharacterResultsListProps>([]);
 
   const { isLoading } = useQuery({
     queryKey: ['characters'],
@@ -23,7 +25,7 @@ export function CharactersProvider({ children }: { children: ReactNode }) {
   });
 
   async function getData() {
-    let characters: T.CharacterPropsResults = [];
+    let characters: T.CharacterResultsListProps = [];
 
     // set next page to fetch
     const nextPage: string | null = 'https://swapi.dev/api/people/';
