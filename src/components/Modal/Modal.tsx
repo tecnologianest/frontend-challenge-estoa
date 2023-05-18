@@ -6,6 +6,7 @@ interface ModalProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   onClose: () => void;
 }
 export function Modal({ isOpen, onClose, children }: ModalProps) {
+  // Runs an effect to call the handler esc key  to close modal
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -17,13 +18,14 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
       document.addEventListener('keydown', handleKeyDown);
     }
 
+    // Removes the listener when component dismount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
 
+  // Prevent the click event from propagating to the wrapper and triggering the modal close
   const handleContentClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // Prevent the click event from propagating to the wrapper and triggering the modal close
     event.stopPropagation();
   };
 
