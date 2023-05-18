@@ -31,9 +31,9 @@ export function CharactersProvider({ children }: { children: ReactNode }) {
     const nextPage: string | null = 'https://swapi.dev/api/people/';
 
     // get only 10 results
-    const response: AxiosResponse<T.CharacterProps> =
+    const { data }: AxiosResponse<T.CharacterProps> =
       await axios.get<T.CharacterProps>(nextPage);
-    characters = [...characters, ...response.data.results];
+    characters = [...characters, ...data.results];
 
     // get all results
     // characters = (await axios.get<T.CharacterProps>(nextPage)).data
@@ -68,6 +68,40 @@ export function CharactersProvider({ children }: { children: ReactNode }) {
     }
 
     await getSpecies();
+
+    async function getFilms() {
+      await Promise.all(
+        // loops over the data object
+        characters.map(async (char, index) => {
+          const filmsList: string[] = [];
+
+          await Promise.all(
+            char.films.map(async (film) => {
+              // loops over the films list and fetch each film
+              const response = await axios.get<{ title: string }>(film);
+              const filmName = response.data.title;
+
+              // updates the data object
+              filmsList.push(filmName);
+              characters[index].films = [...filmsList];
+            })
+          );
+        })
+      );
+    }
+
+    await getFilms();
+
+    async function getHomeWorld() {
+      await Promise.all(
+        characters.map(async (char, index) => {
+          const { data } = await axios.get<{ name: string }>(char.homeworld);
+          characters[index].homeworld = data.name;
+        })
+      );
+    }
+
+    await getHomeWorld();
 
     setCharacters(characters);
     return characters;
