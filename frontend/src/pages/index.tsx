@@ -1,4 +1,12 @@
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import {motion} from "framer-motion"
+import { Container, Content } from '@/styles/indexStyle'
+import Head from 'next/head'
+import Image from 'next/image'
+import illustration from "../../public/illustration.svg"
 
+import { containerVariants, childVariants } from '@/utils/animation'
 
 export default function Home() {
   return (
@@ -10,7 +18,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      
+      <Header />
+      <Container>
+        <Content 
+        className="content"
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={containerVariants}
+        >
+            <motion.section className="text"
+            variants={childVariants}
+            >
+                  <p>Here, you will find detailed information about the starwars universe...</p>
+              </motion.section>
+
+              <motion.section className='category'
+              variants={childVariants}
+              >
+                  <div>
+                      <Image src={illustration} alt="" width={223.83} height={321.89}/>
+                  </div>
+            </motion.section>
+        </Content>
+      </Container>
+      <Footer />
     </>
   )
 }
