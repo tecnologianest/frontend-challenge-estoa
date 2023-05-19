@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  top: ${({ theme }) => theme.headerHeight};
+  display: grid;
+  place-content: center;
+`;
+
 export const Loading = styled.svg`
   display: block;
   width: 32px;
