@@ -27,8 +27,6 @@
 
 - Uma coisa que eu acabei adotando por conta desse projeto por conseguir ganhar mais um tempo, foi juntar a lógica com os componentes... O ideal seria ter a lógica (chamadas a apis, metodos separados) e meus componentes apenas terem a informação de UI, design dos componentes.
 
-- O "componente" main page esta atuando como pagina prinicpal, logo , poderia ser uma page do next ao invéz de estar em um componente
-
 - Seria ideal adicionar um sistema de cache, para que assim que o componente fosse ja visitado uma vez pelo usuario, armazenasse isso para obter-se acessos mais rápidos.
 
 - Pensei em usar react-testing-library para os testes, biblioteca que ja usei previamente, que e baseada no jest e bem tranquila de usar , teste não feito por conta de tempo.
