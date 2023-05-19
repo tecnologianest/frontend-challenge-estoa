@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Species from "../../components/fetchSpecies";
 import Homeworld from "../../components/fetchHomeWorld";
+import Movies from "../../components/fetchMovies";
 
 interface Character {
   name: string;
@@ -64,7 +65,13 @@ export default function CharacterDetailsPage() {
               <strong>Height:</strong>
               {characterDetails.height}
             </p>
-            <p className="text-lg">
+            <p className="text-lg  ">
+              <strong>Mass:</strong> {characterDetails.mass}
+            </p>
+            <p className="text-lg  ">
+              <strong>Skin Color:</strong> {characterDetails.skin_color}
+            </p>
+            <p className="text-lg my-4">
               <strong>Character Homeworld Information:</strong>
               <span className="font-normal">
                 <Homeworld
@@ -72,12 +79,17 @@ export default function CharacterDetailsPage() {
                 />
               </span>
             </p>
-            <p className="text-lg  ">
-              <strong>Mass:</strong> {characterDetails.mass}
+            <p className="text-lg">
+              <strong>Character Movies Apperance Information: </strong>
+              <span className="font-normal">
+                {characterDetails.films.map((movieUrl: string, index) => (
+                  <p className="text-lg" key={index}>
+                    <Movies movieId={`${movieUrl.split("/").at(-2)}`} />
+                  </p>
+                ))}
+              </span>
             </p>
-            <p className="text-lg  ">
-              <strong>Skin Color:</strong> {characterDetails.skin_color}
-            </p>
+
             <p className="text-lg  ">
               {characterDetails.species.map((specieUrl: string, index) => (
                 <p className="text-2xl  " key={index}>
