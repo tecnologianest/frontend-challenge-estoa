@@ -37,6 +37,7 @@ export default function Planets(){
             exit="exit"
             variants={containerVariants}
             >
+                <h2>Planets</h2>
                 <div className="container-table">
                     <motion.table variants={childVariants} >
                     <motion.thead variants={childVariants} >

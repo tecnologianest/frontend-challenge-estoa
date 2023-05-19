@@ -13,6 +13,9 @@ export const Container = styled(motion.div)`
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+    h2{
+        color: #FFC500;
+    }
 
     .container-table{
         width: 100%;

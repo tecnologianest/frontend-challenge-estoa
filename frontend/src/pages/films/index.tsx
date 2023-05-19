@@ -37,7 +37,9 @@ export default function Films() {
       initial="initial"
       animate="animate"
       exit="exit"
-      variants={containerVariants}>
+      variants={containerVariants}
+      >
+        <h2>Films</h2>
         <input type="text" placeholder="Search by film title" value={searchTerm} onChange={handleSearch}/>
         <div className="container-table">
           <motion.table variants={childVariants}>
