@@ -49,8 +49,9 @@ export default function CharacterCard() {
 
   return (
     <div className="flex flex-col justify-center items-center max-w-7xl mx-auto p-6">
-      <h1 className="text-white text-center text-3xl text-bold font-mono">
-        Star Wars Character Wiki
+      <Image src="/assets/logo.png" alt="starwars logo"  width={400} height={200} className="rounded-lg"/>
+      <h1 className="text-white text-center text-3xl text-bold font-mono mt-2">
+        Character Wiki
       </h1>
       <br />
 
@@ -60,7 +61,7 @@ export default function CharacterCard() {
           name="search"
           defaultValue={search}
           type="text"
-          className="p-4 justify-center border border-red-600 rounded-lg h-10 w-96"
+          className="p-4 justify-center border border-yellow-300 rounded-lg h-10 w-96"
         />
       </form>
 
@@ -72,7 +73,7 @@ export default function CharacterCard() {
               href={`/character/${person.url.split("/").at(-2)}`}
               passHref
             >
-              <div className="hover:translate-y-2 hover:transition-all h-full border-x-2 bg-gray-600 border border-red-600 mt-5 rounded-lg flex items-center justify-center">
+              <div className="hover:translate-y-2 hover:transition-all h-full border-x-2 bg-gray-400 border border-yellow-300 mt-5 rounded-lg flex items-center justify-center">
                 <div className="text-center flex flex-col ">
                   <Image
                     src={getImagePath(person.name)}
