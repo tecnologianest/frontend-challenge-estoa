@@ -5,7 +5,7 @@ export function Header() {
   return (
     <S.Header>
       <S.Content className="container">
-        <Logo />
+        <Logo id={'header-logo'} />
       </S.Content>
     </S.Header>
   );

@@ -7,7 +7,6 @@ export function PageTemplate({
 }: HtmlHTMLAttributes<HTMLElement>) {
   return (
     <S.Wrapper className={[className, 'container'].join(' ')} {...props}>
-      {' '}
       {children}
     </S.Wrapper>
   );

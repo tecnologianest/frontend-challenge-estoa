@@ -1,19 +1,17 @@
-import { ReactNode } from 'react';
-import { CharacterProps } from '../../../types';
-import * as S from './Card.styles';
+import { ReactNode } from 'react'
+import { CharacterProps } from '../../../types'
+import * as S from './Card.styles'
 
-export interface CardProps
-  extends Omit<React.HtmlHTMLAttributes<HTMLDivElement>, 'id'> {
-  id: number | string;
+export interface CardProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   character: Partial<CharacterProps>;
   button?: React.ReactNode;
 }
 
-export function Card(props: CardProps) {
+export function Card({ character, button, ...props }: CardProps) {
   function renderValue(key: string, value: ReactNode) {
     if (Array.isArray(value)) {
       return (
-        <li>
+        <div key={`${key}`}>
           <S.Details open>
             <summary>
               <strong>{key.replaceAll('_', ' ')}</strong>
@@ -24,32 +22,30 @@ export function Card(props: CardProps) {
               ))}
             </ul>
           </S.Details>
-        </li>
+        </div>
       );
     } else {
       return (
-        <>
+        <div key={`${key}`}>
           <strong>{key.replaceAll('_', ' ')}:</strong> {value}
-        </>
+        </div>
       );
     }
   }
 
   return (
-    <S.CardWrapper key={props.character.name}>
-      <S.CardTitle>{props.character.name}</S.CardTitle>
+    <S.CardWrapper {...props}>
+      <S.CardTitle>{character.name}</S.CardTitle>
       <S.CardContent>
-        {Object.entries(props.character).map(([key, value]) => {
+        {Object.entries(character).map(([key, value], index) => {
           if (key === 'id' || key === 'name') return null;
           if (Array.isArray(value)) {
             return renderValue(key, value);
           }
-          return (
-            <li key={`${key}_${String(value)}`}>{renderValue(key, value)}</li>
-          );
+          return <div key={`${index}_${key}`}>{renderValue(key, value)}</div>;
         })}
       </S.CardContent>
-      {props.button && props.button}
+      {button && button}
     </S.CardWrapper>
   );
 }

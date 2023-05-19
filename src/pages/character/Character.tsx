@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, Loading } from '../../components';
@@ -7,7 +7,7 @@ import { PageTemplate } from '../../components/templates';
 import { getFilms, getHomeWorld, getSpecies } from '../../services';
 import { CharacterProps } from '../../types';
 
-export function Character() {
+export function Character(props: React.HTMLAttributes<HTMLElement>) {
   const [character, setCharacter] = useState<CharacterProps | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { id } = useParams();
@@ -47,9 +47,9 @@ export function Character() {
   }
 
   return (
-    <PageTemplate>
+    <PageTemplate {...props}>
       {isLoading || data === undefined || !character ? (
-        <Loading />
+        <Loading id="is-loading" />
       ) : (
         <Card
           key={character?.name.replace(' ', '_')}

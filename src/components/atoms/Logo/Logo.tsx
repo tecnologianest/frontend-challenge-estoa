@@ -1,8 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function Logo() {
+export function Logo(props: React.HtmlHTMLAttributes<HTMLAnchorElement>) {
   return (
-    <Link to="/">
+    <Link to="/" {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1500 669"

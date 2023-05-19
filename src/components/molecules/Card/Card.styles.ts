@@ -1,6 +1,7 @@
 import { css, styled } from 'styled-components';
+import { CardProps } from '.';
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.div<Partial<CardProps>>`
   ${({ theme }) => css`
     box-shadow: 2.8px 3.1px 10px rgba(0, 0, 0, 0.035),
       22px 25px 80px rgba(0, 0, 0, 0.07);

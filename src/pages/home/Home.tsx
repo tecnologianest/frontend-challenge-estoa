@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Loading, SearchBar } from '../../components';
@@ -8,12 +8,14 @@ import { CharacterProps } from '../../types';
 import * as S from './Home.styles';
 
 const LazyCard = memo(Card);
-export function Home() {
+
+export function Home(props: React.HtmlHTMLAttributes<HTMLElement>) {
   const { data, isLoading } = useQuery({
     queryFn: fetchCharacters,
   });
 
   const navigate = useNavigate();
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchQueryChange = (value: string) => {
@@ -28,7 +30,8 @@ export function Home() {
   ) => {
     return (
       <LazyCard
-        id={index + 1}
+        id={String(index + 1)}
+        data-testid="character-card"
         key={name.replaceAll(' ', '_')}
         character={{ name, species, birth_year }}
         button={
@@ -41,7 +44,7 @@ export function Home() {
   };
 
   return (
-    <S.Home>
+    <S.Home {...props}>
       {isLoading ? (
         <Loading />
       ) : (

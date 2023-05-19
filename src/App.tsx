@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './GlobalStyles';
 import { Header } from './components';
-import { headerMock } from './components/molecules/Header/Header.mock';
 import { Character, Home, NotFound } from './pages';
 import { queryClient } from './services';
 import { themes } from './shared';
@@ -12,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={themes.light}>
       <BrowserRouter>
-        <Header {...headerMock} />
+        <Header />
         <QueryClientProvider client={queryClient}>
           <Routes>
             <Route path="/" element={<Home />} />
