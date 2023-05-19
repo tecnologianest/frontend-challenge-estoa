@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
       margin-block-start: ${theme.headerHeight};
-      height: 100dvh;
+      height: ${`calc(100dvh - ${theme.headerHeight})`};
       font-family: ${theme.typography.type};
       font-size: ${theme.typography.sizes.base};
       background-color: hsl(0, 0%, 99%);
