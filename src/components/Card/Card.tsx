@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Modal } from '..';
-import { CharacterResultProps } from '../../context/CharactersContext.types';
+import { useNavigate } from 'react-router-dom';
+import { CharacterProps } from '../../types';
 
 export function Card({
+  id,
   name,
   species,
   birth_year,
@@ -14,19 +14,15 @@ export function Card({
   skin_color,
   homeworld,
   films,
-}: CharacterResultProps) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+}: CharacterProps) {
+  const navigate = useNavigate();
 
-  function openModal() {
-    setIsModalOpen(true);
-  }
-
-  function closeModal() {
-    setIsModalOpen(false);
+  function handleClick() {
+    navigate('/character/' + id);
   }
 
   return (
-    <div>
+    <div onClick={handleClick}>
       <ul>
         <li>name: {name}</li>
         {species.length > 0 && (
@@ -40,30 +36,7 @@ export function Card({
           </details>
         )}
         <li>birth year: {birth_year}</li>
-        <button onClick={openModal}>see more</button>
       </ul>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ul>
-          <li>name: {name}</li>
-          <li>birth year: {birth_year}</li>
-          <li>eye color: {eye_color}</li>
-          <li>gender: {gender}</li>
-          <li>hair_color: {hair_color}</li>
-          <li>height: {height}</li>
-          <li>mass: {mass}</li>
-          <li>skin_color: {skin_color}</li>
-          <li>homeworld: {homeworld}</li>
-          <details open>
-            <summary>films:</summary>
-            <ul>
-              {films.map((film) => (
-                <li>{film}</li>
-              ))}
-            </ul>
-          </details>
-          <li>species: {species}</li>
-        </ul>
-      </Modal>
     </div>
   );
 }
