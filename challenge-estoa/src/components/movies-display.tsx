@@ -30,19 +30,19 @@ export default function MoviesDisplay({ movieId }: { movieId: string }) {
     <div>
       {movie ? (
         <div className="my-4">
-          <p>
+          <p className="text-lg">
             <strong>Title:</strong> {movie.title}
           </p>
-          <p>
+          <p className="text-lg">
             <strong>Director:</strong> {movie.director}
           </p>
-          <p>
+          <p className="text-lg">
             <strong>Producer:</strong> {movie.producer}
           </p>
-          <p>
+          <p className="text-lg">
             <strong>Created:</strong> {movie.created}
           </p>
-          <p>
+          <p className="text-lg">
             <strong>Edited:</strong> {movie.edited}
           </p>
         </div>

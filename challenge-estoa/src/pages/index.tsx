@@ -73,35 +73,34 @@ export default function Main() {
 
       {characterData ? (
         <div className="flex flex-col md:grid md:grid-cols-3 gap-2 items-stretch justify-center w-full">
-          {characterData.map((person) => (
+          {characterData.map((character) => (
             <Link
-              key={person.name}
-              href={`/character/${person.url.split("/").at(-2)}`}
+              key={character.name}
+              href={`/character/${character.url.split("/").at(-2)}`}
               passHref
             >
               <div className="hover:translate-y-2 hover:transition-all h-full border-x-2 bg-gray-400 border border-yellow-300 mt-5 rounded-lg flex items-center justify-center">
                 <div className="text-center flex flex-col ">
                   <Image
-                    src={getImagePath(person.name)}
-                    alt={person.name}
+                    src={getImagePath(character.name)}
+                    alt={character.name}
                     className="w-auto h-auto"
                     width={300}
                     height={300}
                   />
                   <p className="text-lg text-white font-mono">
-                    Name: {person.name}
+                    Name: {character.name}
                   </p>
                   <p className="text-lg text-white font-mono">
-                    Birth Year: {person.birth_year}
+                    Birth Year: {character.birth_year}
                   </p>
-                  {person.species.length > 0 ? (
+                  {character.species.length > 0 ? (
                     <>
-                      {person.species.map((specieUrl: string, index) => (
-                        <p className="text-lg font-mono text-white" key={index}>
-                          <Species
-                            specieId={`${specieUrl.split("/").at(-2)}`}
-                          />
-                        </p>
+                      {character.species.map((specieUrl: string, index) => (
+                        <Species
+                          key={index}
+                          specieId={`${specieUrl.split("/").at(-2)}`}
+                        />
                       ))}
                     </>
                   ) : (

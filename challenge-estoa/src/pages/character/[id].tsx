@@ -93,18 +93,20 @@ export default function CharacterDetailsPage() {
               <strong>Character Movies Apperance Information: </strong>
               <span className="font-normal">
                 {characterDetails.films.map((movieUrl: string, index) => (
-                  <p className="text-lg" key={index}>
-                    <Movies movieId={`${movieUrl.split("/").at(-2)}`} />
-                  </p>
+                  <Movies
+                    key={index}
+                    movieId={`${movieUrl.split("/").at(-2)}`}
+                  />
                 ))}
               </span>
             </p>
 
             <p className="text-lg  ">
               {characterDetails.species.map((specieUrl: string, index) => (
-                <p className="text-2xl  " key={index}>
-                  <Species specieId={`${specieUrl.split("/").at(-2)}`} />
-                </p>
+                <Species
+                  key={index}
+                  specieId={`${specieUrl.split("/").at(-2)}`}
+                />
               ))}
             </p>
           </div>

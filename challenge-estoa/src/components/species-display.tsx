@@ -36,33 +36,33 @@ export default function SpeciesDisplay({ specieId }: { specieId: string }) {
     <div>
       {species ? (
         <div>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white ">
             {" "}
             <strong>Specie Name:</strong> {species.name}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             {" "}
             <strong>Average Height:</strong> {species.average_height}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Skin Colors:</strong> {species.skin_colors}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Average Lifespan:</strong> {species.average_lifespan}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Classification:</strong> {species.classification}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Hair Colors :</strong> {species.hair_colors}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Designation:</strong> {species.designation}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Eye Colors:</strong> {species.eye_colors}
           </p>
-          <p className="text-lg">
+          <p className="text-lg font-mono text-white">
             <strong>Language:</strong> {species.language}
           </p>
         </div>
