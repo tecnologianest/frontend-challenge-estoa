@@ -13,6 +13,14 @@ export const fetchCharacters = async (): Promise<CharacterProps[]> => {
   const characters: CharacterProps[] = response.data.results;
 
   const speciesPromises = characters.map(async (character) => {
+    const hasSpecie = character.species.length > 0;
+
+    if (!hasSpecie) {
+      return {
+        ...character,
+        species: ['no-data'],
+      };
+    }
     const species = await getSpecies(character.species);
     return {
       ...character,

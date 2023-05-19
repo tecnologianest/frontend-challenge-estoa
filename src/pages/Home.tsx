@@ -2,6 +2,7 @@ import { memo } from 'react';
 import { useQuery } from 'react-query';
 import { Card, Loading } from '../components';
 import { fetchCharacters } from '../services';
+import * as S from './Home.styles';
 
 const LazyCard = memo(Card);
 
@@ -15,10 +16,16 @@ export function Home() {
   }
 
   return (
-    <section>
-      {data?.map((char, index) => (
-        <LazyCard key={char.name} {...char} id={index + 1} />
+    <S.Wrapper>
+      {data?.map(({ name, species, birth_year }, index) => (
+        <LazyCard
+          id={index + 1}
+          key={name}
+          name={name}
+          species={species}
+          birth_year={birth_year}
+        />
       ))}
-    </section>
+    </S.Wrapper>
   );
 }

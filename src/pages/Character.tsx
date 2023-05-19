@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Loading } from '../components';
-import { CharacterProps } from '../context/CharactersContext.types';
+import { Card, Loading } from '../components';
 import { getFilms, getHomeWorld, getSpecies } from '../services';
+import { CharacterProps } from '../types';
 
 export default function Character() {
   const [character, setCharacter] = useState<CharacterProps | null>(null);
@@ -55,19 +55,19 @@ export default function Character() {
 
   return (
     <main>
-      <ul>
-        <li>name: {character?.name}</li>
-        <li>birth_year: {character?.birth_year}</li>
-        <li>eye_color: {character?.eye_color}</li>
-        <li>gender: {character?.gender}</li>
-        <li>hair_color: {character?.hair_color}</li>
-        <li>height: {character?.height}</li>
-        <li>mass: {character?.mass}</li>
-        <li>skin_color: {character?.skin_color}</li>
-        <li>homeworld: {character?.homeworld}</li>
-        <li>films: {character?.films}</li>
-        <li>species: {character?.species}</li>
-      </ul>
+      <Card
+        name={character?.name}
+        birth_year={character?.birth_year}
+        eye_color={character?.eye_color}
+        gender={character?.gender}
+        hair_color={character?.hair_color}
+        height={character?.height}
+        mass={character?.mass}
+        skin_color={character?.skin_color}
+        homeworld={character?.homeworld}
+        films={character?.films}
+        species={character?.species}
+      />
       <button onClick={handlePreview}>Back</button>
     </main>
   );
