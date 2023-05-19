@@ -21,9 +21,7 @@ export async function fetchCharacters() {
   }
 
   const speciesPromises = characters.map((character) =>
-    getSpecies(character.species)
-      .then((species) => ({ ...character, species }))
-      .catch(() => ({ ...character, species: 'Unknown' }))
+    getSpecies(character.species).then((species) => ({ ...character, species }))
   );
 
   const charactersWithSpecies = await Promise.all(speciesPromises);

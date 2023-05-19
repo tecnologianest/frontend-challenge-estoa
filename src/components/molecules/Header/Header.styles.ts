@@ -8,7 +8,7 @@ export const Header = styled.header`
     width: 100%;
     box-shadow: 0px 3px 2px rgb(0 0 0 / 0.05);
     background-color: white;
-    z-index: ;
+    z-index: ${theme.zIndex.header};
   `};
 `;
 
