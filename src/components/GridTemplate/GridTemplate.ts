@@ -6,6 +6,8 @@ export const GridTemplate = styled.div<{ fullBleed?: boolean }>`
     1fr
     min(60vw, 100%)
     1fr;
+  height: 100dvh;
+  align-items: center;
 
   & > * {
     ${({ fullBleed }) =>

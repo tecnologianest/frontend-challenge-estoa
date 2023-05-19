@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
       height: 100dvh;
       font-family: ${theme.typography.type};
       font-size: ${theme.typography.sizes.base};
-      background-color: hsl(0, 100%, 99%);
+      background-color: hsl(0, 0%, 99%);
     }
 
     button,
