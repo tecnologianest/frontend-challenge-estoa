@@ -1,42 +1,63 @@
-# Desafio front-end da Estoa
+# SWAPI APP
 
-Esse repositório é o nosso desafio para avaliar o quão bom desenvolvedor front-end você é.
+SWAPI APP é uma pequena aplicação criada para o teste de Desenvolvedor Front-end na Estoa
 
-Provavelmente você já está participando do nosso processo de contratação, mas se você caiu aqui por acaso, leia o documento até o final e caso haja interesse, você pode começar daqui mesmo.
+> Esta aplicação utiliza Vite como builder
 
+## Stack utilizada
 
-## Sobre o desafio
+**Front-end:** React, TypeScript, styled-components, react-router-dom, axios, react-query
 
-Esse é um desafio, não um teste ou uma prova de faculdade, portanto não há uma única resposta certa.
+## Road map
 
-Daremos a você alguns requisitos que devem ser cumpridos, e pelos quais você será avaliado, mas deixamos livre a escolha do método de solução.
+- Definir a estrutura da aplicação;
 
-O que nós esperamos aprender de você com o desafio:
+- Criar as rotas da aplicação;
 
-- Seu estilo de trabalho
-- Como você pensa e resolve problemas
-- Como você se comunica
+- Criar uma função que retorne todos os personagens da swapi;
 
-O que nós esperamos que você aprenda sobre a Estoa:
+- Implementação do layout utilizando styled-components;
 
-- Como nós trabalhamos como um time.
-- Tenha uma visão próxima dos desafios que enfrentamos no dia-a-dia.
+- Implementação da função de filtro;
 
-## Próximos passos
+## Melhorias
 
-1. Faça um _fork_ desse repositório para sua conta pessoal.
-2. As instruções do desafio se encontram no arquivo [`CHALLENGE.md`](/CHALLENGE.md).
-2. Resolva o desafio da forma que você julgar mais adequada.
-3. Preferencialmente utilize uma _branch_ chamada `desafio` ou com o seu nome (`nome-sobrenome`) para o desenvolvimento. E submeta o _pull-request_ para essa mesma _branch_.
+- Exibir um avatar para cada personagem;
 
-## Considerações
+- Adicionar a capacidade de alterar o avatar;
 
-- Nós não iremos limitar a sua escolha por ferramentas e bibliotecas, porém é de suma importância que use React.js, faça escolhas que sejam condizentes com o desafio apresentado. Para que utilizar uma bazuca para matar uma formiga?
-- Tente escrever o melhor código possível para que possamos avaliar o seu _pull-request_ com mais facilidade. E lembre-se: Você vai ter que explicar pessoalmente para nós depois.
-- Também leve em consideração que estamos availando como será o seu modo de trabalho no nosso dia a dia. Então, use as melhores práticas de semântica, estruturação, legibilidade e componentização.
+- Criar uma tela de login fake usando JWT;
 
-## Dúvidas?
+## Rodando localmente
 
-Ficou com alguma dúvida sobre como irá funcionar o processo? Entre em contato que nós te ajudaremos com o processo.
+Clone o projeto
 
-**Boa sorte!**
+```bash
+  git clone https://github.com/theviniis/frontend-challenge-estoa.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd frontend-challenge-estoa
+```
+
+Instale as dependências
+
+```bash
+  pnpm install
+```
+
+Inicie o servidor
+
+```bash
+  pnpm dev
+```
+
+## Deploy
+
+Para fazer o deploy desse projeto rode
+
+```bash
+  pnpm build
+```
