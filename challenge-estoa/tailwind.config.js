@@ -8,10 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "star-wars-bg": "url('/public/assets/bg-starwars.png')",
+        starwars: "url('/assets/background-image.jpeg')",
       },
     },
   },
