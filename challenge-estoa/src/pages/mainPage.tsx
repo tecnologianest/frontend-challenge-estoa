@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Species from "./speciesInfoDisplay";
+import Species from "../components/speciesInfoDisplay";
 import Image from "next/image";
 import { getImagePath } from "../utils/getImagePath";
 import { useRouter } from "next/router";
@@ -49,7 +49,13 @@ export default function CharacterCard() {
 
   return (
     <div className="flex flex-col justify-center items-center max-w-7xl mx-auto p-6">
-      <Image src="/assets/logo.png" alt="starwars logo"  width={400} height={200} className="rounded-lg"/>
+      <Image
+        src="/assets/logo.png"
+        alt="starwars logo"
+        width={400}
+        height={200}
+        className="rounded-lg"
+      />
       <h1 className="text-white text-center text-3xl text-bold font-mono mt-2">
         Character Wiki
       </h1>

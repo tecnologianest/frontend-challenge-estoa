@@ -1,4 +1,4 @@
-import CharacterCard from "../components/mainPage";
+import CharacterCard from "./mainPage";
 
 export default function Home() {
   return (
