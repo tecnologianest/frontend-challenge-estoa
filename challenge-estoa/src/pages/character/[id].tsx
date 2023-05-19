@@ -46,7 +46,7 @@ export default function CharacterDetailsPage() {
   return (
     <div className="w-full min-h-screen bg-starwars flex items-center justify-center p-10">
       {characterDetails ? (
-        <div className="p-4 bg-gray-300 border rounded-lg border-red-600 opacity-60 max-w-xl mx-auto">
+        <div className="p-4 bg-gray-300 border rounded-lg border-red-600 opacity-80 max-w-xl mx-auto">
           <div className="flex flex-col gap-2 justify-center ">
             <h1 className="text-lg text-center mb-2 font-bold">
               {characterDetails.name}
