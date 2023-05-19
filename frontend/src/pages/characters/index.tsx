@@ -37,28 +37,30 @@ export default function Characters() {
       exit="exit"
       variants={containerVariants}
       >
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Height</th>
-              <th>Skin Color</th>
-              <th>Eye Color</th>
-            </tr>
-          </thead>
-          <motion.tbody variants={childVariants}>
-            {characters.map(character => (
-              <motion.tr variants={childVariants} key={character.name}>
-                <motion.td variants={childVariants}>{character.name}</motion.td>
-                <motion.td variants={childVariants}>{character.gender}</motion.td>
-                <motion.td variants={childVariants}>{character.height}</motion.td>
-                <motion.td variants={childVariants}>{character.skin_color}</motion.td>
-                <motion.td variants={childVariants}>{character.eye_color}</motion.td>
-              </motion.tr>
-            ))}
-          </motion.tbody>
-        </table>
+        <div className="container-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Height</th>
+                <th>Skin Color</th>
+                <th>Eye Color</th>
+              </tr>
+            </thead>
+            <motion.tbody variants={childVariants}>
+              {characters.map(character => (
+                <motion.tr variants={childVariants} key={character.name}>
+                  <motion.td variants={childVariants}>{character.name}</motion.td>
+                  <motion.td variants={childVariants}>{character.gender}</motion.td>
+                  <motion.td variants={childVariants}>{character.height}</motion.td>
+                  <motion.td variants={childVariants}>{character.skin_color}</motion.td>
+                  <motion.td variants={childVariants}>{character.eye_color}</motion.td>
+                </motion.tr>
+              ))}
+            </motion.tbody>
+          </table>
+        </div>
         
         <div>
           <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>

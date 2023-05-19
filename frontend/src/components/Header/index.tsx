@@ -22,7 +22,6 @@ export const Header = () => {
                     <Link className="link" href={"/films"}>
                         <li>Films</li>
                     </Link>
-                    
                 </ul>
             </nav>
         </Container>

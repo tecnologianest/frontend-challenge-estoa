@@ -37,28 +37,30 @@ export default function Planets(){
             exit="exit"
             variants={containerVariants}
             >
-                <motion.table variants={childVariants} >
-                <motion.thead variants={childVariants} >
-                    <motion.tr variants={childVariants} >
-                    <motion.th variants={childVariants} >Name</motion.th>
-                    <motion.th variants={childVariants} >Diameter</motion.th>
-                    <motion.th variants={childVariants} >Population</motion.th>
-                    <motion.th variants={childVariants} >Terrain</motion.th>
-                    <motion.th variants={childVariants} >Gravity</motion.th>
-                    </motion.tr>
-                </motion.thead>
-                <motion.tbody variants={childVariants} >
-                    {planets.map(planet => (
-                    <motion.tr  variants={childVariants} key={planet.name}>
-                        <motion.td variants={childVariants} >{planet.name}</motion.td>
-                        <motion.td variants={childVariants} >{planet.diameter}</motion.td>
-                        <motion.td variants={childVariants} >{planet.population}</motion.td>
-                        <motion.td variants={childVariants} >{planet.terrain}</motion.td>
-                        <motion.td variants={childVariants} >{planet.gravity}</motion.td>
-                    </motion.tr>
-                    ))}
-                </motion.tbody>
-                </motion.table>
+                <div className="container-table">
+                    <motion.table variants={childVariants} >
+                    <motion.thead variants={childVariants} >
+                        <motion.tr variants={childVariants} >
+                        <motion.th variants={childVariants} >Name</motion.th>
+                        <motion.th variants={childVariants} >Diameter</motion.th>
+                        <motion.th variants={childVariants} >Population</motion.th>
+                        <motion.th variants={childVariants} >Terrain</motion.th>
+                        <motion.th variants={childVariants} >Gravity</motion.th>
+                        </motion.tr>
+                    </motion.thead>
+                    <motion.tbody variants={childVariants} >
+                        {planets.map(planet => (
+                        <motion.tr  variants={childVariants} key={planet.name}>
+                            <motion.td variants={childVariants} >{planet.name}</motion.td>
+                            <motion.td variants={childVariants} >{planet.diameter}</motion.td>
+                            <motion.td variants={childVariants} >{planet.population}</motion.td>
+                            <motion.td variants={childVariants} >{planet.terrain}</motion.td>
+                            <motion.td variants={childVariants} >{planet.gravity}</motion.td>
+                        </motion.tr>
+                        ))}
+                    </motion.tbody>
+                    </motion.table>
+                </div>
                 
                 <div>
                 <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>

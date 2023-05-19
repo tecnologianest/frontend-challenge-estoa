@@ -17,6 +17,10 @@ export const Content = styled(motion.div)`
     justify-content: space-around;
     align-items: center;
     color: var(--text-color);
+
+    @media (max-width: 767px){
+        flex-direction: column;
+    }
     
     .text{
         width: 237px;
@@ -29,5 +33,10 @@ export const Content = styled(motion.div)`
         display: flex;
         gap: 10rem;
         align-items: center;
+        
+        @media (max-width: 767px){
+            flex-direction: column;
+            display: none;
+        }
     }
 `

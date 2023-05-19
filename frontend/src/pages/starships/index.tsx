@@ -37,28 +37,30 @@ export default function Starships(){
             exit="exit"
             variants={containerVariants}
             >
-                <motion.table variants={childVariants} >
-                <motion.thead variants={childVariants} >
-                    <motion.tr variants={childVariants} >
-                    <motion.th variants={childVariants} >Name</motion.th>
-                    <motion.th variants={childVariants} >Model</motion.th>
-                    <motion.th variants={childVariants} >Length</motion.th>
-                    <motion.th variants={childVariants} >Passengenrs</motion.th>
-                    <motion.th variants={childVariants} >Consumables</motion.th>
-                    </motion.tr>
-                </motion.thead>
-                <motion.tbody variants={childVariants} >
-                    {starships.map(starship => (
-                    <motion.tr  variants={childVariants} key={starship.name}>
-                        <motion.td variants={childVariants} >{starship.name}</motion.td>
-                        <motion.td variants={childVariants} >{starship.model}</motion.td>
-                        <motion.td variants={childVariants} >{starship.length}</motion.td>
-                        <motion.td variants={childVariants} >{starship.passengers}</motion.td>
-                        <motion.td variants={childVariants} >{starship.consumables}</motion.td>
-                    </motion.tr>
-                    ))}
-                </motion.tbody>
-                </motion.table>
+                <div className="container-table">
+                    <motion.table variants={childVariants} >
+                    <motion.thead variants={childVariants} >
+                        <motion.tr variants={childVariants} >
+                        <motion.th variants={childVariants} >Name</motion.th>
+                        <motion.th variants={childVariants} >Model</motion.th>
+                        <motion.th variants={childVariants} >Length</motion.th>
+                        <motion.th variants={childVariants} >Passengenrs</motion.th>
+                        <motion.th variants={childVariants} >Consumables</motion.th>
+                        </motion.tr>
+                    </motion.thead>
+                    <motion.tbody variants={childVariants} >
+                        {starships.map(starship => (
+                        <motion.tr  variants={childVariants} key={starship.name}>
+                            <motion.td variants={childVariants} >{starship.name}</motion.td>
+                            <motion.td variants={childVariants} >{starship.model}</motion.td>
+                            <motion.td variants={childVariants} >{starship.length}</motion.td>
+                            <motion.td variants={childVariants} >{starship.passengers}</motion.td>
+                            <motion.td variants={childVariants} >{starship.consumables}</motion.td>
+                        </motion.tr>
+                        ))}
+                    </motion.tbody>
+                    </motion.table>
+                </div>
                 
                 <div>
                     <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>

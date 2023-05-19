@@ -9,6 +9,10 @@ export const Container = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 767px){
+        flex-direction: column;
+    }
     
     .logo{
         width: 7rem;
@@ -19,10 +23,16 @@ export const Container = styled.header`
         display: flex;
         gap: 2rem;
         cursor: pointer;
+
+        @media (max-width: 767px){
+            margin-top:1rem;
+            gap: 1rem;
+        }
         
         .link{
             color: var(--text-color);
 
         }
     }
+
 `

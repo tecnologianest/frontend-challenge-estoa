@@ -14,17 +14,44 @@ export const Container = styled(motion.div)`
     align-items: center;
     gap: 3rem;
 
-    table{
+    .container-table{
         width: 100%;
-        
-        thead{
-            background-color: rgba(44, 83, 100, 0.26);
-            color: var(--text-color);
-    
+        max-width: 100%;
+
+        @media (max-width: 767px){
+            overflow-x: scroll;
+            padding-bottom: 2rem ;
         }
+
+        table{
+            width: 100%;
+            
+            thead{
+                background-color: rgba(44, 83, 100, 0.26);
+                color: var(--text-color);
+                
+                @media (max-width: 767px){
+                    th{
+                        min-width: 200px;
     
-        tbody{
-            color: #fff;
+                    }
+                }
+            }
+        
+            tbody{
+                color: #fff;
+
+                tr{
+                    height: 1.8rem;
+                }
+
+                @media (max-width: 767px){
+                    td{
+                        min-width: 200px;
+    
+                    }
+                }
+            }
         }
     }
 

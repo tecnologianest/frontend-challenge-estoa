@@ -39,26 +39,28 @@ export default function Films() {
       exit="exit"
       variants={containerVariants}>
         <input type="text" placeholder="Search by film title" value={searchTerm} onChange={handleSearch}/>
-        <motion.table variants={childVariants}>
-          <motion.thead variants={childVariants}>
-            <motion.tr variants={childVariants}>
-              <motion.th variants={childVariants}>Title</motion.th>
-              <motion.th variants={childVariants}>Director</motion.th>
-              <motion.th variants={childVariants}>Producer</motion.th>
-              <motion.th variants={childVariants}>Release_date</motion.th>
-            </motion.tr>
-          </motion.thead>
-          <motion.tbody variants={childVariants}>
-            {films.filter((films) => films.title.toLowerCase().includes(searchTerm.toLowerCase())).map((films) => (
-                <motion.tr variants={childVariants} key={films.title}>
-                  <motion.td variants={childVariants}>{films.title}</motion.td>
-                  <motion.td variants={childVariants}>{films.director}</motion.td>
-                  <motion.td variants={childVariants}>{films.producer}</motion.td>
-                  <motion.td variants={childVariants}>{films.release_date}</motion.td>
-                </motion.tr>
-              ))}
-          </motion.tbody>
-        </motion.table>
+        <div className="container-table">
+          <motion.table variants={childVariants}>
+            <motion.thead variants={childVariants}>
+              <motion.tr variants={childVariants}>
+                <motion.th variants={childVariants}>Title</motion.th>
+                <motion.th variants={childVariants}>Director</motion.th>
+                <motion.th variants={childVariants}>Producer</motion.th>
+                <motion.th variants={childVariants}>Release_date</motion.th>
+              </motion.tr>
+            </motion.thead>
+            <motion.tbody variants={childVariants}>
+              {films.filter((films) => films.title.toLowerCase().includes(searchTerm.toLowerCase())).map((films) => (
+                  <motion.tr variants={childVariants} key={films.title}>
+                    <motion.td variants={childVariants}>{films.title}</motion.td>
+                    <motion.td variants={childVariants}>{films.director}</motion.td>
+                    <motion.td variants={childVariants}>{films.producer}</motion.td>
+                    <motion.td variants={childVariants}>{films.release_date}</motion.td>
+                  </motion.tr>
+                ))}
+            </motion.tbody>
+          </motion.table>
+        </div>
       </Container>
       <Footer />
     </>
