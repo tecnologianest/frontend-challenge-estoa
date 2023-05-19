@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Species from "../../components/fetchSpecies";
-import Homeworld from "../../components/fetchHomeWorld";
-import Movies from "../../components/fetchMovies";
+import Species from "../../components/speciesInfoDisplay";
+import Homeworld from "../../components/planetsInfoDisplay";
+import Movies from "../../components/moviesInfoDisplay";
 
 interface Character {
   name: string;

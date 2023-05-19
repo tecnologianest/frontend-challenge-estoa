@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Species from "./fetchSpecies";
+import Species from "./speciesInfoDisplay";
 import Image from "next/image";
 import { getImagePath } from "../utils/getImagePath";
 import { useRouter } from "next/router";
