@@ -21,7 +21,7 @@ type Character = {
   films: [];
 };
 
-export default function Cards() {
+export default function Main() {
   const [characterData, setCharacterData] = useState<Character[] | null>(null);
 
   const { query, isReady } = useRouter();
