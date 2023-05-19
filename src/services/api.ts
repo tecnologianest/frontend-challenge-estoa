@@ -13,14 +13,6 @@ export const fetchCharacters = async (): Promise<CharacterProps[]> => {
   const characters: CharacterProps[] = response.data.results;
 
   const speciesPromises = characters.map(async (character) => {
-    const hasSpecie = character.species.length > 0;
-
-    if (!hasSpecie) {
-      return {
-        ...character,
-        species: ['unknown'],
-      };
-    }
     const species = await getSpecies(character.species);
     return {
       ...character,
@@ -46,6 +38,12 @@ export async function getFilms(filmsList: string[]) {
 
 export async function getSpecies(speciesList: string[]) {
   const list: string[] = [];
+  const hasSpecie = speciesList.length > 0;
+  console.log(hasSpecie);
+
+  if (!hasSpecie) {
+    return ['unknown'];
+  }
 
   await Promise.all(
     speciesList.map(async (specie) => {

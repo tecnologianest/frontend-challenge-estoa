@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../';
 import { CharacterProps } from '../../types';
@@ -21,7 +21,7 @@ export function Card(props: Partial<CharacterProps>) {
             </summary>
             <ul>
               {value.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
+                <li key={`${key}_${index}`}>{item}</li>
               ))}
             </ul>
           </S.Details>
@@ -29,9 +29,9 @@ export function Card(props: Partial<CharacterProps>) {
       );
     } else {
       return (
-        <React.Fragment>
+        <>
           <strong>{key.replaceAll('_', ' ')}:</strong> {value}
-        </React.Fragment>
+        </>
       );
     }
   }
@@ -46,7 +46,7 @@ export function Card(props: Partial<CharacterProps>) {
             return renderValue(key, value);
           }
           return (
-            <li key={key + '-' + String(value)}>{renderValue(key, value)}</li>
+            <li key={`${key}_${String(value)}`}>{renderValue(key, value)}</li>
           );
         })}
       </S.CardContent>
