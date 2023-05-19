@@ -16,7 +16,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path={'/character/:id'} element={<Character />} />
+            <Route path="/character/:id" element={<Character />} />
           </Routes>
         </QueryClientProvider>
         <GlobalStyles />
