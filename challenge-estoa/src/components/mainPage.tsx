@@ -56,7 +56,7 @@ export default function CharacterCard() {
 
       <form>
         <input
-          placeholder="Type the name of some character + ENTER"
+          placeholder="character name + enter"
           name="search"
           defaultValue={search}
           type="text"
