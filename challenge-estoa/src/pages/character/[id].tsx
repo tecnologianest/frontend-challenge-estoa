@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Species from "../../components/speciesInfoDisplay";
 import Homeworld from "../../components/planetsInfoDisplay";
 import Movies from "../../components/moviesInfoDisplay";
+import Image from "next/image"
+import { getImagePath } from "../../utils/getImagePath";
+
 
 interface Character {
   name: string;
@@ -49,6 +52,14 @@ export default function CharacterDetailsPage() {
               {characterDetails.name}
             </h1>
 
+            <Image
+                    src={getImagePath(characterDetails.name)}
+                    alt={characterDetails.name}
+                    className="w-auto h-auto"
+                    width={200}
+                    height={200}
+                  />
+            
             <p className="text-lg">
               <strong>Birth year</strong>: {characterDetails.birth_year}
             </p>
