@@ -1,16 +1,20 @@
-import { QueryClientProvider } from 'react-query'
-import { CharactersProvider } from './context'
-import { queryClient } from './lib'
-import { Home } from './pages'
+import { QueryClientProvider } from 'react-query';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from './pages';
+import Character from './pages/Character';
+import { queryClient } from './services';
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <CharactersProvider>
-        <Home />
-      </CharactersProvider>
-    </QueryClientProvider>
-  )
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path={'/character/:id'} element={<Character />} />
+        </Routes>
+      </QueryClientProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
