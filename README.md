@@ -18,7 +18,7 @@ Antes de executar o projeto, certifique-se de ter os seguintes requisitos instal
 
 Siga os passos abaixo para instalar e executar o projeto:
 
-1. Clone o repositório do projeto: `https://github.com/B-Lucas365/frontend-challenge-estoa/tree/desafio`
+1. Clone o repositório do projeto: `https://github.com/B-Lucas365/frontend-challenge-estoa`
 
 2. Dentro da pasta `backend`, instale as dependências com:
 
