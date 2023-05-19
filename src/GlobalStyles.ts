@@ -14,6 +14,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     body {
+      margin-block-start: ${theme.headerHeight};
       height: 100dvh;
       font-family: ${theme.typography.type};
       font-size: ${theme.typography.sizes.base};
@@ -21,7 +22,8 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     button,
-    input {
+    input,
+    a {
       font: inherit;
     }
 
@@ -37,9 +39,15 @@ export const GlobalStyles = createGlobalStyle`
       list-style: none;
     }
 
-    main {
-      padding: ${theme.spacing.lg};
-      border-radius: ${theme.border.radius};
+    a {
+      text-decoration: none;
+      color: currentColor;
+    }
+
+    .container {
+      max-width: clamp(300px, 65vw, 1200px);
+      margin: 0 auto;
+      padding-inline: ${theme.spacing.sm};
     }
   `};
 

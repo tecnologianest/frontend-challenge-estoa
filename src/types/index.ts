@@ -21,9 +21,7 @@ export interface CharacterProps
       | 'url',
       string
     >,
-    Record<'films' | 'species' | 'starships' | 'vehicles', Array<string>> {
-  id: number;
-}
+    Record<'films' | 'species' | 'starships' | 'vehicles', Array<string>> {}
 
 export interface FilmProps {
   title: string;

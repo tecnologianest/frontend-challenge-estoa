@@ -1,8 +1,18 @@
 import { memo } from 'react';
 import { useQuery } from 'react-query';
-import { Card, Loading } from '../components';
+import { useNavigate } from 'react-router-dom';
+import { css, styled } from 'styled-components';
+import { Button, Card, Loading } from '../components';
+import { PageTemplate } from '../components/templates';
 import { fetchCharacters } from '../services';
-import * as S from './Home.styles';
+
+const Content = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: ${theme.spacing.sm};
+  `}
+`;
 
 const LazyCard = memo(Card);
 
@@ -11,21 +21,28 @@ export function Home() {
     queryFn: fetchCharacters,
   });
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  const navigate = useNavigate();
 
   return (
-    <S.Wrapper>
-      {data?.map(({ name, species, birth_year }, index) => (
-        <LazyCard
-          id={index + 1}
-          key={(name + species).replace(' ', '_')}
-          name={name}
-          species={species}
-          birth_year={birth_year}
-        />
-      ))}
-    </S.Wrapper>
+    <PageTemplate>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Content>
+          {data?.map(({ name, species, birth_year }, index) => (
+            <LazyCard
+              id={index + 1}
+              key={name.replaceAll(' ', '_')}
+              character={{ name, species, birth_year }}
+              button={
+                <Button onClick={() => navigate(`/character/${index + 1}`)}>
+                  SEE MORE
+                </Button>
+              }
+            />
+          ))}
+        </Content>
+      )}
+    </PageTemplate>
   );
 }

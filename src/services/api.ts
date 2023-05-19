@@ -39,7 +39,6 @@ export async function getFilms(filmsList: string[]) {
 export async function getSpecies(speciesList: string[]) {
   const list: string[] = [];
   const hasSpecie = speciesList.length > 0;
-  console.log(hasSpecie);
 
   if (!hasSpecie) {
     return ['unknown'];

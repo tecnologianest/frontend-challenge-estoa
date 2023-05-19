@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Card, Loading } from '../components';
+import { Button, Card, Loading } from '../components';
+import { PageTemplate } from '../components/templates';
 import { getFilms, getHomeWorld, getSpecies } from '../services';
 import { CharacterProps } from '../types';
 
@@ -12,10 +13,6 @@ export default function Character() {
   const { id } = useParams();
 
   const navigate = useNavigate();
-
-  function handlePreview() {
-    navigate(-1);
-  }
 
   const { data } = useQuery({
     queryKey: ['character'],
@@ -49,29 +46,30 @@ export default function Character() {
     }
   }
 
-  if (isLoading || data === undefined) {
-    return <Loading />;
-  }
-
-  if (!character) return;
-
   return (
-    <main>
-      <Card
-        key={'banana'}
-        name={character.name}
-        birth_year={character.birth_year}
-        eye_color={character.eye_color}
-        gender={character.gender}
-        hair_color={character.hair_color}
-        height={character.height}
-        mass={character.mass}
-        skin_color={character.skin_color}
-        homeworld={character.homeworld}
-        films={character.films}
-        species={character.species}
-      />
-      <button onClick={handlePreview}>Back</button>
-    </main>
+    <PageTemplate>
+      {isLoading || data === undefined || !character ? (
+        <Loading />
+      ) : (
+        <Card
+          key={character?.name.replace(' ', '_')}
+          id={character?.name}
+          character={{
+            name: character.name,
+            birth_year: character.birth_year,
+            eye_color: character.eye_color,
+            gender: character.gender,
+            hair_color: character.hair_color,
+            height: character.height,
+            mass: character.mass,
+            skin_color: character.skin_color,
+            homeworld: character.homeworld,
+            films: character.films,
+            species: character.species,
+          }}
+          button={<Button onClick={() => navigate('/')}>BACK</Button>}
+        />
+      )}
+    </PageTemplate>
   );
 }

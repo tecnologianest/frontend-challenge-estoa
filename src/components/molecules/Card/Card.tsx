@@ -1,16 +1,15 @@
 import { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../';
-import { CharacterProps } from '../../types';
+import { CharacterProps } from '../../../types';
 import * as S from './Card.styles';
 
-export function Card(props: Partial<CharacterProps>) {
-  const navigate = useNavigate();
+export interface CardProps
+  extends Omit<React.HtmlHTMLAttributes<HTMLDivElement>, 'id'> {
+  id: number | string;
+  character: Partial<CharacterProps>;
+  button?: React.ReactNode;
+}
 
-  function handleClick() {
-    navigate('/character/' + props.id);
-  }
-
+export function Card(props: CardProps) {
   function renderValue(key: string, value: ReactNode) {
     if (Array.isArray(value)) {
       return (
@@ -37,10 +36,10 @@ export function Card(props: Partial<CharacterProps>) {
   }
 
   return (
-    <S.CardWrapper key={props.name ?? crypto.randomUUID()}>
-      <S.CardTitle>{props.name}</S.CardTitle>
+    <S.CardWrapper key={props.character.name}>
+      <S.CardTitle>{props.character.name}</S.CardTitle>
       <S.CardContent>
-        {Object.entries(props).map(([key, value]) => {
+        {Object.entries(props.character).map(([key, value]) => {
           if (key === 'id' || key === 'name') return null;
           if (Array.isArray(value)) {
             return renderValue(key, value);
@@ -50,7 +49,7 @@ export function Card(props: Partial<CharacterProps>) {
           );
         })}
       </S.CardContent>
-      <Button onClick={handleClick}>SEE MORE</Button>
+      {props.button && props.button}
     </S.CardWrapper>
   );
 }

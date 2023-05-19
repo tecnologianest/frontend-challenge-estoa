@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Loading = styled.svg`
   display: block;
@@ -10,7 +10,7 @@ export const Loading = styled.svg`
 
   circle {
     fill: none;
-    stroke: tomato;
+    stroke: ${({ theme }) => theme.colors.primary[100]};
     stroke-width: 4px;
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
@@ -39,4 +39,4 @@ export const Loading = styled.svg`
       stroke-dashoffset: -125px;
     }
   }
-`
+`;

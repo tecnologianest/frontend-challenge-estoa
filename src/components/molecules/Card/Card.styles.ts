@@ -34,6 +34,10 @@ export const CardContent = styled.ul`
       }
       padding: ${theme.spacing.xs};
     }
+    li {
+      display: flex;
+      justify-content: space-between;
+    }
   `}
 `;
 
