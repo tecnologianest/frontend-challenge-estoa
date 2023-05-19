@@ -43,6 +43,7 @@ export const spacing = {
 
 export const border = {
   radius: '8px',
+  width: '2px',
 };
 
 export const zIndex = {
