@@ -6,7 +6,7 @@ SWAPI APP é uma pequena aplicação criada para o teste de Desenvolvedor Front-
 
 ## Stack utilizada
 
-**Front-end:** React, TypeScript, styled-components, react-router-dom, axios, react-query
+**Front-end:** React, TypeScript, styled-components, react-router-dom, axios, react-query, react-testing-library, jest
 
 ## Road map
 
@@ -20,13 +20,13 @@ SWAPI APP é uma pequena aplicação criada para o teste de Desenvolvedor Front-
 
 - Implementação da função de filtro;
 
+- Implementação de testes unitários
+
 ## Melhorias
 
 - Exibir um avatar para cada personagem;
 
-- Adicionar a capacidade de alterar o avatar;
-
-- Criar uma tela de login fake usando JWT;
+- Melhorar os testes da página Characters
 
 ## Rodando localmente
 
