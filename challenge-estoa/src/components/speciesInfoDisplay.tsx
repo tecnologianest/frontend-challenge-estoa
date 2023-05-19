@@ -18,7 +18,6 @@ type Specie = {
 };
 
 export default function Species({ specieId }: { specieId: string }) {
-  const router = useRouter();
   const [species, setSpecies] = useState<Specie>();
 
   useEffect(() => {

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 type HomeWorld = {
   climate: string;
   created: string;
@@ -17,7 +16,6 @@ type HomeWorld = {
 };
 
 export default function Homeworld({ planetId }: { planetId: string }) {
-  const router = useRouter();
   const [homeWorld, setHomeWorld] = useState<HomeWorld>();
 
   useEffect(() => {

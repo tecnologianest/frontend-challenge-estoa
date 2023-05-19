@@ -15,7 +15,6 @@ type Movie = {
 };
 
 export default function Movies({ movieId }: { movieId: string }) {
-  const router = useRouter();
   const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
