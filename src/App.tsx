@@ -4,8 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './GlobalStyles';
 import { Header } from './components';
 import { headerMock } from './components/molecules/Header/Header.mock';
-import { Home } from './pages';
-import Character from './pages/Character';
+import { Character, Home } from './pages';
 import { queryClient } from './services';
 import { themes } from './shared';
 

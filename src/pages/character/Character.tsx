@@ -2,12 +2,12 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Loading } from '../components';
-import { PageTemplate } from '../components/templates';
-import { getFilms, getHomeWorld, getSpecies } from '../services';
-import { CharacterProps } from '../types';
+import { Button, Card, Loading } from '../../components';
+import { PageTemplate } from '../../components/templates';
+import { getFilms, getHomeWorld, getSpecies } from '../../services';
+import { CharacterProps } from '../../types';
 
-export default function Character() {
+export function Character() {
   const [character, setCharacter] = useState<CharacterProps | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { id } = useParams();
