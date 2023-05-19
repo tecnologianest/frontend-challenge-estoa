@@ -1,42 +1,84 @@
-# Desafio front-end da Estoa
+# frontend-challenge-estoa
 
-Esse repositório é o nosso desafio para avaliar o quão bom desenvolvedor front-end você é.
+## Descrição
+O projeto foi um desafio proposto pela empresa Estoa, para posiçao de Desenvolvedor Front-end Jr.
 
-Provavelmente você já está participando do nosso processo de contratação, mas se você caiu aqui por acaso, leia o documento até o final e caso haja interesse, você pode começar daqui mesmo.
+Como um extra resolvi criar uma api, para tratar e adicionar mais funcionalidades aos dados retornados da api, para assim eu poder criar um front-end mais completo com mais detalhes.
+No projeto voce encontrará duas pastas, uma backend e outra front-end. Entre na pasta Backend, instale as dependencias e execulte ela primeiro, após isso entre na pasta Frontend e faca o mesmo.
+
+o projeto possue uma branch com o nome "desafio".
+
+## Requisitos
+Antes de executar o projeto, certifique-se de ter os seguintes requisitos instalados em sua máquina:
+
+- Node.js (versão 14 ou superior)
+- npm ou yarn
+
+## Instalação
+
+Siga os passos abaixo para instalar e executar o projeto:
+
+1. Clone o repositório do projeto: `https://github.com/B-Lucas365/frontend-challenge-estoa/tree/desafio`
+
+2. Dentro da pasta `backend`, instale as dependências com:
+
+yarn ou npm install
+
+3. Após isso, execute o servidor com:
+
+yarn dev ou npm run dev
 
 
-## Sobre o desafio
+# Endpoints
 
-Esse é um desafio, não um teste ou uma prova de faculdade, portanto não há uma única resposta certa.
+A API disponibiliza os seguintes endpoints:
 
-Daremos a você alguns requisitos que devem ser cumpridos, e pelos quais você será avaliado, mas deixamos livre a escolha do método de solução.
+- `/characters`: Retorna informações sobre os personagens da saga Star Wars em ordem alfabética.
+- `/planets`: Retorna informações sobre os planetas da saga Star Wars ordenado por diâmetro, do maior para o menor.
+- `/starships`: Retorna informações sobre as naves da saga Star Wars em ordem alfabética..
+- `/films`: Retorna informações sobre os filmes da saga Star Wars em ordem cronológica e um campo de busca que possibilita a busca de filmes por nome.
 
-O que nós esperamos aprender de você com o desafio:
+## Dependencias utilizadas
 
-- Seu estilo de trabalho
-- Como você pensa e resolve problemas
-- Como você se comunica
+- express
+- Axios
+- Typescript
 
-O que nós esperamos que você aprenda sobre a Estoa:
 
-- Como nós trabalhamos como um time.
-- Tenha uma visão próxima dos desafios que enfrentamos no dia-a-dia.
 
-## Próximos passos
 
-1. Faça um _fork_ desse repositório para sua conta pessoal.
-2. As instruções do desafio se encontram no arquivo [`CHALLENGE.md`](/CHALLENGE.md).
-2. Resolva o desafio da forma que você julgar mais adequada.
-3. Preferencialmente utilize uma _branch_ chamada `desafio` ou com o seu nome (`nome-sobrenome`) para o desenvolvimento. E submeta o _pull-request_ para essa mesma _branch_.
+# Aplicação Frontend
 
-## Considerações
 
-- Nós não iremos limitar a sua escolha por ferramentas e bibliotecas, porém é de suma importância que use React.js, faça escolhas que sejam condizentes com o desafio apresentado. Para que utilizar uma bazuca para matar uma formiga?
-- Tente escrever o melhor código possível para que possamos avaliar o seu _pull-request_ com mais facilidade. E lembre-se: Você vai ter que explicar pessoalmente para nós depois.
-- Também leve em consideração que estamos availando como será o seu modo de trabalho no nosso dia a dia. Então, use as melhores práticas de semântica, estruturação, legibilidade e componentização.
+## Informações do Projeto
 
-## Dúvidas?
+- Nome do projeto: front-end
+- Versão: 0.1.0
 
-Ficou com alguma dúvida sobre como irá funcionar o processo? Entre em contato que nós te ajudaremos com o processo.
 
-**Boa sorte!**
+## Instalação
+
+Siga os passos abaixo para instalar e executar o projeto:
+
+1. Dentro da pasta `frontend`, instale as dependências com:
+
+yarn ou npm install
+
+2. Após isso, execute o servidor com:
+
+yarn dev ou npm run dev
+
+utilize o navegador de sua preferencia: http://localhost:3000
+
+
+## Dependencias utilizadas
+
+- Styled-Components
+= Axios
+- Framer-Motion
+- Typescript
+
+![image](https://github.com/B-Lucas365/frontend-challenge-estoa/assets/82220876/54b45e2f-29d0-4150-8350-4927d8feed47)
+
+
+
