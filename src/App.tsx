@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './GlobalStyles';
 import { Header } from './components';
 import { headerMock } from './components/molecules/Header/Header.mock';
-import { Character, Home } from './pages';
+import { Character, Home, NotFound } from './pages';
 import { queryClient } from './services';
 import { themes } from './shared';
 
@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/character/:id" element={<Character />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </QueryClientProvider>
         <GlobalStyles />
