@@ -1,10 +1,14 @@
-import { useContext } from 'react';
-import { Card } from '../components';
-import { Loading } from '../components/Loading';
-import { CharactersContext } from '../context';
+import { memo } from 'react';
+import { useQuery } from 'react-query';
+import { Card, Loading } from '../components';
+import { fetchCharacters } from '../services';
+
+const LazyCard = memo(Card);
 
 export function Home() {
-  const { characters, isLoading } = useContext(CharactersContext);
+  const { data, isLoading } = useQuery({
+    queryFn: fetchCharacters,
+  });
 
   if (isLoading) {
     return <Loading />;
@@ -12,8 +16,8 @@ export function Home() {
 
   return (
     <section>
-      {characters?.map((char) => (
-        <Card key={char.name} {...char} />
+      {data?.map((char, index) => (
+        <LazyCard key={char.name} {...char} id={index + 1} />
       ))}
     </section>
   );
