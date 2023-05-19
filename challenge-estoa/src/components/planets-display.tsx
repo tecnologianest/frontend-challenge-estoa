@@ -15,7 +15,7 @@ type HomeWorld = {
   url: string;
 };
 
-export default function Homeworld({ planetId }: { planetId: string }) {
+export default function PlanetsDisplay({ planetId }: { planetId: string }) {
   const [homeWorld, setHomeWorld] = useState<HomeWorld>();
 
   useEffect(() => {

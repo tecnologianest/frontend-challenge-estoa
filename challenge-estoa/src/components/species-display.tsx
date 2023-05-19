@@ -11,12 +11,13 @@ type Specie = {
   edited: string;
   eye_colors: string;
   hair_colors: string;
+  skin_colors: string;
   homeworld: string;
   language: string;
   name: string;
 };
 
-export default function Species({ specieId }: { specieId: string }) {
+export default function SpeciesDisplay({ specieId }: { specieId: string }) {
   const [species, setSpecies] = useState<Specie>();
 
   useEffect(() => {
@@ -44,10 +45,25 @@ export default function Species({ specieId }: { specieId: string }) {
             <strong>Average Height:</strong> {species.average_height}
           </p>
           <p className="text-lg">
+            <strong>Skin Colors:</strong> {species.skin_colors}
+          </p>
+          <p className="text-lg">
             <strong>Average Lifespan:</strong> {species.average_lifespan}
           </p>
           <p className="text-lg">
             <strong>Classification:</strong> {species.classification}
+          </p>
+          <p className="text-lg">
+            <strong>Hair Colors :</strong> {species.hair_colors}
+          </p>
+          <p className="text-lg">
+            <strong>Designation:</strong> {species.designation}
+          </p>
+          <p className="text-lg">
+            <strong>Eye Colors:</strong> {species.eye_colors}
+          </p>
+          <p className="text-lg">
+            <strong>Language:</strong> {species.language}
           </p>
         </div>
       ) : (

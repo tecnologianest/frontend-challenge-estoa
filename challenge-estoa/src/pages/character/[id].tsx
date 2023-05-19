@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Species from "../../components/speciesInfoDisplay";
-import Homeworld from "../../components/planetsInfoDisplay";
-import Movies from "../../components/moviesInfoDisplay";
+import Species from "../../components/species-display";
+import Homeworld from "../../components/planets-display";
+import Movies from "../../components/movies-display";
 import Image from "next/image";
-import { getImagePath } from "../../utils/getImagePath";
+import { getImagePath } from "../../utils/get-image-path";
 
 interface Character {
   name: string;

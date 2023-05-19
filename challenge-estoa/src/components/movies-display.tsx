@@ -13,7 +13,7 @@ type Movie = {
   edited: string;
 };
 
-export default function Movies({ movieId }: { movieId: string }) {
+export default function MoviesDisplay({ movieId }: { movieId: string }) {
   const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
