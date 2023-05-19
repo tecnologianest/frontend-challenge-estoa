@@ -20,6 +20,10 @@ export const Container = styled(motion.div)`
     .container-table{
         width: 100%;
         max-width: 100%;
+
+        .more{
+            cursor: pointer;
+        }
         
         
         @media (max-width: 767px){

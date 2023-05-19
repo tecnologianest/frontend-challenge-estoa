@@ -63,7 +63,7 @@ export default function Characters() {
             <motion.tbody variants={childVariants}>
               {characters.map(character => (
                 <motion.tr variants={childVariants} key={character.name} onClick={() => handleOpenModal(character)}>
-                  <motion.td variants={childVariants}>{character.name}</motion.td>
+                  <motion.td className="more" variants={childVariants}>{character.name}</motion.td>
                   <motion.td variants={childVariants}>{character.gender}</motion.td>
                   <motion.td variants={childVariants}>{character.height}</motion.td>
                   <motion.td variants={childVariants}>{character.skin_color}</motion.td>
