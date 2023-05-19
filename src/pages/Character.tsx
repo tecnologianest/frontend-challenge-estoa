@@ -53,20 +53,23 @@ export default function Character() {
     return <Loading />;
   }
 
+  if (!character) return;
+
   return (
     <main>
       <Card
-        name={character?.name}
-        birth_year={character?.birth_year}
-        eye_color={character?.eye_color}
-        gender={character?.gender}
-        hair_color={character?.hair_color}
-        height={character?.height}
-        mass={character?.mass}
-        skin_color={character?.skin_color}
-        homeworld={character?.homeworld}
-        films={character?.films}
-        species={character?.species}
+        key={'banana'}
+        name={character.name}
+        birth_year={character.birth_year}
+        eye_color={character.eye_color}
+        gender={character.gender}
+        hair_color={character.hair_color}
+        height={character.height}
+        mass={character.mass}
+        skin_color={character.skin_color}
+        homeworld={character.homeworld}
+        films={character.films}
+        species={character.species}
       />
       <button onClick={handlePreview}>Back</button>
     </main>

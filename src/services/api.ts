@@ -18,7 +18,7 @@ export const fetchCharacters = async (): Promise<CharacterProps[]> => {
     if (!hasSpecie) {
       return {
         ...character,
-        species: ['no-data'],
+        species: ['unknown'],
       };
     }
     const species = await getSpecies(character.species);

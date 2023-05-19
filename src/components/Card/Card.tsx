@@ -14,14 +14,18 @@ export function Card(props: Partial<CharacterProps>) {
   function renderValue(key: string, value: ReactNode) {
     if (Array.isArray(value)) {
       return (
-        <S.Details open>
-          <summary>
-            <strong>{key.replaceAll('_', ' ')}</strong>
-          </summary>
-          {value.map((item: string, index: number) => (
-            <li key={index}>{item}</li>
-          ))}
-        </S.Details>
+        <li>
+          <S.Details open>
+            <summary>
+              <strong>{key.replaceAll('_', ' ')}</strong>
+            </summary>
+            <ul>
+              {value.map((item: string, index: number) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </S.Details>
+        </li>
       );
     } else {
       return (
@@ -33,7 +37,7 @@ export function Card(props: Partial<CharacterProps>) {
   }
 
   return (
-    <S.CardWrapper>
+    <S.CardWrapper key={props.name ?? crypto.randomUUID()}>
       <S.CardTitle>{props.name}</S.CardTitle>
       <S.CardContent>
         {Object.entries(props).map(([key, value]) => {
@@ -41,7 +45,9 @@ export function Card(props: Partial<CharacterProps>) {
           if (Array.isArray(value)) {
             return renderValue(key, value);
           }
-          return <li key={key}>{renderValue(key, value)}</li>;
+          return (
+            <li key={key + '-' + String(value)}>{renderValue(key, value)}</li>
+          );
         })}
       </S.CardContent>
       <Button onClick={handleClick}>SEE MORE</Button>

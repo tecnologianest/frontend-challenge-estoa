@@ -20,7 +20,7 @@ export function Home() {
       {data?.map(({ name, species, birth_year }, index) => (
         <LazyCard
           id={index + 1}
-          key={name}
+          key={(name + species).replace(' ', '_')}
           name={name}
           species={species}
           birth_year={birth_year}
