@@ -67,7 +67,7 @@ export default function SpeciesDisplay({ specieId }: { specieId: string }) {
           </p>
         </div>
       ) : (
-        <p>oi</p>
+        <p>No Specie !!</p>
       )}
     </div>
   );
