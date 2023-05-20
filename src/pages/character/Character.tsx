@@ -1,48 +1,51 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, Loading } from '../../components';
-import { PageTemplate } from '../../components/templates';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Card, Loading, PageTemplate } from '../../components';
 import { getFilms, getHomeWorld, getSpecies } from '../../services';
 import { CharacterProps } from '../../types';
 
 export function Character(props: React.HTMLAttributes<HTMLElement>) {
   const [character, setCharacter] = useState<CharacterProps | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { id } = useParams();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const params: { charUrl: string | null } = location.state || {
+    charUrl: null,
+  };
 
   const { data } = useQuery({
     queryKey: ['character'],
     queryFn: getCharacter,
     staleTime: 0,
     refetchOnWindowFocus: false,
-    enabled: id !== undefined,
+    enabled: params.charUrl !== undefined,
   });
 
   async function getCharacter() {
-    try {
-      setIsLoading(true);
-      setCharacter(null);
-      const { data } = await axios.get<CharacterProps>(
-        `https://swapi.dev/api/people/${id}`
-      );
+    if (params.charUrl) {
+      try {
+        setIsLoading(true);
+        setCharacter(null);
 
-      const films = await getFilms(data.films);
-      data.films = films;
+        const { data } = await axios.get<CharacterProps>(params.charUrl);
 
-      const species = await getSpecies(data.species);
-      data.species = species;
+        const films = await getFilms(data.films);
+        data.films = films;
 
-      const homeworld = await getHomeWorld(data.homeworld);
-      data.homeworld = homeworld;
+        const species = await getSpecies(data.species);
+        data.species = species;
 
-      setCharacter(data);
-      return data;
-    } finally {
-      setIsLoading(false);
+        const homeworld = await getHomeWorld(data.homeworld);
+        data.homeworld = homeworld;
+
+        setCharacter(data);
+        return data;
+      } finally {
+        setIsLoading(false);
+      }
     }
   }
 

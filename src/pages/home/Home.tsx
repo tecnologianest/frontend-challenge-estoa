@@ -25,20 +25,24 @@ export function Home(props: React.HtmlHTMLAttributes<HTMLElement>) {
   const filteredList = useSearch<CharacterProps>(data ?? [], searchQuery);
 
   const renderComponent = (
-    { name, species, birth_year }: CharacterProps,
+    { name, species, birth_year, url }: CharacterProps,
     index: number
   ) => {
+    function handleClick() {
+      return navigate(`/character/${name.toLowerCase().replaceAll(' ', '_')}`, {
+        state: {
+          charUrl: url,
+        },
+      });
+    }
+
     return (
       <LazyCard
         id={String(index + 1)}
         data-testid="character-card"
         key={name.replaceAll(' ', '_')}
         character={{ name, species, birth_year }}
-        button={
-          <Button onClick={() => navigate(`/character/${index + 1}`)}>
-            SEE MORE
-          </Button>
-        }
+        button={<Button onClick={handleClick}>SEE MORE</Button>}
       />
     );
   };
