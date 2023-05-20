@@ -97,8 +97,7 @@ describe('Home', () => {
       expect(characterCards[0]).toHaveTextContent('Luke Skywalker');
     });
   });
-
-  it('navigates to character details page when "SEE MORE" button is clicked', async () => {
+  it('navigates to character details page when "SEE MORE" button is clicked', () => {
     const navigateMock = jest.fn();
     (useNavigate as jest.Mock).mockReturnValue(navigateMock);
 
@@ -109,6 +108,10 @@ describe('Home', () => {
     fireEvent.click(seeMoreButton);
 
     // Check if the navigate function is called with the correct path
-    expect(navigateMock).toHaveBeenCalledWith('/character/1');
+
+    expect(navigateMock).toHaveBeenCalledWith(
+      '/character/luke_skywalker',
+      expect.any(Object)
+    );
   });
 });
