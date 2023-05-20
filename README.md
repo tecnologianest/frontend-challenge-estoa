@@ -61,3 +61,11 @@ Para fazer o deploy desse projeto rode
 ```bash
   pnpm build
 ```
+
+## Testes
+
+Para rodar os testes desse projeto rode
+
+```bash
+  pnpm test
+```
