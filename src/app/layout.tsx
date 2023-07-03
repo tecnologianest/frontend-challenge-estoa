@@ -3,6 +3,7 @@ import React from 'react';
 
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
+import Header from '@/components/Header';
 
 export default function RootLayout({
   children,
@@ -13,7 +14,10 @@ export default function RootLayout({
     <html>
       <body>
         <CacheProvider>
-          <ChakraProvider>{children}</ChakraProvider>
+          <ChakraProvider>
+            <Header />
+            {children}
+          </ChakraProvider>
         </CacheProvider>
       </body>
     </html>
