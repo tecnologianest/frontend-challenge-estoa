@@ -16,9 +16,11 @@ export default function Card({
 }: CardProps) {
   const router = useRouter();
 
-  const handleRedirect = () => router.push('/details');
-
-  console.log(peopleUrl);
+  function extractNumbersFromString(str: string): string {
+    const regex = /\d+/g;
+    const numbers = str.match(regex);
+    return numbers ? numbers.join('') : '';
+  }
 
   const { data } = useQuery(species[0], async () => {
     return await axios
@@ -31,6 +33,13 @@ export default function Card({
         return response.data;
       });
   });
+
+  const speciesName = data?.name ? data.name : '';
+
+  const detailsParam = extractNumbersFromString(peopleUrl);
+
+  const handleRedirect = () =>
+    router.push(`/details/${detailsParam}${speciesName}`);
 
   return (
     <GridItem
