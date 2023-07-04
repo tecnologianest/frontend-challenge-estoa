@@ -1,5 +1,5 @@
 export interface CardProps {
   name: string;
-  species: string;
+  species: string[];
   birthYear: string;
 }
