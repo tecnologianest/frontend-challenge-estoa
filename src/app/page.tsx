@@ -8,6 +8,7 @@ import { Box, Button, Flex } from '@chakra-ui/react';
 import Card from '@/components/Card';
 import { AllPeopleResponseType } from '@/@types/peopleTypes';
 import { PeopleResponseType } from '@/@types/peopleResponseType';
+import Loading from '@/components/Loading';
 
 export default function Home() {
   const [url, setUrl] = useState<string>('https://swapi.dev/api/people/');
@@ -24,8 +25,15 @@ export default function Home() {
     }
   );
 
+  function handleNextButton() {
+    if (data.next) {
+      setUrl(data.next);
+    }
+    return;
+  }
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (
@@ -57,9 +65,7 @@ export default function Home() {
             })
           : ''}
       </Box>
-      <Button onClick={() => setUrl('https://swapi.dev/api/people/?page=3')}>
-        Next Page
-      </Button>
+      <Button onClick={() => handleNextButton()}>Next Page</Button>
     </Flex>
   );
 }
