@@ -32,6 +32,13 @@ export default function Home() {
     return;
   }
 
+  function handlePrevioustButton() {
+    if (data.previous) {
+      setUrl(data.previous);
+    }
+    return;
+  }
+
   if (isLoading) {
     return <Loading />;
   }
@@ -65,7 +72,36 @@ export default function Home() {
             })
           : ''}
       </Box>
-      <Button onClick={() => handleNextButton()}>Next Page</Button>
+
+      <Flex justifyContent="center" gap={6}>
+        <Button
+          w="100px"
+          onClick={() => handlePrevioustButton()}
+          _hover={{
+            opacity: data.previous ? '0.8' : '1',
+            cursor: data.previous ? 'pointer' : 'default',
+          }}
+          disabled={!data.previous}
+          _focus={{
+            boxShadow: 'none',
+          }}
+          _active={{
+            bg: !data.previous && '#EDF2F7',
+
+            borderColor: !data.previous && '#EDF2F7',
+          }}
+        >
+          Previous
+        </Button>
+
+        <Button
+          w="100px"
+          onClick={() => handleNextButton()}
+          _hover={{ opacity: '0.8' }}
+        >
+          Next
+        </Button>
+      </Flex>
     </Flex>
   );
 }
