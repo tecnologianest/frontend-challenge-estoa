@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import Loading from '@/components/Loading';
 import Films from '@/components/Films';
+import Homeworld from '@/components/Homeworld';
 
 export default function Details() {
   const searchParams = useParams();
@@ -38,8 +39,6 @@ export default function Details() {
     return response.data;
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -69,11 +68,13 @@ export default function Details() {
         <Text>Height: {data.height}</Text>
         <Text>Mass: {data.mass}</Text>
         <Text>Skin Color: {data.skin_color}</Text>
-        <Text>Homeworld: {data.homeworld}</Text>
+        <Homeworld url={data.homeworld} />
+
         <Flex gap={3}>
           <Text>Films: </Text>
           <Films urls={data.films} />
         </Flex>
+
         <Text>Species: {specie}</Text>
       </Flex>
     </Flex>

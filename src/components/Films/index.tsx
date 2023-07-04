@@ -25,8 +25,6 @@ export default function Films({ urls }: FilmsProps) {
     return films;
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -38,7 +36,6 @@ export default function Films({ urls }: FilmsProps) {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      ml="10px"
     >
       {data && data.length > 0
         ? data.map((film: string, index: number) => (
