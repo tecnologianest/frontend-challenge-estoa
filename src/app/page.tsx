@@ -1,17 +1,21 @@
 'use client';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, ChangeEvent } from 'react';
 
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Select, Spinner } from '@chakra-ui/react';
 import Card from '@/components/Card';
 import { AllPeopleResponseType } from '@/@types/peopleTypes';
 import { PeopleResponseType } from '@/@types/peopleResponseType';
 import Loading from '@/components/Loading';
+import { FilmsResponseType } from '@/@types/filmsResponseProps';
 
 export default function Home() {
   const [page, setPage] = useState<number>(1);
+  const [defaultOptionSelected, setDefaultOptionSelected] = useState(true);
+  const [filteredData, setFilteredData] = useState<AllPeopleResponseType[]>();
+
   const url = `https://swapi.dev/api/people/?page=${page}`;
 
   const { data = {} as PeopleResponseType, isLoading } = useQuery(
@@ -30,21 +34,47 @@ export default function Home() {
     }
   );
 
+  const filmData = useQuery(['getFilms'], async () => {
+    const response = await axios.get('https://swapi.dev/api/films', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data as FilmsResponseType;
+  });
+
   function handleNextButton() {
+    setFilteredData([]);
+    setDefaultOptionSelected(true);
     if (data.next) {
       setPage((prevPage) => prevPage + 1);
     }
   }
 
   function handlePreviousButton() {
+    setFilteredData([]);
+    setDefaultOptionSelected(true);
     if (data.previous) {
       setPage((prevPage) => prevPage - 1);
     }
   }
 
+  function handleRemoveFilter() {
+    setFilteredData([]);
+  }
+
   const memoizedData = useMemo(() => {
     return data?.results || [];
   }, [data]);
+
+  function handleMovieSelection(event: ChangeEvent<HTMLSelectElement>) {
+    const filteredCharacters = memoizedData?.filter(
+      (movie: AllPeopleResponseType) =>
+        movie?.films?.includes(event?.target?.value)
+    );
+
+    setFilteredData(filteredCharacters);
+  }
 
   if (isLoading) {
     return (
@@ -68,6 +98,37 @@ export default function Home() {
       direction="column"
       justifyContent="space-around"
     >
+      {filmData.isLoading ? (
+        <Spinner ml="80px" color="#FFF" />
+      ) : (
+        <Select
+          bg="#FFF"
+          maxW="300px"
+          ml="20px"
+          onChange={(e) => {
+            handleMovieSelection(e);
+            setDefaultOptionSelected(false);
+          }}
+        >
+          <option
+            value="reset"
+            selected={defaultOptionSelected}
+            onChange={() => handleRemoveFilter()}
+          >
+            Select a movie
+          </option>
+          {filmData && filmData.data
+            ? filmData.data.results.map((data) => {
+                return (
+                  <option key={data.title} value={data.url}>
+                    {data.title}
+                  </option>
+                );
+              })
+            : null}
+        </Select>
+      )}
+
       <Box
         padding={{ base: '20px', '2xl': '50px' }}
         display="grid"
@@ -79,8 +140,8 @@ export default function Home() {
         gap={{ base: 5, sm: 6 }}
         justifyContent="center"
       >
-        {memoizedData.length > 0
-          ? memoizedData.map((data: AllPeopleResponseType, index: number) => {
+        {filteredData?.length
+          ? filteredData?.map((data: AllPeopleResponseType, index: number) => {
               return (
                 <Card
                   key={index}
@@ -91,7 +152,17 @@ export default function Home() {
                 />
               );
             })
-          : ''}
+          : memoizedData.map((data: AllPeopleResponseType, index: number) => {
+              return (
+                <Card
+                  key={index}
+                  name={data.name}
+                  species={data.species}
+                  birthYear={data.birth_year}
+                  peopleUrl={data.url}
+                />
+              );
+            })}
       </Box>
 
       <Flex justifyContent="center" gap={6}>

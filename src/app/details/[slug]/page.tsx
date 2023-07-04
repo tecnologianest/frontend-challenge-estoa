@@ -40,7 +40,17 @@ export default function Details() {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <Flex
+        as="main"
+        h="calc(100vh - 80px)"
+        bg="#303046"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Loading />
+      </Flex>
+    );
   }
 
   return (
@@ -51,13 +61,18 @@ export default function Details() {
       direction="column"
       alignItems="center"
       justifyContent="center"
+      gap={6}
     >
+      <Text as="h1" color="#FFF">
+        Character Details
+      </Text>
+
       <Flex
         direction="column"
         color="#FFF"
         bg="#5b5baa"
         borderRadius="1rem"
-        w="300px"
+        w="340px"
         maxH="600px"
         gap={4}
         justifyContent="center"
