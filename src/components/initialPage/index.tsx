@@ -1,7 +1,6 @@
-
 function InitialPage() {
   return (
-    <div>Olá, Mundo!</div>
+    <div className="bg-blue-500 h-14 mb-0">Olá, Mundo!</div>
   )
 }
 
