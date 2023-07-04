@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import axios from 'axios';
 import { useQuery } from 'react-query';
@@ -11,10 +11,11 @@ import { PeopleResponseType } from '@/@types/peopleResponseType';
 import Loading from '@/components/Loading';
 
 export default function Home() {
-  const [url, setUrl] = useState<string>('https://swapi.dev/api/people/');
+  const [page, setPage] = useState<number>(1);
+  const url = `https://swapi.dev/api/people/?page=${page}`;
 
   const { data = {} as PeopleResponseType, isLoading } = useQuery(
-    'getPeopleData',
+    ['getPeopleData', page],
     async () => {
       const response = await axios.get(url, {
         headers: {
@@ -22,22 +23,28 @@ export default function Home() {
         },
       });
       return response.data;
+    },
+    {
+      enabled: Boolean(page),
+      keepPreviousData: true,
     }
   );
 
   function handleNextButton() {
     if (data.next) {
-      setUrl(data.next);
+      setPage((prevPage) => prevPage + 1);
     }
-    return;
   }
 
-  function handlePrevioustButton() {
+  function handlePreviousButton() {
     if (data.previous) {
-      setUrl(data.previous);
+      setPage((prevPage) => prevPage - 1);
     }
-    return;
   }
+
+  const memoizedData = useMemo(() => {
+    return data?.results || [];
+  }, [data]);
 
   if (isLoading) {
     return <Loading />;
@@ -58,8 +65,8 @@ export default function Home() {
         gap={5}
         justifyContent="center"
       >
-        {data && data.results && data.results.length > 0
-          ? data.results.map((data: AllPeopleResponseType, index: number) => {
+        {memoizedData.length > 0
+          ? memoizedData.map((data: AllPeopleResponseType, index: number) => {
               return (
                 <Card
                   key={index}
@@ -76,7 +83,7 @@ export default function Home() {
       <Flex justifyContent="center" gap={6}>
         <Button
           w="100px"
-          onClick={() => handlePrevioustButton()}
+          onClick={handlePreviousButton}
           _hover={{
             opacity: data.previous ? '0.8' : '1',
             cursor: data.previous ? 'pointer' : 'default',
@@ -87,7 +94,6 @@ export default function Home() {
           }}
           _active={{
             bg: !data.previous && '#EDF2F7',
-
             borderColor: !data.previous && '#EDF2F7',
           }}
         >
@@ -96,7 +102,7 @@ export default function Home() {
 
         <Button
           w="100px"
-          onClick={() => handleNextButton()}
+          onClick={handleNextButton}
           _hover={{ opacity: '0.8' }}
         >
           Next
