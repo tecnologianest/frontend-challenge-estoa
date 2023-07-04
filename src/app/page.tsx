@@ -1,10 +1,11 @@
 'use client';
 import React, { useState } from 'react';
+
+import axios from 'axios';
 import { useQuery } from 'react-query';
 
 import { Box, Button, Flex } from '@chakra-ui/react';
 import Card from '@/components/Card';
-import axios from 'axios';
 import { AllPeopleResponseType } from '@/@types/peopleTypes';
 import { PeopleResponseType } from '@/@types/peopleResponseType';
 
@@ -22,8 +23,6 @@ export default function Home() {
       return response.data;
     }
   );
-
-  console.log(data);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -52,6 +51,7 @@ export default function Home() {
                   name={data.name}
                   species={data.species}
                   birthYear={data.birth_year}
+                  peopleUrl={data.url}
                 />
               );
             })
