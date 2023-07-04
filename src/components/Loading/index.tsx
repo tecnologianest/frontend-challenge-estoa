@@ -13,8 +13,8 @@ export default function Loading() {
       h="calc(100vh - 80px)"
       gap={3}
     >
-      <Spinner size="xl" />
-      <Text>Loading...</Text>
+      <Spinner size="xl" color="#FFF" />
+      <Text color="#FFF">Loading...</Text>
     </Flex>
   );
 }

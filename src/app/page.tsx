@@ -47,7 +47,17 @@ export default function Home() {
   }, [data]);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <Flex
+        as="main"
+        h="calc(100vh - 80px)"
+        bg="#303046"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Loading />
+      </Flex>
+    );
   }
 
   return (
@@ -59,10 +69,14 @@ export default function Home() {
       justifyContent="space-around"
     >
       <Box
-        padding="50px"
+        padding={{ base: '20px', '2xl': '50px' }}
         display="grid"
-        gridTemplateColumns="repeat(4, 1fr)"
-        gap={5}
+        gridTemplateColumns={{
+          base: 'repeat(2, 1fr)',
+          sm: 'repeat(3, 1fr)',
+          xl: 'repeat(4, 1fr)',
+        }}
+        gap={{ base: 5, sm: 6 }}
         justifyContent="center"
       >
         {memoizedData.length > 0

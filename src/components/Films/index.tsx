@@ -4,7 +4,6 @@ import React from 'react';
 import { Flex, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import Loading from '../Loading';
 
 type FilmsProps = {
   urls: string[];
@@ -26,7 +25,7 @@ export default function Films({ urls }: FilmsProps) {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <Text></Text>;
   }
 
   return (

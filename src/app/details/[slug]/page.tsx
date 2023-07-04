@@ -58,7 +58,10 @@ export default function Details() {
         bg="#5b5baa"
         borderRadius="1rem"
         w="300px"
-        h="500px"
+        maxH="600px"
+        gap={4}
+        justifyContent="center"
+        p="10px"
       >
         <Text>Name: {data.name}</Text>
         <Text>Birth Year: {data.birth_year}</Text>
@@ -68,6 +71,7 @@ export default function Details() {
         <Text>Height: {data.height}</Text>
         <Text>Mass: {data.mass}</Text>
         <Text>Skin Color: {data.skin_color}</Text>
+
         <Homeworld url={data.homeworld} />
 
         <Flex gap={3}>

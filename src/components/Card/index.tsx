@@ -47,18 +47,24 @@ export default function Card({
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      gap={3}
+      gap={{ base: 1, sm: 2 }}
       color="#FFF"
       border="1px solid white"
       textColor="#FFF"
-      maxH="100px"
-      maxW="200px"
+      maxH="120px"
+      maxW="240px"
       _hover={{ cursor: 'pointer' }}
       onClick={() => handleRedirect()}
     >
-      <Text>Name: {name}</Text>
-      <Text>Species: {data?.name ? data.name : 'N/A'}</Text>
-      <Text>Birth Year: {birthYear}</Text>
+      <Text fontSize={{ base: '12px', sm: '14px', md: '18px' }}>
+        Name: {name}
+      </Text>
+      <Text fontSize={{ base: '12px', sm: '14px', md: '18px' }}>
+        Species: {data?.name ? data.name : 'N/A'}
+      </Text>
+      <Text fontSize={{ base: '12px', sm: '14px', md: '18px' }}>
+        Birth Year: {birthYear}
+      </Text>
     </GridItem>
   );
 }
