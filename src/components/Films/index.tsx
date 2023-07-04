@@ -2,23 +2,49 @@
 
 import React from 'react';
 import { Flex, Text } from '@chakra-ui/react';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import Loading from '../Loading';
 
 type FilmsProps = {
   urls: string[];
 };
 
 export default function Films({ urls }: FilmsProps) {
+  const { data, isLoading } = useQuery(`getFilms`, async () => {
+    const requests = urls.map((url) =>
+      axios.get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    );
+
+    const responses = await Promise.all(requests);
+    const films = responses.map((response) => response.data.title);
+    return films;
+  });
+
+  console.log(data);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Flex
-      bg="#3f3f7c"
-      h="80px"
+      bg="transparent"
+      maxH="90px"
       direction="column"
       justifyContent="center"
       alignItems="center"
+      ml="10px"
     >
-      {urls.length > 0
-        ? urls.map((film: string, index: number) => (
-            <Text key={index}>{film}</Text>
+      {data && data.length > 0
+        ? data.map((film: string, index: number) => (
+            <Text fontSize="12px" key={index}>
+              {film}
+            </Text>
           ))
         : ''}
     </Flex>
