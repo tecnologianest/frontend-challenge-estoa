@@ -84,6 +84,7 @@ export default function Home() {
         bg="#303046"
         justifyContent="center"
         alignItems="center"
+        data-testid="test-loading"
       >
         <Loading />
       </Flex>
