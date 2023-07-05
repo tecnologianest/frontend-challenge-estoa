@@ -13,7 +13,7 @@ import { FilmsResponseType } from '@/@types/filmsResponseProps';
 
 export default function Home() {
   const [page, setPage] = useState<number>(1);
-  const [defaultOptionSelected, setDefaultOptionSelected] = useState(true);
+  const [defaultOptionSelected, setDefaultOptionSelected] = useState('reset');
   const [filteredData, setFilteredData] = useState<AllPeopleResponseType[]>();
 
   const url = `https://swapi.dev/api/people/?page=${page}`;
@@ -34,6 +34,8 @@ export default function Home() {
     }
   );
 
+  console.log(data);
+
   const filmData = useQuery(['getFilms'], async () => {
     const response = await axios.get('https://swapi.dev/api/films', {
       headers: {
@@ -45,7 +47,7 @@ export default function Home() {
 
   function handleNextButton() {
     setFilteredData([]);
-    setDefaultOptionSelected(true);
+    setDefaultOptionSelected('reset');
     if (data.next) {
       setPage((prevPage) => prevPage + 1);
     }
@@ -53,7 +55,7 @@ export default function Home() {
 
   function handlePreviousButton() {
     setFilteredData([]);
-    setDefaultOptionSelected(true);
+    setDefaultOptionSelected('reset');
     if (data.previous) {
       setPage((prevPage) => prevPage - 1);
     }
@@ -69,8 +71,10 @@ export default function Home() {
 
   function handleMovieSelection(event: ChangeEvent<HTMLSelectElement>) {
     const filteredCharacters = memoizedData?.filter(
-      (movie: AllPeopleResponseType) =>
-        movie?.films?.includes(event?.target?.value)
+      (movie: AllPeopleResponseType) => {
+        setDefaultOptionSelected(event?.target?.value);
+        return movie?.films?.includes(event?.target?.value);
+      }
     );
 
     setFilteredData(filteredCharacters);
@@ -109,14 +113,11 @@ export default function Home() {
           ml="20px"
           onChange={(e) => {
             handleMovieSelection(e);
-            setDefaultOptionSelected(false);
           }}
+          value={defaultOptionSelected}
+          data-testid="test-select-loaded"
         >
-          <option
-            value="reset"
-            selected={defaultOptionSelected}
-            onChange={() => handleRemoveFilter()}
-          >
+          <option value="reset" onChange={() => handleRemoveFilter()}>
             Select a movie
           </option>
           {filmData && filmData.data
@@ -151,6 +152,7 @@ export default function Home() {
                   species={data.species}
                   birthYear={data.birth_year}
                   peopleUrl={data.url}
+                  data-testid="filtered-card-loaded"
                 />
               );
             })
@@ -162,6 +164,7 @@ export default function Home() {
                   species={data.species}
                   birthYear={data.birth_year}
                   peopleUrl={data.url}
+                  data-testid="card-loaded"
                 />
               );
             })}
