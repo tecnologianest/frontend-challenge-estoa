@@ -98,6 +98,7 @@ export default function Home() {
       bg="#303046"
       direction="column"
       justifyContent="space-around"
+      data-testid="test-home-loaded"
     >
       {filmData.isLoading ? (
         <Spinner ml="80px" color="#FFF" />
@@ -119,7 +120,7 @@ export default function Home() {
             Select a movie
           </option>
           {filmData && filmData.data
-            ? filmData.data.results.map((data) => {
+            ? filmData.data?.results?.map((data) => {
                 return (
                   <option key={data.title} value={data.url}>
                     {data.title}
