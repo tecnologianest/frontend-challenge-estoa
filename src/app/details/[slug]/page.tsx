@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useParams } from 'next/navigation';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text, Image } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import Loading from '@/components/Loading';
@@ -24,12 +24,12 @@ export default function Details() {
     return matches ? matches[0] : '';
   }
 
-  const peopleNumber = extractNumberFromParams(search);
+  const peopleId = extractNumberFromParams(search);
   const specie = extractLettersFromParams(search);
 
-  const { data, isLoading } = useQuery(`getPeople${peopleNumber}`, async () => {
+  const { data, isLoading } = useQuery(`getPeople${peopleId}`, async () => {
     const response = await axios.get(
-      `https://swapi.dev/api/people/${peopleNumber}/`,
+      `https://swapi.dev/api/people/${peopleId}/`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -38,6 +38,23 @@ export default function Details() {
     );
     return response.data;
   });
+
+  const personImageRequest = useQuery(
+    `getImage${data && data.name ? data.name : 'person'}`,
+    async () => {
+      const response = await axios.get(
+        `https://cdn.jsdelivr.net/gh/akabab/starwars-api@0.2.1/api/id/${peopleId}.json`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    }
+  );
+
+  console.log(personImageRequest.data);
 
   if (isLoading) {
     return (
@@ -56,27 +73,41 @@ export default function Details() {
   return (
     <Flex
       as="main"
-      h="calc(100vh - 80px)"
+      h="100vh"
       bg="#303046"
       direction="column"
       alignItems="center"
       justifyContent="center"
       gap={6}
     >
-      <Text as="h1" color="#FFF">
+      <Text as="h1" fontSize="18px" color="#FFF" mt="20px">
         Character Details
       </Text>
+
+      {!personImageRequest.isLoading && personImageRequest.data ? (
+        <Image
+          maxH="150px"
+          maxW="150px"
+          src={personImageRequest.data.image}
+          alt="character image"
+          rounded={10}
+        />
+      ) : (
+        <Loading />
+      )}
 
       <Flex
         direction="column"
         color="#FFF"
         bg="#5b5baa"
         borderRadius="1rem"
-        w="340px"
+        w="full"
+        maxW="340px"
         maxH="600px"
         gap={4}
         justifyContent="center"
         p="10px"
+        mb="20px"
       >
         <Text>Name: {data.name}</Text>
         <Text>Birth Year: {data.birth_year}</Text>

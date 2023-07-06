@@ -21,8 +21,6 @@ export default function Homeworld({ url }: HomeworldProps) {
       .then((response) => response.data);
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <Loading />;
   }

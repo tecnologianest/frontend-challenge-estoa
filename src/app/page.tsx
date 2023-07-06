@@ -34,8 +34,6 @@ export default function Home() {
     }
   );
 
-  console.log(data);
-
   const filmData = useQuery(['getFilms'], async () => {
     const response = await axios.get('https://swapi.dev/api/films', {
       headers: {
@@ -98,7 +96,7 @@ export default function Home() {
   return (
     <Flex
       as="main"
-      h="calc(100vh - 80px)"
+      h="100vh"
       bg="#303046"
       direction="column"
       justifyContent="space-around"
@@ -116,6 +114,7 @@ export default function Home() {
           }}
           value={defaultOptionSelected}
           data-testid="test-select-loaded"
+          mt="20px"
         >
           <option value="reset" onChange={() => handleRemoveFilter()}>
             Select a movie
@@ -170,7 +169,7 @@ export default function Home() {
             })}
       </Box>
 
-      <Flex justifyContent="center" gap={6}>
+      <Flex justifyContent="center" gap={6} mb="20px">
         <Button
           w="100px"
           onClick={handlePreviousButton}
