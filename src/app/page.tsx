@@ -137,7 +137,7 @@ export default function Home() {
         gridTemplateColumns={{
           base: 'repeat(2, 1fr)',
           sm: 'repeat(3, 1fr)',
-          xl: 'repeat(4, 1fr)',
+          xl: 'repeat(5, 1fr)',
         }}
         gap={{ base: 5, sm: 6 }}
         justifyContent="center"
