@@ -44,19 +44,19 @@ export default function Home() {
   });
 
   function handleNextButton() {
-    setFilteredData([]);
-    setDefaultOptionSelected('reset');
     if (data.next) {
       setPage((prevPage) => prevPage + 1);
     }
+    setFilteredData([]);
+    setDefaultOptionSelected('reset');
   }
 
   function handlePreviousButton() {
-    setFilteredData([]);
-    setDefaultOptionSelected('reset');
     if (data.previous) {
       setPage((prevPage) => prevPage - 1);
     }
+    setFilteredData([]);
+    setDefaultOptionSelected('reset');
   }
 
   function handleRemoveFilter() {
@@ -82,7 +82,7 @@ export default function Home() {
     return (
       <Flex
         as="main"
-        h="calc(100vh - 80px)"
+        h="100vh"
         bg="#303046"
         justifyContent="center"
         alignItems="center"
@@ -114,7 +114,7 @@ export default function Home() {
           }}
           value={defaultOptionSelected}
           data-testid="test-select-loaded"
-          mt="20px"
+          mt={{ base: '20px', md: 0 }}
         >
           <option value="reset" onChange={() => handleRemoveFilter()}>
             Select a movie

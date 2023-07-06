@@ -10,7 +10,7 @@ import Homeworld from '@/components/Homeworld';
 
 export default function Details() {
   const searchParams = useParams();
-  const search = searchParams.slug;
+  const pageParams = searchParams.slug;
 
   function extractNumberFromParams(str: string): string {
     const regex = /^\d+/;
@@ -24,8 +24,8 @@ export default function Details() {
     return matches ? matches[0] : '';
   }
 
-  const peopleId = extractNumberFromParams(search);
-  const specie = extractLettersFromParams(search);
+  const peopleId = extractNumberFromParams(pageParams);
+  const specie = extractLettersFromParams(pageParams);
 
   const { data, isLoading } = useQuery(`getPeople${peopleId}`, async () => {
     const response = await axios.get(
@@ -58,7 +58,7 @@ export default function Details() {
     return (
       <Flex
         as="main"
-        h="calc(100vh - 80px)"
+        h="100vh"
         bg="#303046"
         justifyContent="center"
         alignItems="center"
@@ -97,7 +97,7 @@ export default function Details() {
       <Flex
         direction="column"
         color="#FFF"
-        bg="#5b5baa"
+        bg="#3f3f7c"
         borderRadius="1rem"
         w="full"
         maxW="340px"
@@ -123,7 +123,7 @@ export default function Details() {
           <Films urls={data.films} />
         </Flex>
 
-        <Text>Species: {specie}</Text>
+        <Text>Species: {specie.length > 0 ? specie : 'N/A'}</Text>
       </Flex>
     </Flex>
   );

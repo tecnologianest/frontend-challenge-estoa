@@ -48,9 +48,9 @@ export default function Card({
       alignItems="center"
       justifyContent="center"
       gap={{ base: 1, sm: 2 }}
+      borderRadius="10px"
+      bg="#3f3f7c"
       color="#FFF"
-      border="1px solid white"
-      textColor="#FFF"
       maxH="120px"
       maxW="240px"
       _hover={{ cursor: 'pointer' }}

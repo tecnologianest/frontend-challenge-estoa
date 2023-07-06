@@ -8,6 +8,12 @@ const queryClient = new QueryClient();
 import { CacheProvider } from '@chakra-ui/next-js';
 import { ChakraProvider } from '@chakra-ui/react';
 import Header from '@/components/Header';
+import { Roboto } from '@next/font/google';
+
+const roboto = Roboto({
+  weight: ['300', '400', '500', '700', '900'],
+  preload: false,
+});
 
 export default function RootLayout({
   children,
@@ -16,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className={roboto.className}>
         <QueryClientProvider client={queryClient}>
           <CacheProvider>
             <ChakraProvider>
