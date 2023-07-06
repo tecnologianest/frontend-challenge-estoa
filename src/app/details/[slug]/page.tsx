@@ -77,7 +77,7 @@ export default function Details() {
       bg="#303046"
       direction="column"
       alignItems="center"
-      justifyContent="center"
+      justifyContent="space-around"
       gap={6}
     >
       <Text as="h1" fontSize="18px" color="#FFF" mt="20px">
@@ -104,7 +104,7 @@ export default function Details() {
         w="full"
         maxW="340px"
         maxH="600px"
-        gap={4}
+        gap={{ base: 2, md: 4 }}
         justifyContent="center"
         p="10px"
         mb="20px"
