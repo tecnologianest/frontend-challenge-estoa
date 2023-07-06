@@ -54,8 +54,6 @@ export default function Details() {
     }
   );
 
-  console.log(personImageRequest.data);
-
   if (isLoading) {
     return (
       <Flex

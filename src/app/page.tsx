@@ -6,10 +6,10 @@ import { useQuery } from 'react-query';
 
 import { Box, Button, Flex, Select, Spinner } from '@chakra-ui/react';
 import Card from '@/components/Card';
-import { AllPeopleResponseType } from '@/@types/peopleTypes';
+import { AllPeopleResponseType } from '@/@types/allPeopleResponseProps';
 import { PeopleResponseType } from '@/@types/peopleResponseType';
 import Loading from '@/components/Loading';
-import { FilmsResponseType } from '@/@types/filmsResponseProps';
+import { FilmsResponseType } from '@/@types/filmsResponseType';
 
 export default function Home() {
   const [page, setPage] = useState<number>(1);
