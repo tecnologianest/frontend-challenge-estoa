@@ -15,6 +15,7 @@ export default function Home() {
   const [page, setPage] = useState<number>(1);
   const [defaultOptionSelected, setDefaultOptionSelected] = useState('reset');
   const [filteredData, setFilteredData] = useState<AllPeopleResponseType[]>();
+  const [pageLoading, setPageLoading] = useState(false);
 
   const url = `https://swapi.dev/api/people/?page=${page}`;
 
@@ -44,19 +45,28 @@ export default function Home() {
   });
 
   function handleNextButton() {
+    setPageLoading(true);
     if (data.next) {
       setPage((prevPage) => prevPage + 1);
     }
     setFilteredData([]);
     setDefaultOptionSelected('reset');
+
+    setTimeout(() => {
+      setPageLoading(false);
+    }, 2000);
   }
 
   function handlePreviousButton() {
+    setPageLoading(true);
     if (data.previous) {
       setPage((prevPage) => prevPage - 1);
     }
     setFilteredData([]);
     setDefaultOptionSelected('reset');
+    setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
   }
 
   function handleRemoveFilter() {
@@ -78,7 +88,7 @@ export default function Home() {
     setFilteredData(filteredCharacters);
   }
 
-  if (isLoading) {
+  if (isLoading || pageLoading) {
     return (
       <Flex
         as="main"
@@ -132,7 +142,7 @@ export default function Home() {
       )}
 
       <Box
-        padding={{ base: '20px', '2xl': '50px' }}
+        padding={{ base: '20px' }}
         display="grid"
         gridTemplateColumns={{
           base: 'repeat(2, 1fr)',
