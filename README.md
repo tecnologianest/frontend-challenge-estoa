@@ -24,7 +24,6 @@ https://github.com/JoaoKeuwe/frontend-challenge-estoa/assets/91097315/90440733-3
 - [Consumo de uma API do Star Wars](https://swapi.dev/)
 - [ReactJs](https://pt-br.reactjs.org/)
 - [Tailwind](https://tailwindui.com/?ref=top)
-- [Cypress](https://www.cypress.io/)
 - [Vite.js](https://vitejs.dev/)
 - [Google fonts | Icons](https://fonts.google.com/)
 - [axios](https://axios-http.com/ptbr/docs/intro)
@@ -66,9 +65,6 @@ https://github.com/JoaoKeuwe/frontend-challenge-estoa/assets/91097315/90440733-3
  
  # Caso não abra direto em seu navegador digitar no campo de busca 
  $ http://localhost:5174/
- 
- # Comando caso queira executar os testes
- $ npm run test
  
 
 ```
