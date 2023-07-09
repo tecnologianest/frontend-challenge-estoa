@@ -1,42 +1,74 @@
-# Desafio front-end da Estoa
+<h1 align='center' >
 
-Esse repositório é o nosso desafio para avaliar o quão bom desenvolvedor front-end você é.
-
-Provavelmente você já está participando do nosso processo de contratação, mas se você caiu aqui por acaso, leia o documento até o final e caso haja interesse, você pode começar daqui mesmo.
+Projeto Estoa Star Wars 🛸
 
 
-## Sobre o desafio
+<h1/>
 
-Esse é um desafio, não um teste ou uma prova de faculdade, portanto não há uma única resposta certa.
+## (📱Caso esteja pelo celular é so clicar no link abaixo📱)
 
-Daremos a você alguns requisitos que devem ser cumpridos, e pelos quais você será avaliado, mas deixamos livre a escolha do método de solução.
+https://user-images.githubusercontent.com/91097315/219524614-b58f26f9-47d4-4878-975f-bde441b22fc2.mp4
 
-O que nós esperamos aprender de você com o desafio:
+## Sobre o Projeto
 
-- Seu estilo de trabalho
-- Como você pensa e resolve problemas
-- Como você se comunica
+- O projeto se baseou em consumir a API do star wars e dela retirar as informações como, personagem, tamanho, planeta, naves etc.<br>
 
-O que nós esperamos que você aprenda sobre a Estoa:
+## O que foi passado no desafio:
 
-- Como nós trabalhamos como um time.
-- Tenha uma visão próxima dos desafios que enfrentamos no dia-a-dia.
+-	Criar uma página inicial contendo os personagens e quando clicasse aparecesse as informações relacionadas a ele.
+-	Utilizar React.
+-	fazer o filtro pelo nome do filme, ou personagem.
+-	O site deve ser responsivo.
+-	Criar um repositório no GIT com o código fonte.
 
-## Próximos passos
 
-1. Faça um _fork_ desse repositório para sua conta pessoal.
-2. As instruções do desafio se encontram no arquivo [`CHALLENGE.md`](/CHALLENGE.md).
-2. Resolva o desafio da forma que você julgar mais adequada.
-3. Preferencialmente utilize uma _branch_ chamada `desafio` ou com o seu nome (`nome-sobrenome`) para o desenvolvimento. E submeta o _pull-request_ para essa mesma _branch_.
+## Tecnologias utilizadas:
 
-## Considerações
+- [Consumo de uma API do Star Wars](https://swapi.dev/)
+- [ReactJs](https://pt-br.reactjs.org/)
+- [Tailwind](https://tailwindui.com/?ref=top)
+- [Cypress](https://www.cypress.io/)
+- [Vite.js](https://vitejs.dev/)
+- [Google fonts | Icons](https://fonts.google.com/)
 
-- Nós não iremos limitar a sua escolha por ferramentas e bibliotecas, porém é de suma importância que use React.js, faça escolhas que sejam condizentes com o desafio apresentado. Para que utilizar uma bazuca para matar uma formiga?
-- Tente escrever o melhor código possível para que possamos avaliar o seu _pull-request_ com mais facilidade. E lembre-se: Você vai ter que explicar pessoalmente para nós depois.
-- Também leve em consideração que estamos availando como será o seu modo de trabalho no nosso dia a dia. Então, use as melhores práticas de semântica, estruturação, legibilidade e componentização.
+# Sobre o que foi desenvolvido no projeto:
+👨🏾‍💻 Foram utilizadas metodologias que são aplicadas no mercado de trabalho, principalmente na organização das pastas e o nome de cada uma delas, ja sendo feito pensando em atualizações futuras, com a pesquisa orientada a pastas e não só a arquivos, pois em uma grande aplicação muitos nomes de arquivos podem se repetir.
+ 
+📲 Projeto totalmente repsonsivo, tanto para celulares e tablets, quanto para o desktop !
 
-## Dúvidas?
+🔥 Foram feitos diversos commits pensando em mostrar a trajetória do projeto desde seu inicio, com pequenos e descritivos commits.
 
-Ficou com alguma dúvida sobre como irá funcionar o processo? Entre em contato que nós te ajudaremos com o processo.
+🎨 Template eu fiz do 0, nesse caso não nos foi passado um template a seguir.
 
-**Boa sorte!**
+🛸 Foi também utilizada a API do Star Wars para ser consumida no front end.
+
+🧪 Foram executados testes para que a aplicação possa ter uma maior confiabilidade e desempenho.
+
+
+## Guia de instalação do projeto para a sua máquina !
+
+```bash
+ # Clonar o repositório
+ $ git clone git@github.com:JoaoKeuwe/frontend-challenge-estoa.git
+
+ # Entrar no diretório(pasta) da aplicação
+ $ cd \frontend-challenge-estoa
+
+ # Instalar todas as dependencias de desenvolvimento do projeto (necessita ter o Node(npm) instalado, ou o yarn)
+ $ npm install ou yarn
+
+ # Comando para executar o projeto
+ $ npm run dev ou yarn dev
+ 
+ # Caso não abra direto em seu navegador digitar no campo de busca 
+ $ http://localhost:5174/
+ 
+ # Comando caso queira executar os testes
+ $ npm run test
+ 
+
+```
+<br>
+
+## Deploy do projeto
+Acesse: [Star Wars aplicattion](https://frontend-challenge-estoa-cyan.vercel.app/) 🏠
