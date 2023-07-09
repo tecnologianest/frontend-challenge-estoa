@@ -1,17 +1,10 @@
 <h1 align='center' >
-
 Projeto Estoa Star Wars 🛸
-
-
 <h1/>
 
 ## (📱Caso esteja pelo celular é so clicar no link abaixo📱)
 
-
-
 https://github.com/JoaoKeuwe/frontend-challenge-estoa/assets/91097315/90440733-3d8a-4a85-b862-e7e31b59b4d2
-
-
 
 ## Sobre o Projeto
 
@@ -34,6 +27,13 @@ https://github.com/JoaoKeuwe/frontend-challenge-estoa/assets/91097315/90440733-3
 - [Cypress](https://www.cypress.io/)
 - [Vite.js](https://vitejs.dev/)
 - [Google fonts | Icons](https://fonts.google.com/)
+- [axios](https://axios-http.com/ptbr/docs/intro)
+- [tanstack](https://tanstack.com/)
+- [headlessui](https://headlessui.com/)
+- [react-router-dom](https://reactrouter.com/en/main)
+- [zod](https://zod.dev/)
+- [Tanstack react query](https://tanstack.com/query/latest)
+- [react-select](https://react-select.com/home)
 
 # Sobre o que foi desenvolvido no projeto:
 👨🏾‍💻 Foram utilizadas metodologias que são aplicadas no mercado de trabalho, principalmente na organização das pastas e o nome de cada uma delas, ja sendo feito pensando em atualizações futuras, com a pesquisa orientada a pastas e não só a arquivos, pois em uma grande aplicação muitos nomes de arquivos podem se repetir.
