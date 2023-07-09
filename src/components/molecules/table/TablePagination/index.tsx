@@ -1,3 +1,4 @@
+
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { DataTable } from '~/@types/table/DataTable';
 
