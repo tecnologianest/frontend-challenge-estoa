@@ -7,6 +7,12 @@ Projeto Estoa Star Wars 🛸
 
 ## (📱Caso esteja pelo celular é so clicar no link abaixo📱)
 
+
+
+https://github.com/JoaoKeuwe/frontend-challenge-estoa/assets/91097315/90440733-3d8a-4a85-b862-e7e31b59b4d2
+
+
+
 ## Sobre o Projeto
 
 - O projeto se baseou em consumir a API do star wars e dela retirar as informações como, personagem, tamanho, planeta, naves etc.<br>
