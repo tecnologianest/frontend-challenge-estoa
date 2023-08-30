@@ -12,7 +12,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-export default function Character() {
+export default function Character(props) {
   const [modal, setModal] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -20,9 +20,15 @@ export default function Character() {
     <>
       <Card className="py-4 bg-slate-900 rounded-xl">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">Luke Skywalker</p>
-          <small className="text-default-500">Birth Year: </small>
-          <h4 className="font-bold text-large cursor-pointer">Species: </h4>
+          <p className="text-tiny uppercase font-bold">{props.name}</p>
+          <small className="text-default-500">
+            Birth Year: {props.birth_year}
+          </small>
+          {props.species.length > 0 && (
+            <h4 className="font-bold text-large cursor-pointer">
+              Species: Droid
+            </h4>
+          )}
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <Image

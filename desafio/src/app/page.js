@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   const charactersElements = characters.map((character, index) => {
-    return <Character />;
+    return <Character {...character} key={index} />;
   });
 
   return (
