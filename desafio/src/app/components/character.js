@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import {
   Modal,
@@ -13,7 +12,6 @@ import {
 } from "@nextui-org/react";
 
 export default function Character(props) {
-  const [modal, setModal] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -32,10 +30,10 @@ export default function Character(props) {
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <Image
-            alt="Luke Skywalker"
+            alt={props.name}
             className="object-cover rounded-xl"
-            src="https://i.pinimg.com/564x/97/53/e7/9753e7c3ab26a0f75246431cd1c2063b.jpg"
-            width={270}
+            src={`${props.name}.jpg`}
+            width={250}
           />
         </CardBody>
         <Button onPress={onOpen}>More info</Button>
@@ -49,26 +47,22 @@ export default function Character(props) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-center text-slate-400">
-                Luke Skywalker
+                {props.name}
               </ModalHeader>
               <ModalBody>
-                <img
-                  className="rounded-xl"
-                  src="https://i.pinimg.com/564x/97/53/e7/9753e7c3ab26a0f75246431cd1c2063b.jpg"
-                />
+                <img className="rounded-xl" src={`${props.name}.jpg`} />
                 <div className="flex">
-                  <ul className="space-y-1">
-                    <li>Name: Placeholder bla bla</li>
-                    <li>Birth Year: </li>
-                    <li>Eye Color: </li>
-                    <li>Gender: </li>
-                    <li>Hair Color: </li>
-                    <li>Height: </li>
-                    <li>Mass: </li>
-                    <li>Skin Color: </li>
-                    <li>Homeworld: </li>
-                    <li>Films: </li>
-                    <li>Species: </li>
+                  <ul className="space-y-1 text-transform: capitalize">
+                    <li>Birth Year: {props.birth_year}</li>
+                    <li>Eye Color: {props.eye_color}</li>
+                    <li>Gender: {props.gender}</li>
+                    <li>Hair Color: {props.hair_color}</li>
+                    <li>Height: {props.height}</li>
+                    <li>Mass: {props.mass}</li>
+                    <li>Skin Color: {props.skin_color}</li>
+                    <li>Homeworld: {props.homeworld}</li>
+                    <li>Films: {props.films}</li>
+                    {props.species.length > 0 && <li>Species: Droid</li>}
                   </ul>
                 </div>
               </ModalBody>
