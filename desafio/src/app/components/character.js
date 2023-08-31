@@ -77,7 +77,7 @@ export default function Character({
           <Image
             alt={name}
             className="object-cover rounded-xl"
-            src="https://placehold.co/400"
+            src="https://c4.wallpaperflare.com/wallpaper/670/495/775/star-wars-artwork-the-mandalorian-baby-yoda-hd-wallpaper-preview.jpg"
             width={270}
           />
         </CardBody>
@@ -95,7 +95,12 @@ export default function Character({
                 {name}
               </ModalHeader>
               <ModalBody>
-                <img className="rounded-xl" src={`${name}.jpg`} />
+                <img
+                  className="rounded-xl"
+                  src={
+                    "https://c4.wallpaperflare.com/wallpaper/906/807/619/the-mandalorian-baby-yoda-hd-wallpaper-preview.jpg"
+                  }
+                />
                 <div className="flex">
                   <ul className="space-y-1 text-transform: capitalize text-xs">
                     <li className="font-light">

@@ -59,11 +59,10 @@ export default function Home() {
   return (
     <main className="flex min-h-screen justify-center flex-wrap items-center p-24 gap-8">
       {charactersElements}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-slate-900/50 py-4 px-8 flex justify-between">
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-slate-900/10 py-4 px-8 flex justify-between">
         <Button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="pagination-button"
         >
           Previous
         </Button>
@@ -73,7 +72,6 @@ export default function Home() {
         <Button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="pagination-button"
         >
           Next
         </Button>
