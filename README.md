@@ -21,6 +21,12 @@
     - [x] films
     - [x] species
 
+## Tech Stack
+- [x] TailwindCSS
+- [x] NextJS
+- [x] ReactJS
+- [x] CSS
+- [x] NextUI
 
 
 ## Installation
