@@ -28,6 +28,7 @@ export default function Character({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [movies, setMovies] = useState([]);
   const [species, setSpecies] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function getMovies() {
@@ -56,38 +57,53 @@ export default function Character({
 
   return (
     <>
-      <Card className="py-4 bg-slate-800/30 rounded-xl shadow-xl">
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{name}</p>
-          <small className="text-default-500">Birth Year: {birth_year}</small>
-          {species?.length > 0 && (
-            <>
-              <h5 className="font-semibold">Species:</h5>
-              <div className="flex flex-col">
-                {species.map((speciesData, i) => (
-                  <div className="rounded" key={`species-${i}`}>
-                    {speciesData.name}
-                  </div>
-                ))}
+      <Card className="py-4 bg-slate-800/30 rounded-xl shadow-xl flex flex-col justify-between">
+        <div>
+          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+            <p className="text-lg uppercase font-bold">{name}</p>
+            <small className="text-default-500">Birth Year: {birth_year}</small>
+            <div className="mt-2">
+              <h5 className="font-semibold text-lg">Species:</h5>
+              <div className="flex flex-col space-y-1">
+                {species?.length > 0 ? (
+                  species.map((speciesData, i) => (
+                    <div
+                      className="rounded bg-slate-600 px-2 py-1"
+                      key={`species-${i}`}
+                    >
+                      {speciesData.name}
+                    </div>
+                  ))
+                ) : (
+                  <div className="rounded bg-slate-600 px-2 py-1">Human</div>
+                )}
               </div>
-            </>
-          )}
-        </CardHeader>
-        <CardBody className="overflow-visible py-2">
-          <Image
-            alt={name}
-            className="object-cover rounded-xl"
-            src="https://c4.wallpaperflare.com/wallpaper/670/495/775/star-wars-artwork-the-mandalorian-baby-yoda-hd-wallpaper-preview.jpg"
-            width={270}
-          />
-        </CardBody>
-        <Button onPress={onOpen}>More info</Button>
+            </div>
+          </CardHeader>
+          <CardBody className="overflow-visible py-2">
+            <Image
+              alt={name}
+              className="object-cover rounded-xl h-40 w-full"
+              src={
+                "https://c4.wallpaperflare.com/wallpaper/670/495/775/star-wars-artwork-the-mandalorian-baby-yoda-hd-wallpaper-preview.jpg"
+              }
+            />
+          </CardBody>
+        </div>
+        <Button onPress={onOpen} className="mt-2">
+          More info
+        </Button>
       </Card>
+
       <Modal
         className="bg-slate-900 rounded-xl"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
+        {/* Overlay */}
+
+        <div className="overlay" onClick={() => setIsModalOpen(false)} />
+
         <ModalContent>
           {(onClose) => (
             <>
@@ -96,62 +112,68 @@ export default function Character({
               </ModalHeader>
               <ModalBody>
                 <img
-                  className="rounded-xl"
+                  className="rounded-xl h-40 w-full object-cover mx-auto"
                   src={
                     "https://c4.wallpaperflare.com/wallpaper/906/807/619/the-mandalorian-baby-yoda-hd-wallpaper-preview.jpg"
                   }
                 />
-                <div className="flex">
-                  <ul className="space-y-1 text-transform: capitalize text-xs">
-                    <li className="font-light">
-                      <span className="font-bold">Birth Year:</span>{" "}
+                <div className="mt-4">
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <span className="font-semibold">Birth Year:</span>{" "}
                       {birth_year}
                     </li>
                     <li>
-                      <span className="font-bold">Eye Color:</span> {eye_color}
+                      <span className="font-semibold">Eye Color:</span>{" "}
+                      {eye_color}
                     </li>
                     <li>
-                      <span className="font-bold">Gender:</span> {gender}
+                      <span className="font-semibold">Gender:</span> {gender}
                     </li>
                     <li>
-                      <span className="font-bold">Hair Color:</span>{" "}
+                      <span className="font-semibold">Hair Color:</span>{" "}
                       {hair_color}
                     </li>
                     <li>
-                      <span className="font-bold">Height:</span> {height}
+                      <span className="font-semibold">Height:</span> {height}
                     </li>
                     <li>
-                      <span className="font-bold">Mass:</span> {mass}
+                      <span className="font-semibold">Mass:</span> {mass}
                     </li>
                     <li>
-                      <span className="font-bold">Skin Color:</span>{" "}
+                      <span className="font-semibold">Skin Color:</span>{" "}
                       {skin_color}
                     </li>
                     <li>
-                      <span className="font-bold">Homeworld:</span> {homeworld}
+                      <span className="font-semibold">Homeworld:</span>{" "}
+                      {homeworld}
                     </li>
-                    <ul>
-                      <span className="font-bold">Movies:</span>
-                      {filmURLs.map((filmURL, index) => {
-                        const episodeNumber = filmURL.substr(28, 1);
-                        const matchingMovie = movies.find(
-                          (movie) =>
-                            movie.episode_id === parseInt(episodeNumber)
-                        );
+                    <li className="mt-2">
+                      <span className="font-semibold">Movies:</span>
+                      <ul className="list-disc list-inside space-y-1">
+                        {filmURLs.map((filmURL, index) => {
+                          const episodeNumber = filmURL.substr(28, 1);
+                          const matchingMovie = movies.find(
+                            (movie) =>
+                              movie.episode_id === parseInt(episodeNumber)
+                          );
 
-                        return (
-                          matchingMovie && (
-                            <li key={index}>{matchingMovie.title}</li>
-                          )
-                        );
-                      })}
-                    </ul>
-
+                          return (
+                            matchingMovie && (
+                              <li key={index}>{matchingMovie.title}</li>
+                            )
+                          );
+                        })}
+                      </ul>
+                    </li>
                     {species?.length > 0 && (
-                      <li>
-                        Species:{" "}
+                      <li className="mt-2">
+                        <span className="font-semibold">Species:</span>{" "}
                         {species.map((speciesData, i) => (
-                          <div className="rounded" key={`species-${i}`}>
+                          <div
+                            className="rounded bg-slate-600 px-2 py-1"
+                            key={`species-${i}`}
+                          >
                             {speciesData.name}
                           </div>
                         ))}
