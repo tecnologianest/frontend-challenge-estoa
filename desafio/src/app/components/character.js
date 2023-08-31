@@ -71,15 +71,33 @@ export default function Character(props) {
                       <span className="font-bold">Birth Year:</span>{" "}
                       {props.birth_year}
                     </li>
-                    <li>Eye Color: {props.eye_color}</li>
-                    <li>Gender: {props.gender}</li>
-                    <li>Hair Color: {props.hair_color}</li>
-                    <li>Height: {props.height}</li>
-                    <li>Mass: {props.mass}</li>
-                    <li>Skin Color: {props.skin_color}</li>
-                    <li>Homeworld: {props.homeworld}</li>
-                    <li className="movies__li">
-                      Movies:
+                    <li>
+                      <span className="font-bold">Eye Color:</span>{" "}
+                      {props.eye_color}
+                    </li>
+                    <li>
+                      <span className="font-bold">Gender:</span> {props.gender}
+                    </li>
+                    <li>
+                      <span className="font-bold">Hair Color:</span>{" "}
+                      {props.hair_color}
+                    </li>
+                    <li>
+                      <span className="font-bold">Height:</span> {props.height}
+                    </li>
+                    <li>
+                      <span className="font-bold">Mass:</span> {props.mass}
+                    </li>
+                    <li>
+                      <span className="font-bold">Skin Color:</span>{" "}
+                      {props.skin_color}
+                    </li>
+                    <li>
+                      <span className="font-bold">Homeworld:</span>{" "}
+                      {props.homeworld}
+                    </li>
+                    <ul>
+                      <span className="font-bold">Movies:</span>
                       {props.films[0].substr(28, 1) === "1" && (
                         <li>{sortedMovies[0]?.title}</li>
                       )}
@@ -98,7 +116,7 @@ export default function Character(props) {
                       {props.films[5]?.substr(28, 1) === "6" && (
                         <li>{sortedMovies[5]?.title}</li>
                       )}
-                    </li>
+                    </ul>
                     {props.species.length > 0 && <li>Species: Droid</li>}
                   </ul>
                 </div>
