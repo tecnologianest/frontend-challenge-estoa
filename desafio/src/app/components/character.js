@@ -12,7 +12,19 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-export default function Character(props) {
+export default function Character({
+  name,
+  birth_year,
+  eye_color,
+  gender,
+  hair_color,
+  height,
+  mass,
+  skin_color,
+  homeworld,
+  species: speciesURLs,
+  films: filmURLs,
+}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [movies, setMovies] = useState([]);
   const [species, setSpecies] = useState([]);
@@ -28,31 +40,33 @@ export default function Character(props) {
   }, []);
 
   useEffect(() => {
-    for (let item of props.species) {
-      setSpecies([]);
-      fetch(item).then((res) => {
-        res.json().then((data) => {
-          setSpecies([...species, data]);
-        });
-      });
-    }
-  }, []);
+    const fetchSpecies = async () => {
+      const fetchedSpecies = await Promise.all(
+        speciesURLs.map(async (speciesURL) => {
+          const response = await fetch(speciesURL);
+          const data = await response.json();
+          return data;
+        })
+      );
+      setSpecies(fetchedSpecies);
+    };
+
+    fetchSpecies();
+  }, [speciesURLs]);
 
   return (
     <>
       <Card className="py-4 bg-slate-800/30 rounded-xl shadow-xl">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{props.name}</p>
-          <small className="text-default-500">
-            Birth Year: {props.birth_year}
-          </small>
-          {props.species?.length > 0 && (
+          <p className="text-tiny uppercase font-bold">{name}</p>
+          <small className="text-default-500">Birth Year: {birth_year}</small>
+          {species?.length > 0 && (
             <>
               <h5 className="font-semibold">Species:</h5>
               <div className="flex flex-col">
-                {species.map((species, i) => (
+                {species.map((speciesData, i) => (
                   <div className="rounded" key={`species-${i}`}>
-                    {species.name}
+                    {speciesData.name}
                   </div>
                 ))}
               </div>
@@ -61,7 +75,7 @@ export default function Character(props) {
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <Image
-            alt={props.name}
+            alt={name}
             className="object-cover rounded-xl"
             src="https://placehold.co/400"
             width={270}
@@ -78,44 +92,42 @@ export default function Character(props) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-center text-slate-400">
-                {props.name}
+                {name}
               </ModalHeader>
               <ModalBody>
-                <img className="rounded-xl" src={`${props.name}.jpg`} />
+                <img className="rounded-xl" src={`${name}.jpg`} />
                 <div className="flex">
                   <ul className="space-y-1 text-transform: capitalize text-xs">
                     <li className="font-light">
                       <span className="font-bold">Birth Year:</span>{" "}
-                      {props.birth_year}
+                      {birth_year}
                     </li>
                     <li>
-                      <span className="font-bold">Eye Color:</span>{" "}
-                      {props.eye_color}
+                      <span className="font-bold">Eye Color:</span> {eye_color}
                     </li>
                     <li>
-                      <span className="font-bold">Gender:</span> {props.gender}
+                      <span className="font-bold">Gender:</span> {gender}
                     </li>
                     <li>
                       <span className="font-bold">Hair Color:</span>{" "}
-                      {props.hair_color}
+                      {hair_color}
                     </li>
                     <li>
-                      <span className="font-bold">Height:</span> {props.height}
+                      <span className="font-bold">Height:</span> {height}
                     </li>
                     <li>
-                      <span className="font-bold">Mass:</span> {props.mass}
+                      <span className="font-bold">Mass:</span> {mass}
                     </li>
                     <li>
                       <span className="font-bold">Skin Color:</span>{" "}
-                      {props.skin_color}
+                      {skin_color}
                     </li>
                     <li>
-                      <span className="font-bold">Homeworld:</span>{" "}
-                      {props.homeworld}
+                      <span className="font-bold">Homeworld:</span> {homeworld}
                     </li>
                     <ul>
                       <span className="font-bold">Movies:</span>
-                      {props.films.map((filmURL, index) => {
+                      {filmURLs.map((filmURL, index) => {
                         const episodeNumber = filmURL.substr(28, 1);
                         const matchingMovie = movies.find(
                           (movie) =>
@@ -130,12 +142,12 @@ export default function Character(props) {
                       })}
                     </ul>
 
-                    {props.species?.length > 0 && (
+                    {species?.length > 0 && (
                       <li>
                         Species:{" "}
-                        {species.map((species, i) => (
+                        {species.map((speciesData, i) => (
                           <div className="rounded" key={`species-${i}`}>
-                            {species.name}
+                            {speciesData.name}
                           </div>
                         ))}
                       </li>
