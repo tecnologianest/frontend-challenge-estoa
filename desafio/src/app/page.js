@@ -22,7 +22,7 @@ export default function Home() {
   });
 
   return (
-    <main className="flex min-h-screen flex-row flex-wrap items-center p-24 gap-8">
+    <main className="flex min-h-screen justify-center flex-wrap items-center p-24 gap-8">
       {charactersElements}
     </main>
   );

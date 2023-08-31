@@ -30,11 +30,9 @@ export default function Character(props) {
     a.episode_id > b.episode_id ? 1 : -1
   );
 
-  console.log(props);
-
   return (
     <>
-      <Card className="py-4 bg-slate-900 rounded-xl">
+      <Card className="py-4 bg-slate-800/30 rounded-xl shadow-xl">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">{props.name}</p>
           <small className="text-default-500">
@@ -68,8 +66,11 @@ export default function Character(props) {
               <ModalBody>
                 <img className="rounded-xl" src={`${props.name}.jpg`} />
                 <div className="flex">
-                  <ul className="space-y-1 text-transform: capitalize">
-                    <li>Birth Year: {props.birth_year}</li>
+                  <ul className="space-y-1 text-transform: capitalize text-xs">
+                    <li className="font-light">
+                      <span className="font-bold">Birth Year:</span>{" "}
+                      {props.birth_year}
+                    </li>
                     <li>Eye Color: {props.eye_color}</li>
                     <li>Gender: {props.gender}</li>
                     <li>Hair Color: {props.hair_color}</li>
