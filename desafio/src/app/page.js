@@ -10,12 +10,34 @@ export default function Home() {
   useEffect(() => {
     async function getCharacters() {
       const response = await fetch("https://swapi.dev/api/people/");
-      const data = await response.json();
-      setCharacters(data.results);
+      const character = await response.json();
+      setCharacters(character.results);
     }
 
     getCharacters();
   }, []);
+
+  useEffect(() => {
+    async function fetchHomeworlds() {
+      const updatedCharacters = await Promise.all(
+        characters.map(async (character) => {
+          const homeworldResponse = await fetch(character.homeworld);
+          const homeworldData = await homeworldResponse.json();
+          const updatedCharacter = {
+            ...character,
+            homeworld: homeworldData.name,
+          };
+          return updatedCharacter;
+        })
+      );
+
+      setCharacters(updatedCharacters);
+    }
+
+    if (characters.length > 0) {
+      fetchHomeworlds();
+    }
+  }, [characters]);
 
   const charactersElements = characters.map((character, index) => {
     return <Character {...character} key={index} />;

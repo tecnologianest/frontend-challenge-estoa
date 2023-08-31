@@ -15,6 +15,7 @@ import {
 export default function Character(props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [movies, setMovies] = useState([]);
+  const [species, setSpecies] = useState([]);
 
   useEffect(() => {
     async function getMovies() {
@@ -26,9 +27,16 @@ export default function Character(props) {
     getMovies();
   }, []);
 
-  const sortedMovies = movies?.sort((a, b) =>
-    a.episode_id > b.episode_id ? 1 : -1
-  );
+  useEffect(() => {
+    for (let item of props.species) {
+      setSpecies([]);
+      fetch(item).then((res) => {
+        res.json().then((data) => {
+          setSpecies([...species, data]);
+        });
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -38,15 +46,24 @@ export default function Character(props) {
           <small className="text-default-500">
             Birth Year: {props.birth_year}
           </small>
-          {props.species.length > 0 && (
-            <small className="text-default-500">Species: Droid</small>
+          {props.species?.length > 0 && (
+            <>
+              <h5 className="font-semibold">Species:</h5>
+              <div className="flex flex-col">
+                {species.map((species, i) => (
+                  <div className="rounded" key={`species-${i}`}>
+                    {species.name}
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <Image
             alt={props.name}
             className="object-cover rounded-xl"
-            src={`${props.name}.jpg`}
+            src="https://placehold.co/400"
             width={270}
           />
         </CardBody>
@@ -98,26 +115,31 @@ export default function Character(props) {
                     </li>
                     <ul>
                       <span className="font-bold">Movies:</span>
-                      {props.films[0].substr(28, 1) === "1" && (
-                        <li>{sortedMovies[0]?.title}</li>
-                      )}
-                      {props.films[1]?.substr(28, 1) === "2" && (
-                        <li>{sortedMovies[1]?.title}</li>
-                      )}
-                      {props.films[2]?.substr(28, 1) === "3" && (
-                        <li>{sortedMovies[2]?.title}</li>
-                      )}
-                      {props.films[3]?.substr(28, 1) === "4" && (
-                        <li>{sortedMovies[3]?.title}</li>
-                      )}
-                      {props.films[4]?.substr(28, 1) === "5" && (
-                        <li>{sortedMovies[4]?.title}</li>
-                      )}
-                      {props.films[5]?.substr(28, 1) === "6" && (
-                        <li>{sortedMovies[5]?.title}</li>
-                      )}
+                      {props.films.map((filmURL, index) => {
+                        const episodeNumber = filmURL.substr(28, 1);
+                        const matchingMovie = movies.find(
+                          (movie) =>
+                            movie.episode_id === parseInt(episodeNumber)
+                        );
+
+                        return (
+                          matchingMovie && (
+                            <li key={index}>{matchingMovie.title}</li>
+                          )
+                        );
+                      })}
                     </ul>
-                    {props.species.length > 0 && <li>Species: Droid</li>}
+
+                    {props.species?.length > 0 && (
+                      <li>
+                        Species:{" "}
+                        {species.map((species, i) => (
+                          <div className="rounded" key={`species-${i}`}>
+                            {species.name}
+                          </div>
+                        ))}
+                      </li>
+                    )}
                   </ul>
                 </div>
               </ModalBody>
