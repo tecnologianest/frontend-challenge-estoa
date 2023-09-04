@@ -1,16 +1,23 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React from "react";
 
 export default function Header() {
-    
   return (
     <header className="w-full flex gap-8 items-center px-32 py-4 bg-[#000000] box-border">
-      <img src="assets/images/main-Logo.png" alt="logo" className="w-24" />
+      <Link href="/">
+        <img src="assets/images/main-Logo.png" alt="logo" className="w-24" />
+      </Link>
       <nav>
         <ul className="flex gap-4 font-semibold text-slate-100 select-none">
-          <li className="hover:cursor-pointer hover:text-sky-400"> <Link href='/'>Home</Link> </li>
-          <li className="hover:cursor-pointer hover:text-sky-400"> <Link href='/favorites'> Favorites </Link> </li>
+          <li className="hover:cursor-pointer hover:text-sky-400">
+            {" "}
+            <Link href="/">Home</Link>{" "}
+          </li>
+          <li className="hover:cursor-pointer hover:text-sky-400">
+            {" "}
+            <Link href="/favorites"> Favorites </Link>{" "}
+          </li>
         </ul>
       </nav>
       <input
