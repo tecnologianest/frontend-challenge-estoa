@@ -1,14 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
-export const store = configureStore({
-    reducer: {
+const initialState = {
+    charactersList: [],
+    loading: false,
+    error: ''
+}
 
-    }
+export  const characters = createSlice({
+    name: 'characters',
+    initialState,
+    reducers:{}
 })
 
-export default store
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export default characters.reducer
