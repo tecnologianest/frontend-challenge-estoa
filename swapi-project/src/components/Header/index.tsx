@@ -14,7 +14,7 @@ export default function Header() {
       </nav>
       <input
         type="text"
-        className="ml-auto bg-slate-300 px-4 py-2 placeholder:text-slate-500 placeholder:font-medium outline-none "
+        className="ml-auto bg-slate-200 px-4 py-2 placeholder:text-slate-500 placeholder:font-medium outline-none "
         placeholder="Pesquisar personagem"
       />
     </header>
