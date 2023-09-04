@@ -1,17 +1,17 @@
-import { ICharacter } from "@/types/characters";
+import { ICharacter, IPeople } from "@/types/characters";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
 
 interface InicitalState {
-    charactersList: ICharacter[]
+    peopleObj: IPeople
     loading: boolean
     error: string
 }
 
 const initialState: InicitalState = {
-  charactersList: [],
+  peopleObj: {},
   loading: false,
   error: "",
 };
@@ -31,8 +31,8 @@ export  const characters = createSlice({
     initialState,
     reducers:{},
     extraReducers: builder => {
-        builder.addCase( fetchCharacters.fulfilled, (state, {payload}: PayloadAction<ICharacters[]>) => {
-            state.charactersList = payload;
+        builder.addCase( fetchCharacters.fulfilled, (state, {payload}: PayloadAction<IPeople>) => {
+            state.peopleObj = payload;
             state.loading = false
             state.error = ''
         } )

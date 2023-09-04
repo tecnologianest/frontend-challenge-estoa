@@ -5,8 +5,8 @@ export interface ICharacter {
 }
 
 export interface IPeople {
-    count: number
-    next: number
-    previous: number 
-    results: ICharacter[]
+    count?: number
+    next?: number
+    previous?: number 
+    results?: ICharacter[]
 }
