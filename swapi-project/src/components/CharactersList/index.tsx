@@ -17,7 +17,7 @@ export default function CharactersList() {
 
   return (
     <section className="py-4 box-border overflow-y-auto h-[80vh]">
-      <div className=" flex gap-2">
+      <div className="grid grid-cols-5 gap-8">
         {characters.results?.map((item: any) => (
           <Card key={item.name} {...item} />
         ))}
