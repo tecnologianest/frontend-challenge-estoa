@@ -5,17 +5,14 @@ export default function Header() {
     
   return (
     <header className="w-full flex gap-8 items-center px-32 py-4 bg-[#000000]">
-      <img src="assets/images/main-Logo.png" alt="logo" className="w-24"/>
+      <img src="assets/images/main-Logo.png" alt="logo" className="w-24" />
       <nav>
         <ul className="flex gap-4 font-semibold text-slate-100 select-none">
           <li className="hover:cursor-pointer hover:text-sky-400">Home</li>
-          <li className="hover:cursor-pointer hover:text-sky-400">
-            Favorites
-          </li>
+          <li className="hover:cursor-pointer hover:text-sky-400">Favorites</li>
         </ul>
-
       </nav>
-        
+      <input type="text" className="ml-auto bg-slate-300 px-4 py-2 placeholder:text-slate-500 placeholder:font-medium outline-none " placeholder="Pesquisar personagem" />
     </header>
   );
 }
