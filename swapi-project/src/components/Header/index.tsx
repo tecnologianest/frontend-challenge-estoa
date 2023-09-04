@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import React from "react";
 
 export default function Header() {
@@ -8,8 +9,8 @@ export default function Header() {
       <img src="assets/images/main-Logo.png" alt="logo" className="w-24" />
       <nav>
         <ul className="flex gap-4 font-semibold text-slate-100 select-none">
-          <li className="hover:cursor-pointer hover:text-sky-400">Home</li>
-          <li className="hover:cursor-pointer hover:text-sky-400">Favorites</li>
+          <li className="hover:cursor-pointer hover:text-sky-400"> <Link href='/'>Home</Link> </li>
+          <li className="hover:cursor-pointer hover:text-sky-400"> <Link href='/favorites'> Favorites </Link> </li>
         </ul>
       </nav>
       <input

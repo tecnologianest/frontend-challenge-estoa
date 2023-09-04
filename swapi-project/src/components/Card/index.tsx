@@ -4,9 +4,9 @@ import Link from "next/link";
 import React from "react";
 
 export default function Card({ name, birth_year, url }: ICharacter) {
-    const cardNumber = getString(url); 
-  
-    function getString(url: any) {
+  const cardNumber = getString(url);
+
+  function getString(url: any) {
     const arrUrl = url.split("people/");
     const number = arrUrl[1].split("/");
     return number[0];
