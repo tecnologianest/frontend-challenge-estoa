@@ -1,114 +1,127 @@
 import CardPerson from '../components/card-person';
+import Card from '../components/card';
+import { RouteMapping } from '../../urls';
+import { ButtonBack } from '@/app/components/buttonBack';
+import { ModalCard } from '../components/modal';
 import { actions } from '@/app/store/infos/info-slice';
 import { store } from '@/app/store';
-import { ModalCard } from '../components/modal';
 import { tipo } from '../../[...type]/models/tipo';
-import Card from '../components/card';
-import { ButtonBack } from '@/app/components/buttonBack';
+import Alert from '../components/alert';
 
 export default async function Details ({ params }: { params: { Details: string[] } }) {
 
-   let dados: any = [];
-   let response;
-
-   switch (params.Details[0]) {
-       case tipo.PERSONAGEM:
-           response = await fetch(`https://swapi.dev/api/people/${params.Details[1]}`);
-           dados = await response.json();
-       
-           const filmesResponses = await Promise.all(dados.films.map((filme: string) => fetch(filme).then(response => response.json())));
-           const speciesResponse: any = await Promise.all(dados.species.map((species: string) => fetch(species).then(response => response.json())));
-           const starshipsResponse: any = await Promise.all(dados.starships.map((starships: string) => fetch(starships).then(response => response.json())));
-           const vehiclesResponse: any = await Promise.all(dados.vehicles.map((vehicles: string) => fetch(vehicles).then(response => response.json())));
-           const homeworldResponse = await fetch(dados.homeworld);
-           dados.newSpecies = speciesResponse
-           dados.newFilms = filmesResponses;
-           dados.newStarships = starshipsResponse
-           dados.newVehicles = vehiclesResponse
-           dados.newHomeWorld = await homeworldResponse.json();
-           dados.films = []; 
-
-       break;
-       
-       case tipo.FILMES: 
-           response = await fetch(`https://swapi.dev/api/films/${params.Details[1]}`);
-           dados = await response.json();
-
-           const filmStarshipsResponse: any = await Promise.all(dados.starships.map((starships: string) => fetch(starships).then(response => response.json())));
-           const filmVehiclesResponse: any = await Promise.all(dados.vehicles.map((vehicles: string) => fetch(vehicles).then(response => response.json())));
-           const filmPeopleResponse: any = await Promise.all(dados.characters.map((characters: string) => fetch(characters).then(response => response.json())));
-           dados.films = [{
-            title: dados.title,
-            opening_crawl: dados.opening_crawl,
-            director: dados.director,
-            producer: dados.producer,
-            url: dados.url,
-           }];
-           dados.newStarships = filmStarshipsResponse
-           dados.newVehicles = filmVehiclesResponse
-           dados.newPeoples = filmPeopleResponse           
-
-       break;
+    async function fetchData(url: string) {
+        return fetch(url).then((response) => response.json())
+    }
+  
+    async function fetchAndFormatDetails(type: string, id: string) {
+        const apiUrl = `${RouteMapping[type] || ""}${id}`;
+        const details = await fetchData(apiUrl);
    
-       case tipo.PLANETA:
+        switch  (type)  {
+        case tipo.PERSONAGEM:
+             const  [ films, species, starships, vehicles, homeworld] : any  =[
+                await Promise.all(details.films.map((url: string) => fetchData(url))),
+                await Promise.all(details.species.map((url: string) => fetchData(url))),
+                await Promise.all(details.starships.map((url: string) => fetchData(url))),
+                await Promise.all(details.vehicles.map((url: string) => fetchData(url))),
+                await fetch(details?.homeworld).then((response) => response.json())
+    
+            ];
+    
+            details.newSpecies = species;
+            details.newFilms = films;
+            details.newStarships = starships;
+            details.newVehicles = vehicles;
+            details.newHomeWorld = [homeworld];
+            details.films = [];
+            break;
+    
+        case tipo.FILMES:
 
-       response = await fetch(`https://swapi.dev/api/planets/${params.Details[1]}`);
-       dados = await response.json();
+            const [filmStarships, filmVehicles, filmPeople] = [
+                await Promise.all(details.starships.map((url: string) => fetchData(url))),
+                await Promise.all(details.vehicles.map((url: string) => fetchData(url))),
+                await Promise.all(details.characters.map((url: string) => fetchData(url))),
+            ];
+            details.films = [
+            {
+                title: details.title,
+                opening_crawl: details.opening_crawl,
+                director: details.director,
+                producer: details.producer,
+                url: details.url,
+            },
+            ];
+            details.newStarships = filmStarships;
+            details.newVehicles = filmVehicles;
+            details.newPeoples = filmPeople;
+            break;
+    
+        case tipo.PLANETA:
+            const [planetaPeople, planetaFilmes] = [
+                await Promise.all(details.residents.map((url: string) => fetchData(url))),
+                await Promise.all(details.films.map((url: string) => fetchData(url))),
 
-       const planetaPeopleResponse: any = await Promise.all(dados.residents.map((residents: string) => fetch(residents).then(response => response.json())));
-       const planetaFilmesResponses = await Promise.all(dados.films.map((filme: string) => fetch(filme).then(response => response.json())));
-       
-       dados.newPeoples = planetaPeopleResponse           
-       dados.films = planetaFilmesResponses;
-       dados.newHomeWorld = {
-        name: dados.name,
-        terrain: dados.terrain,
-        population: dados.population,
-        climate: dados.climate,
-        url: dados.url
-       }
+            ];
+    
+            details.newPeoples = planetaPeople;
+            details.films = planetaFilmes;
+            details.newHomeWorld = [{
+            name: details.name,
+            terrain: details.terrain,
+            population: details.population,
+            climate: details.climate,
+            url: details.url,
+            }];
+            break;
+    
+        case tipo.NAVES:
+            const [navesFilmes, navesPilotos] = [
+                await Promise.all(details.films.map((url: string) => fetchData(url))),
+                await Promise.all(details.pilots?.map((url: string) => fetchData(url))),
 
+            ]; 
 
-
-       break;
-   
-       case tipo.NAVES:
-            response = await fetch(`https://swapi.dev/api/starships/${params.Details[1]}`);
-            dados = await response.json();
-
-            const navesFilmesResponses = await Promise.all(dados.films.map((filme: string) => fetch(filme).then(response => response.json())));
-            const navesPilotosResponses = await Promise.all(dados.pilots?.map((pilots: string) => fetch(pilots).then(response => response.json())));
-            dados.films = navesFilmesResponses;
-            dados.newPeoples = navesPilotosResponses
-            dados.newStarships = [
-                {
-                    name: dados.name,
-                    model: dados.model,
-                    starship_class: dados.starship_class 
-                }
-            ]
-
-        break;
-
+            details.films = navesFilmes;
+            details.newPeoples = navesPilotos;
+            details.newStarships = [
+            {
+                name: details.name,
+                model: details.model,
+                starship_class: details.starship_class,
+            },
+            ];
+            break;
+    
         case tipo.VEICULOS:
-            response = await fetch(`https://swapi.dev/api/vehicles/${params.Details[1]}`);
-            dados = await response.json();
+        if(details.detail) return details
+        const [veiculosFilmes, veiculosPilotos] = [
+                await Promise.all(details.films.map((url: string) => fetchData(url))),
+                await Promise.all(details.pilots?.map((url: string) => fetchData(url))),
 
-            const veiculosFilmesResponses = await Promise.all(dados.films?.map((filme: string) => fetch(filme).then(response => response.json())));
-            const veiculosPilotosResponses = await Promise.all(dados.pilots?.map((pilots: string) => fetch(pilots).then(response => response.json())));
-            dados.films = veiculosFilmesResponses;
-            dados.newPeoples = veiculosPilotosResponses
-            dados.newVehicles = [
-                {
-                    name: dados.name,
-                    model: dados.model,
-                    starship_class: dados.vehicle_class 
-                }
-            ]
+            ];
 
-        break;
+            details.films = veiculosFilmes;
+            details.newPeoples = veiculosPilotos;
+            details.newVehicles = [
+            {
+                name: details.name,
+                model: details.model,
+                starship_class: details.vehicle_class,
+            },
+            ];
+            break;
+    
+        default:
+            console.error("Tipo de parâmetro inválido:", type);
+            break;
+        }
+    
+        return details;
     }
 
+    const dados = await fetchAndFormatDetails(params.Details[0], params.Details[1]);
     store.dispatch(actions.addInfosPerson(dados))
         
     return (
@@ -118,9 +131,11 @@ export default async function Details ({ params }: { params: { Details: string[]
                 <ButtonBack/>
             </div>
 
+            {
+                dados?.detail ? (<Alert message='Não encontramos nada sobre o veiculo, tente outro' /> ): null
+            }
 
-        <div className='sm:flex sm:flex-row-reverse h-full justify-center gap-10'>
-
+        <div className={`${ params.Details[0] == tipo.PERSONAGEM ? "justify-between" : "justify-center"} sm:flex sm:flex-row-reverse h-full gap-10`}>
             {
                 params.Details[0] == tipo.PERSONAGEM ?
                 <div className='w-full max-w-[350px] h-full sm:flex sm:justify-end'>
@@ -129,9 +144,7 @@ export default async function Details ({ params }: { params: { Details: string[]
             }
 
             <div className='flex flex-wrap justify-center lg:justify-normal'>
-
                 <Card />
-
             </div>
         </div>
         <ModalCard/>

@@ -47,6 +47,26 @@ export function ModalCard() {
       let dados = [];
       switch (type) {
         case tipo.NAVES:
+          dados = data.map((element: any) => {
+            return [
+              {
+                title: "Nome",
+                description: element.name
+              },
+              {
+                title: "Modelo",
+                description: element.model
+              },
+              {
+                title: "Classe de nave",
+                description: element.starship_class ? element.starship_class : element.vehicle_class
+              },
+  
+            ]
+          });
+        break;
+
+        case tipo.PLANETA:
 
         dados = data.map((element: any) => {
           return [
@@ -54,41 +74,23 @@ export function ModalCard() {
               title: "Nome",
               description: element.name
             },
+  
             {
-              title: "Modelo",
-              description: element.model
+              title: "Terreno",
+              description: element.terrain
             },
+  
             {
-              title: "Classe de nave",
-              description: element.starship_class ? element.starship_class : element.vehicle_class
+              title: "População",
+              description: element.population
             },
-
+  
+            {
+              title: "Clima",
+              description: element.climate
+            },
           ]
         });
-        break;
-
-        case tipo.PLANETA:
-        dados = [[
-          {
-            title: "Nome",
-            description: data.name
-          },
-
-          {
-            title: "Terreno",
-            description: data.terrain
-          },
-
-          {
-            title: "População",
-            description: data.population
-          },
-
-          {
-            title: "Clima",
-            description: data.climate
-          },
-        ]]
         break;
 
     

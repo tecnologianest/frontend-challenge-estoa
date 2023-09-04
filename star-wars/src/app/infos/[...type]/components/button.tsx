@@ -11,26 +11,37 @@ export type ButtonProps = ComponentProps<'button'> & {
 
 export function Button({route, search, ...props}: ButtonProps) {
 
-    async function handleClick() {
-        let dados;
-        if(search) {
-            const response = await fetch(`${route}${search}`);
-            dados = await response.json();
-        } else {
-            const response = await fetch(route);
-            dados = await response.json();
-        }
-        for (const person of dados?.results) {
-            if (person.species?.length > 0) {
+    async function fetchData(route: string, search?: string) {
+        try {
+          const apiUrl = search ? `${route}${search}` : route;
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+      
+          if (data?.results) {
+            for (const person of data.results) {
+              if (person.species?.length > 0) {
                 const speciesUrl: string = person.species[0];
-                const speciesResponse = await fetch(speciesUrl).then(response => response.json());;
-                const speciesData = speciesResponse;
+                const speciesResponse = await fetch(speciesUrl);
+                const speciesData = await speciesResponse.json();
                 person.newSpecies = speciesData;
+              }
             }
+          }
+      
+          return data;
+        } catch (e) {
+          throw new Error(`Erro ao buscar dados`);
         }
-        store.dispatch(actions.addInfosPerson(dados))
-        
-    };
+      }
+      
+      async function handleClick() {
+        try {
+          const dados = await fetchData(route, search);
+          store.dispatch(actions.addInfosPerson(dados));
+        } catch (error: any) {
+          console.error(error.message);
+        }
+      }
 
     return (
         <button onClick={handleClick} {...props} />

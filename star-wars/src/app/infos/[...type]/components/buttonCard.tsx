@@ -10,14 +10,21 @@ export type ButtonProps = ComponentProps<'button'> & {
 export function ButtonCard({url, tipo, ...props}: ButtonProps) {
     const router = useRouter();
 
-    function getPerson() {
-        const match: any = url.match(/\/(\d+)\/$/);
-        router.push(`/infos/detalhes/${tipo}/${match[1]}`);
-    }
+    function getPerson(url: string, tipo: string) {
+        const match = url.match(/\/(\d+)\/$/);
+      
+        if (match) {
+          const personId = match[1];
+          const newPath = `/infos/detalhes/${tipo}/${personId}`;
+          router.push(newPath);
+        } else {
+          throw new Error('URL inválida: ' + url);
+        }
+      }
 
 
     return (
-        <button onClick={() => getPerson()} {...props} />
+        <button onClick={() => getPerson(url, tipo)} {...props} />
     )
 
 }

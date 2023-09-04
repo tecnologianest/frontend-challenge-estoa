@@ -11,28 +11,18 @@ export type ButtonProps = ComponentProps<'input'> & {
 
 export function InputSearch({ tipoParams, ...props }: ButtonProps) {
 
-  let route: string = ''
-  switch (tipoParams) {
-    case tipo.PERSONAGEM:
-      route = "https://swapi.dev/api/people/?search="
-      break;
-
-    case tipo.FILMES:
-      route = "https://swapi.dev/api/films/?search="
-      break;
-
-    case tipo.PLANETA:
-      route = "https://swapi.dev/api/planets/?search="
-      break;
-
-    case tipo.NAVES:
-      route = "https://swapi.dev/api/starships/?search="
-      break;
-
-    case tipo.VEICULOS:
-      route = "https://swapi.dev/api/vehicles/?search="
-      break;
-
+  const routeMapping: Record<string, string> = {
+    [tipo.PERSONAGEM]: "https://swapi.dev/api/people/?search=",
+    [tipo.FILMES]: "https://swapi.dev/api/films/?search=",
+    [tipo.PLANETA]: "https://swapi.dev/api/planets/?search=",
+    [tipo.NAVES]: "https://swapi.dev/api/starships/?search=",
+    [tipo.VEICULOS]: "https://swapi.dev/api/vehicles/?search=",
+  };
+  
+  const route = routeMapping[tipoParams] || "";
+  
+  if (!route) {
+    throw new Error("Tipo de parâmetro inválido: " + tipoParams);
   }
 
   const [inputValue, setInputValue] = useState('');
