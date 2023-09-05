@@ -1,6 +1,10 @@
 import { ICharacter } from "./characters";
 
-export interface ICharacterDetails extends ICharacter {
+export interface ICharacterDetails {
+  name?: string;
+  species?: string;
+  birth_year?: string;
+  url?: string;
   eye_color?: string;
   gender?: string;
   hair_color?: string;
