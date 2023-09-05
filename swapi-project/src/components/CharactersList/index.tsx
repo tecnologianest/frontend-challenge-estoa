@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "@/hooks/redux-hooks";
 import { fetchCharacters, fetchPage, numOfPagesHandler } from "@/redux/reducers/characters";
 import { useEffect } from "react";
 import Card from "../Card";
-import { Spinner } from "@nextui-org/react";
+import { Pagination, Spinner } from "@nextui-org/react";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
@@ -16,19 +16,10 @@ export default function CharactersList() {
   const nextPage = useAppSelector((state) => state.characters.peopleObj.next);
   const quantity = useAppSelector((state) => state.characters.numOfPages);  
 
-  function resolveNextPage() {
-    if (nextPage == null) {
-      dispatch(fetchPage("https://swapi.dev/api/people/?page=1"));
-      return;
-    }
-    dispatch(fetchPage(nextPage));
-  }
-  function resolvePreviousPage() {
-    if (previousPage == null) {
-      dispatch(fetchPage(`https://swapi.dev/api/people/?page=${quantity}`));
-      return;
-    }
-    dispatch(fetchPage(previousPage));
+   const [currentPage, setCurrentPage] = React.useState(1);
+
+  function resolvePagination(){
+    dispatch(fetchPage(`https://swapi.dev/api/people/?page=${currentPage}`));
   }
 
   useEffect(() => {
@@ -39,6 +30,9 @@ export default function CharactersList() {
     dispatch(numOfPagesHandler());
   }, [characters]);
 
+  useEffect(() => {
+    resolvePagination()
+  }, [currentPage]);
 
 
   return (
@@ -55,24 +49,16 @@ export default function CharactersList() {
       )}
 
       {!loading && (
-        <section className="py-4 box-border overflow-y-auto h-[80vh]">
-          <button
-            className="text-slate-100 hover:text-blue-400"
-            onClick={() => resolvePreviousPage()}
-          >
-            Previous
-          </button>
-          <span className="text-slate-100 mx-2">{pageNum}</span>
-          <button
-            className="text-slate-100 hover:text-blue-400"
-            onClick={() => resolveNextPage()}
-          >
-            Next
-          </button>
+        <section className="py-8 box-border h-[80vh]">
+          <Pagination
+            total={quantity}
+            initialPage={currentPage}
+            onChange={setCurrentPage}
+            showControls
+            loop
+          />
 
-          {quantity && <span className="text-white">{quantity}</span>}
-
-          <div className="grid grid-cols-5 gap-8 mt-4">
+          <div className="grid grid-cols-5 gap-8 mt-8">
             {characters.results?.map((item: any) => (
               <Card key={item.name} {...item} />
             ))}
