@@ -9,13 +9,13 @@ export default function Header() {
       <Link href="/">
         <img src="assets/images/main-Logo.png" alt="logo" className="w-24" />
       </Link>
-      <nav>
+      <nav className="ml-8">
         <ul className="flex gap-4 font-semibold text-slate-100 select-none">
           <li className="hover:cursor-pointer hover:text-sky-400">
             <Link href="/">Home</Link>
           </li>
           <li className="hover:cursor-pointer hover:text-sky-400">
-            <Link href="/favorites"> Favorites </Link>
+            <Link href="/favorites"> Favoritos </Link>
           </li>
         </ul>
       </nav>
