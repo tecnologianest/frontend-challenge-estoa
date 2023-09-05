@@ -12,17 +12,19 @@ import { Pagination, Spinner } from "@nextui-org/react";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
-  
-  const { characters, loading, pageNum, quantityOfPages } = useAppSelector( state => {
+  const characters = useAppSelector((state) => {
     const regexp = new RegExp(state.search, "i");
-    
-    return {
-      characters: state.characters.peopleObj.results?.filter( (item) => item.name.match(regexp) ),
-      loading: state.characters.loading,
-      pageNum: state.characters.currentPage,
-      quantityOfPages: state.characters.numOfPages
-    };
-  })
+
+    return state.characters.peopleObj.results?.filter((item) =>
+      item.name.match(regexp)
+    );
+  });
+
+  const loading = useAppSelector((state) => state.characters.loading);
+  const pageNum = useAppSelector((state) => state.characters.currentPage);
+  const quantityOfPages = useAppSelector(
+    (state) => state.characters.numOfPages
+  );
 
   const [currentPage, setCurrentPage] = React.useState(1);
 

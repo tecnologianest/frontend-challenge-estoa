@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import characters from "./reducers/characters";
-import searchSlice from './reducers/search'
+import search from "./reducers/search";
 
 export const store = configureStore({
   reducer: {
     characters: characters,
-    search: searchSlice
+    search: search
   },
 });
 
