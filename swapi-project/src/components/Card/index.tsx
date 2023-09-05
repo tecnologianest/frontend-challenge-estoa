@@ -20,7 +20,7 @@ export default function Card({ name, birth_year, url, species }: ICharacter) {
                         w-full min-h-35 rounded p-2
                     "
       >
-        <h2>Nome:{name}</h2>
+        <h2>Nome: {name}</h2>
         <h2>Nascimento: {birth_year} </h2>
         <Specie specie={species}/>
       </div>

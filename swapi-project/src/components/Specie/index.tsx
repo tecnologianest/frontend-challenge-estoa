@@ -1,29 +1,25 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 interface SpecieProps {
-    specie: string
+  specie: string;
 }
 
-export default function Specie({specie}: SpecieProps) {
-  const [specieName, setSpecieName] = useState('possibly human');
-  
-    async function getSpecie() {
+export default function Specie({ specie }: SpecieProps) {
+  const [specieName, setSpecieName] = useState("Not Listed");
+
+  async function getSpecie() {
     const res = await axios.get(specie);
-    setSpecieName(res.data.name)
-    
+    setSpecieName(res.data.name);
   }
-  
-    useEffect(() => {
+
+  useEffect(() => {
     if (specie.length > 0) {
-        getSpecie();
+      getSpecie();
     }
-  }, [])
-  
-    return (
-    <div>Specie: {specieName}</div>
-  )
+  }, []);
+
+  return <div>Especie: {specieName}</div>;
 }
