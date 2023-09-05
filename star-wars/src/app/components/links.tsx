@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+
 import { useRouter } from 'next/navigation';
 
 export type Options = {
@@ -10,7 +11,10 @@ export type Options = {
     tipo: string;
 }
 
-const Links: React.FC<{ filmes: Options[] }> = ({ filmes }) => {
+interface LinksProps {
+    linksProps: Options[];
+}
+export default function Links( { linksProps }: LinksProps) {
 
     const router = useRouter();
 
@@ -22,7 +26,7 @@ const Links: React.FC<{ filmes: Options[] }> = ({ filmes }) => {
     return (
 
         <section className='body-home flex flex-wrap items-center justify-evenly'>
-        {filmes.map((filme) => (
+        {linksProps.map((filme: Options) => (
         <div key={filme.id} className="w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/6 flex items-center justify-center card">
             <button onClick={() => navigate(filme.tipo)} className="flex flex-col gap-3 p-4 hover:border-t-2 hover:border-b-2 text-center">
             <Image
@@ -39,5 +43,3 @@ const Links: React.FC<{ filmes: Options[] }> = ({ filmes }) => {
         </section>
     )
 }
-
-export default Links;

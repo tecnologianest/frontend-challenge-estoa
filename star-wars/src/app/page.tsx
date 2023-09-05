@@ -1,14 +1,14 @@
 import Image from 'next/image'
-import Links, {Options} from './components/links'
+import Links, { Options } from './components/links'
 import { tipo } from './infos/[...type]/models/tipo'
 
-  const option: Array<Options> = [
-    {id: 0, alt: 'sabre de luz do filme star wars', img: '/assets/lightsaber.svg', title: 'Filmes', tipo: tipo.FILMES},
-    {id: 1, alt: 'Android do filme do star wars', img: '/assets/droid.svg', title: 'Personagens' , tipo: tipo.PERSONAGEM},
-    {id: 3, alt: 'Representando uma galaxia', img: '/assets/galaxy.svg', title: 'Planetas' , tipo: tipo.PLANETA},
-    {id: 4, alt: 'Nave do filme dos star wars', img: '/assets/aircraft.svg', title: 'Espaçonaves' , tipo: tipo.NAVES},
-    {id: 5, alt: 'Nave do filme dos star wars', img: '/assets/battleship.svg', title: 'Veículos' , tipo: tipo.VEICULOS},
-  ]
+export const option: Options[] = [
+  {id: 0, alt: 'sabre de luz do filme star wars', img: '/assets/lightsaber.svg', title: 'Filmes', tipo: tipo.FILMES},
+  {id: 1, alt: 'Android do filme do star wars', img: '/assets/droid.svg', title: 'Personagens' , tipo: tipo.PERSONAGEM},
+  {id: 3, alt: 'Representando uma galaxia', img: '/assets/galaxy.svg', title: 'Planetas' , tipo: tipo.PLANETA},
+  {id: 4, alt: 'Nave do filme dos star wars', img: '/assets/aircraft.svg', title: 'Espaçonaves' , tipo: tipo.NAVES},
+  {id: 5, alt: 'Nave do filme dos star wars', img: '/assets/battleship.svg', title: 'Veículos' , tipo: tipo.VEICULOS},
+]
 
 export default function Home() {
 
@@ -32,7 +32,7 @@ export default function Home() {
 
       </header>
 
-      <Links filmes={option} />
+      <Links linksProps={option} />
 
 
     </main>

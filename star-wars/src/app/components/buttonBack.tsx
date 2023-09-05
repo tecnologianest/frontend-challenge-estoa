@@ -1,11 +1,9 @@
 'use client'
-import {ComponentProps} from 'react'
 import {useRouter} from 'next/navigation'
 import Image from 'next/image';
 
-export type ButtonProps = ComponentProps<'button'> 
 
-export function ButtonBack({...props}: ButtonProps) {
+export function ButtonBack() {
 
     const {back} = useRouter()
 
@@ -14,7 +12,7 @@ export function ButtonBack({...props}: ButtonProps) {
     }
 
     return (
-        <button onClick={() => backPage()}  {...props} >
+        <button type='button' onClick={() => backPage()}  >
             <Image
                src="/assets/back.svg"
                alt="Imagem Voltar"
