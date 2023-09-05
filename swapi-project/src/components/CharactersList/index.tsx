@@ -50,7 +50,7 @@ export default function CharactersList() {
   }, [currentPage]);
 
   return (
-    <div>
+    <div className="relative">
       {loading && (
         <div className="w-screen">
           <Spinner
@@ -62,30 +62,30 @@ export default function CharactersList() {
         </div>
       )}
 
-      {!loading && quantityOfPages > 1 &&(
-          <section className="py-8 box-border h-[80vh]">
-            <div className="flex justify-between w-full">
-              <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
-                Star Wars personagens
-              </h1>
+      {!loading && quantityOfPages > 1 && (
+        <section className="md:py-8 box-border h-[100vh] overflow-y-auto sticky top-4">
+          <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
+            <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
+              Star Wars personagens
+            </h1>
 
-              <Pagination
-                total={quantityOfPages}
-                initialPage={currentPage}
-                onChange={setCurrentPage}
-                size="sm"
-                showControls
-                loop
-                className="dark"
-              />
-            </div>
-            <div className="grid grid-cols-5 gap-8 mt-8">
-              {characters?.map((item: any) => (
-                <Card key={item.name} {...item} />
-              ))}
-            </div>
-          </section>
-        )}
+            <Pagination
+              total={quantityOfPages}
+              initialPage={currentPage}
+              onChange={setCurrentPage}
+              size="sm"
+              showControls
+              loop
+              className="dark"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8 overflow-y-hidden">
+            {characters?.map((item: any) => (
+              <Card key={item.name} {...item} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
