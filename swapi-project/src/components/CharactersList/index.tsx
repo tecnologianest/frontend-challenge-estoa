@@ -12,17 +12,17 @@ import { Pagination, Spinner } from "@nextui-org/react";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
-  const characters = useAppSelector(
-    (state) => state.characters.peopleObj.results
-  );
-  const loading = useAppSelector((state) => state.characters.loading);
-
-  const pageNum = useAppSelector((state) => state.characters.currentPage);
-  const previousPage = useAppSelector(
-    (state) => state.characters.peopleObj.previous
-  );
-  const nextPage = useAppSelector((state) => state.characters.peopleObj.next);
-  const quantity = useAppSelector((state) => state.characters.numOfPages);
+  
+  const { characters, loading, pageNum, quantityOfPages } = useAppSelector( state => {
+    const regexp = new RegExp(state.search, "i");
+    
+    return {
+      characters: state.characters.peopleObj.results?.filter( (item) => item.name.match(regexp) ),
+      loading: state.characters.loading,
+      pageNum: state.characters.currentPage,
+      quantityOfPages: state.characters.numOfPages
+    };
+  })
 
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -30,9 +30,9 @@ export default function CharactersList() {
     dispatch(fetchPage(`https://swapi.dev/api/people/?page=${currentPage}`));
   }
 
-  // useEffect(() => {
-  //   dispatch(fetchCharacters(pageNum));
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchCharacters(pageNum));
+  }, []);
 
   useEffect(() => {
     dispatch(numOfPagesHandler());
@@ -63,10 +63,10 @@ export default function CharactersList() {
             </h1>
 
             <Pagination
-              total={quantity}
+              total={quantityOfPages}
               initialPage={currentPage}
               onChange={setCurrentPage}
-              size='sm'
+              size="sm"
               showControls
               loop
               className="dark"
