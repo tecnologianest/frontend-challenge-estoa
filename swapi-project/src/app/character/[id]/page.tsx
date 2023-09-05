@@ -1,7 +1,7 @@
 "use client";
 import Specie from "@/components/Specie";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { fetchCharacterDetails } from "@/redux/reducers/characters";
+import { clearSelectedCharacter, fetchCharacterDetails } from "@/redux/reducers/characters";
 import React, { useEffect } from "react";
 
 interface PageProps {
@@ -19,6 +19,12 @@ function page({ params }: PageProps) {
   useEffect(() => {
     dispatch(fetchCharacterDetails(params.id));
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(clearSelectedCharacter());
+  }, [dispatch]);
+
+
 
   return (
     <div className="p-4 flex flex-col gap-2">

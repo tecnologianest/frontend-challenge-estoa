@@ -42,7 +42,9 @@ export const fetchCharacterDetails = createAsyncThunk(
 export  const characters = createSlice({
     name: 'characters',
     initialState,
-    reducers:{},
+    reducers:{
+      clearSelectedCharacter: (state) => { state.selectedCharacter = {} }
+    },
     extraReducers: builder => {
         builder
           .addCase(
@@ -68,4 +70,5 @@ export  const characters = createSlice({
     }
 })
 
+export const { clearSelectedCharacter } = characters.actions;
 export default characters.reducer
