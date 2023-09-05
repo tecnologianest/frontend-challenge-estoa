@@ -22,9 +22,9 @@ export default function CharactersList() {
     dispatch(fetchPage(`https://swapi.dev/api/people/?page=${currentPage}`));
   }
 
-  useEffect(() => {
-    dispatch(fetchCharacters(pageNum));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCharacters(pageNum));
+  // }, []);
   
   useEffect(() => {
     dispatch(numOfPagesHandler());

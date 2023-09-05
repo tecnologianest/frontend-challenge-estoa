@@ -90,6 +90,7 @@ export  const characters = createSlice({
           )
           .addCase(fetchPage.fulfilled, (state, {payload}: PayloadAction<IPeople>) => {
             state.peopleObj = payload;
+            state.numOfCharacters = payload.count;
             state.loading = false;
             state.error = "";
           })
