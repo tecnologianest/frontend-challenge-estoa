@@ -44,6 +44,7 @@ export const fetchPage = createAsyncThunk(
   }
 );
 
+
 export const fetchCharacterDetails = createAsyncThunk(
   "characters/fetchCharacterDetails", 
   async (id:string) => {
@@ -54,7 +55,7 @@ export const fetchCharacterDetails = createAsyncThunk(
   }
 );
 
-export  const characters = createSlice({
+export const characters = createSlice({
     name: 'characters',
     initialState,
     reducers:{
@@ -63,11 +64,9 @@ export  const characters = createSlice({
         if (state.numOfCharacters !== undefined) {
           const num = Math.trunc(state.numOfCharacters/10);
           const numPart = state.numOfCharacters % 10;
-          if (numPart === 0) {
-            state.numOfPages = num
-            return;
-          }
-          state.numOfPages = num + 1
+
+          numPart === 0 ? state.numOfPages = num : state.numOfPages = num + 1;
+
         }
       }
     },

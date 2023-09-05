@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux-hooks";
 import {
@@ -14,10 +15,10 @@ export default function CharactersList() {
   const dispatch = useAppDispatch();
   const characters = useAppSelector((state) => {
     const regexp = new RegExp(state.search, "i");
-
-    return state.characters.peopleObj.results?.filter((item) =>
+    const itens = state.characters.peopleObj.results?.filter((item) =>
       item.name.match(regexp)
     );
+    return itens;
   });
 
   const loading = useAppSelector((state) => state.characters.loading);
@@ -37,11 +38,15 @@ export default function CharactersList() {
   }, []);
 
   useEffect(() => {
-    dispatch(numOfPagesHandler());
+    if (characters) {
+      dispatch(numOfPagesHandler());
+    }
   }, [characters]);
 
   useEffect(() => {
-    resolvePagination();
+    if (characters) {
+      resolvePagination();
+    }
   }, [currentPage]);
 
   return (
@@ -57,30 +62,30 @@ export default function CharactersList() {
         </div>
       )}
 
-      {!loading && (
-        <section className="py-8 box-border h-[80vh]">
-          <div className="flex justify-between w-full">
-            <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
-              Star Wars personagens
-            </h1>
+      {!loading && quantityOfPages > 1 &&(
+          <section className="py-8 box-border h-[80vh]">
+            <div className="flex justify-between w-full">
+              <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
+                Star Wars personagens
+              </h1>
 
-            <Pagination
-              total={quantityOfPages}
-              initialPage={currentPage}
-              onChange={setCurrentPage}
-              size="sm"
-              showControls
-              loop
-              className="dark"
-            />
-          </div>
-          <div className="grid grid-cols-5 gap-8 mt-8">
-            {characters?.map((item: any) => (
-              <Card key={item.name} {...item} />
-            ))}
-          </div>
-        </section>
-      )}
+              <Pagination
+                total={quantityOfPages}
+                initialPage={currentPage}
+                onChange={setCurrentPage}
+                size="sm"
+                showControls
+                loop
+                className="dark"
+              />
+            </div>
+            <div className="grid grid-cols-5 gap-8 mt-8">
+              {characters?.map((item: any) => (
+                <Card key={item.name} {...item} />
+              ))}
+            </div>
+          </section>
+        )}
     </div>
   );
 }
