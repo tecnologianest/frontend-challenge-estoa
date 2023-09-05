@@ -11,12 +11,10 @@ export default function Header() {
       <nav>
         <ul className="flex gap-4 font-semibold text-slate-100 select-none">
           <li className="hover:cursor-pointer hover:text-sky-400">
-            {" "}
-            <Link href="/">Home</Link>{" "}
+            <Link href="/">Home</Link>
           </li>
           <li className="hover:cursor-pointer hover:text-sky-400">
-            {" "}
-            <Link href="/favorites"> Favorites </Link>{" "}
+            <Link href="/favorites"> Favorites </Link>
           </li>
         </ul>
       </nav>

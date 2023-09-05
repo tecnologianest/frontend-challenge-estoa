@@ -2,8 +2,9 @@
 import { ICharacter } from "@/types/characters";
 import Link from "next/link";
 import React from "react";
+import Specie from "../Specie";
 
-export default function Card({ name, birth_year, url }: ICharacter) {
+export default function Card({ name, birth_year, url, species }: ICharacter) {
   const cardNumber = getString(url);
 
   function getString(url: any) {
@@ -21,7 +22,7 @@ export default function Card({ name, birth_year, url }: ICharacter) {
       >
         <h2>Nome:{name}</h2>
         <h2>Nascimento: {birth_year} </h2>
-        <h2> Especie:</h2>
+        <Specie specie={species}/>
       </div>
     </Link>
   );
