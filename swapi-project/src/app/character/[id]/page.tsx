@@ -39,7 +39,7 @@ function page({ params }: PageProps) {
       <span>
         Altura: {(Number(characterDetails.height) / 100).toFixed(2)} m
       </span>
-      <span>Peso: {characterDetails.mass}</span>
+      <span>Peso: {characterDetails.mass} kg</span>
       <span>Cor da pele: {characterDetails.skin_color}</span>
 
       {characterDetails.species !== undefined && (
