@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import {Provider} from 'react-redux'
+import { Provider } from "react-redux";
 import store from "@/redux/store";
+import { NextUIProvider } from "@nextui-org/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <Provider store={store}>
         <body className={inter.className} suppressHydrationWarning={true}>
-          <Header />
-          {children}
+          <NextUIProvider>
+            <Header />
+            {children}
+          </NextUIProvider>
         </body>
       </Provider>
     </html>
