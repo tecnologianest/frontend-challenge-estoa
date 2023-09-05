@@ -9,15 +9,19 @@ interface InicitalState {
   peopleObj: IPeople;
   selectedCharacter: ICharacterDetails;
   loading: boolean;
-  currentPage: number
+  currentPage: number;
+  numOfPages: number;
+  numOfCharacters: number | undefined;
   error: string;
 }
 
 const initialState: InicitalState = {
   peopleObj: {},
   selectedCharacter: {},
+  numOfCharacters: 0,
   loading: false,
   currentPage: 1,
+  numOfPages: 0,
   error: "",
 };
 
@@ -55,7 +59,17 @@ export  const characters = createSlice({
     initialState,
     reducers:{
       clearSelectedCharacter: (state) => { state.selectedCharacter = {} },
-      clearpage: (state) => initialState
+      numOfPagesHandler: (state) => {
+        if (state.numOfCharacters !== undefined) {
+          const num = Math.trunc(state.numOfCharacters/10);
+          const numPart = state.numOfCharacters % 10;
+          if (numPart === 0) {
+            state.numOfPages = num
+            return;
+          }
+          state.numOfPages = num + 1
+        }
+      }
     },
     extraReducers: builder => {
         builder
@@ -63,6 +77,7 @@ export  const characters = createSlice({
             fetchCharacters.fulfilled,
             (state, { payload }: PayloadAction<IPeople>) => {
               state.peopleObj = payload;
+              state.numOfCharacters = payload.count;
               state.loading = false;
               state.error = "";
             }
@@ -78,6 +93,9 @@ export  const characters = createSlice({
             state.loading = false;
             state.error = "";
           })
+          .addCase(fetchPage.pending, (state) => {
+            state.loading = true
+          })
           .addCase(
             fetchCharacterDetails.fulfilled,
             (state, { payload }: PayloadAction<ICharacterDetails>) => {
@@ -87,5 +105,5 @@ export  const characters = createSlice({
     }
 })
 
-export const { clearSelectedCharacter, clearpage } = characters.actions;
+export const { clearSelectedCharacter, numOfPagesHandler } = characters.actions;
 export default characters.reducer
