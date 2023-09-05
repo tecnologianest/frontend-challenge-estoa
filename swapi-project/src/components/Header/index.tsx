@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
+import Search from "../Search";
 
 export default function Header() {
   return (
@@ -18,11 +19,8 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <input
-        type="text"
-        className="ml-auto bg-slate-200 px-4 py-2 placeholder:text-slate-500 placeholder:font-medium outline-none "
-        placeholder="Pesquisar personagem"
-      />
+      <Search />
+      
     </header>
   );
 }
