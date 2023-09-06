@@ -3,7 +3,7 @@ import { ICharacter } from "@/types/characters";
 import Link from "next/link";
 import React from "react";
 import Specie from "../Specie";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, AvatarIcon } from "@nextui-org/react";
 
 export default function Card({ name, birth_year, url, species }: ICharacter) {
   const cardNumber = getString(url);
@@ -22,7 +22,9 @@ export default function Card({ name, birth_year, url, species }: ICharacter) {
                     "
       >
         <div className="border-b border-gray-400 p-4 rounded-t flex items-center gap-4">
-          <Avatar showFallback src="https://images.unsplash.com/broken" />
+          <Avatar
+            icon={<AvatarIcon />}
+          />
           <h2 className=" text-yellow-500 font-semibold ">{name}</h2>
         </div>
         <div className="p-4">

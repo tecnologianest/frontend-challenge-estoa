@@ -1,7 +1,11 @@
 "use client";
+import CharacterInfo from "@/components/CharacterInfo";
 import Specie from "@/components/Specie";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { clearSelectedCharacter, fetchCharacterDetails } from "@/redux/reducers/characters";
+import {
+  clearSelectedCharacter,
+  fetchCharacterDetails,
+} from "@/redux/reducers/characters";
 import React, { useEffect } from "react";
 
 interface PageProps {
@@ -24,28 +28,38 @@ function page({ params }: PageProps) {
     dispatch(clearSelectedCharacter());
   }, [dispatch]);
 
-
-
   return (
-    <div className="p-4 flex flex-col gap-2">
-      <h1 className="mb-4 font-bold text-lg text-slate-800">
+    <div
+      className="flex flex-col gap-2
+                  bg-[#141318] min-h-[calc(100vh-72px)]
+                  px-8 md:px-32 py-4 box-border overflow-hidden"
+    >
+      <h1 className="mb-4 font-bold text-lg text-slate-50">
         {characterDetails.name}
       </h1>
-      <span>Nome: {characterDetails.name}</span>
-      <span>Nascimento: {characterDetails.birth_year}</span>
-      <span>Cor dos olhos: {characterDetails.eye_color}</span>
-      <span>Genero: {characterDetails.gender}</span>
-      <span>Cor do cabelo: {characterDetails.hair_color}</span>
-      <span>
-        Altura: {(Number(characterDetails.height) / 100).toFixed(2)} m
-      </span>
-      <span>Peso: {characterDetails.mass} kg</span>
-      <span>Cor da pele: {characterDetails.skin_color}</span>
+
+      <CharacterInfo text="Nome" info={characterDetails.name} />
+      <CharacterInfo text="Nascimento" info={characterDetails.birth_year} />
+      <CharacterInfo text="Cor dos olhos" info={characterDetails.eye_color} />
+      <CharacterInfo text="Genero" info={characterDetails.gender} />
+      <CharacterInfo text="Cor do cabelo" info={characterDetails.hair_color} />
+      <div>
+        <CharacterInfo
+          text="Altura"
+          info={(Number(characterDetails.height) / 100).toFixed(2)}
+        />
+        <span className="text-slate-100">m</span>
+      </div>
+      <div>
+        <CharacterInfo text="peso" info={characterDetails.mass} />
+        <span className="text-slate-100">Kg</span>
+      </div>
+      <CharacterInfo text="Cor da pele" info={characterDetails.skin_color} />
 
       {characterDetails.species !== undefined && (
         <Specie specie={characterDetails.species} />
       )}
-      
+
       <span>Genero: {characterDetails.gender}</span>
       <span>Genero: {characterDetails.gender}</span>
       <span>Genero: {characterDetails.gender}</span>
