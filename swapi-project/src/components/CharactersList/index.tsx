@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import Card from "../Card";
 import { Pagination, Skeleton, Spinner } from "@nextui-org/react";
 import CardsSkeleton from "../CardsSkeleton";
-import Films from "../Films";
+import MovieSelect from "../MovieSelect";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
@@ -82,7 +82,7 @@ export default function CharactersList() {
               className="dark"
             />
           </div>
-          <Films />
+          <MovieSelect />
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-4 overflow-y-hidden">
             {characters?.map((item: any) => (
               <Card key={item.name} {...item} />
