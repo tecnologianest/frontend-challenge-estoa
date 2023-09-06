@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import Card from "../Card";
 import { Pagination, Skeleton, Spinner } from "@nextui-org/react";
 import CardsSkeleton from "../CardsSkeleton";
+import Films from "../Films";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ export default function CharactersList() {
       {!loading && quantityOfPages > 1 && (
         <section className="md:py-8 box-border md:h-[100vh] overflow-y-auto sticky top-4">
           <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
-            <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
+            <h1 className="font-semibold text-xl text-sky-400 align-middle border-b-2 border-sky-400 inline-block pr-12">
               Star Wars personagens
             </h1>
 
@@ -81,7 +82,8 @@ export default function CharactersList() {
               className="dark"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8 overflow-y-hidden">
+          <Films />
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-4 overflow-y-hidden">
             {characters?.map((item: any) => (
               <Card key={item.name} {...item} />
             ))}
