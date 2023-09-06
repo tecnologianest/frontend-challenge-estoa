@@ -31,7 +31,7 @@ function page({ params }: PageProps) {
   return (
     <div
       className="flex flex-col gap-2
-                  bg-[#141318] min-h-[calc(100vh-72px)]
+                  bg-[#141318]
                   px-8 md:px-32 py-4 box-border overflow-hidden"
     >
       <h1 className="mb-4 font-bold text-lg text-slate-50">
