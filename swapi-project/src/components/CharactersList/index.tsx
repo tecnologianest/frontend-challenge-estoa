@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux-hooks";
@@ -9,7 +9,8 @@ import {
 } from "@/redux/reducers/characters";
 import { useEffect } from "react";
 import Card from "../Card";
-import { Pagination, Spinner } from "@nextui-org/react";
+import { Pagination, Skeleton, Spinner } from "@nextui-org/react";
+import CardsSkeleton from "../CardsSkeleton";
 
 export default function CharactersList() {
   const dispatch = useAppDispatch();
@@ -52,12 +53,13 @@ export default function CharactersList() {
   return (
     <div className="relative">
       {loading && (
-        <div className="w-screen">
+        <div className="">
+          <CardsSkeleton />
           <Spinner
-            label="Loading..."
             labelColor="warning"
-            color="warning"
+            color="default"
             className="mt-16 ml-auto"
+            size="sm"
           />
         </div>
       )}
