@@ -39,9 +39,8 @@ O projeto foi desenvolvido em NExtJs, Tailwind Css, TypeStript e gerenciamento d
 ## Instalação:
 
     Para Instalar a aplicação localmente, clone o repositorio e se sertifique de ter o node instalado.
-    Siga as instruçãoes abaixo:
-
-    - Entre na pasta swapi-project   com o comando cd ./swapi-project 
+    Entre na pasta swapi-project com o comando cd ./swapi-project 
+    
     - No terminal execute:
     
      - npm install
