@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import characters from "./reducers/characters";
 import search from "./reducers/search";
+import films from './reducers/films'
 
 export const store = configureStore({
   reducer: {
     characters: characters,
-    search: search
+    search: search,
+    films: films
   },
 });
 
