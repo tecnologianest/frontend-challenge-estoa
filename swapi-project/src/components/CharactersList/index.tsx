@@ -17,9 +17,17 @@ export default function CharactersList() {
   const dispatch = useAppDispatch();
   const characters = useAppSelector((state) => {
     const regexp = new RegExp(state.search, "i");
-    const itens = state.characters.peopleObj.results?.filter((item) =>
-      item.name.match(regexp)
-    );
+    const itens = state.characters.peopleObj.results?.filter((item) => {
+      if(item.films !== undefined) { //tests if character movies exist
+        if(state.select === "") { // load all characters if no movie filter is selected
+          return item.name.match(regexp);
+        }
+        return (
+          item.name.match(regexp) &&
+          item.films.find((film) => film == state.select)
+        );
+      }
+    });
     return itens;
   });
 

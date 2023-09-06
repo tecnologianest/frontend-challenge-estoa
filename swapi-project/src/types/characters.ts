@@ -3,6 +3,7 @@ export interface ICharacter {
   species: string;
   birth_year: string;
   url?: string;
+  films?: string[]
 }
 
 export interface IPeople {

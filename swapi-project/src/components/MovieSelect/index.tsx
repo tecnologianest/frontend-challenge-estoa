@@ -19,7 +19,12 @@ export default function MovieSelect() {
     <div className="mt-8">
       {loading && <span className="text-white">Loading films...</span>}
       {!loading && films !== undefined && (
-        <select className="" value={selectValue} onChange={e => dispatch(changeSelect(e.target.value))}>
+        <select 
+          className="" 
+          value={selectValue} 
+          onChange={e => {
+          dispatch(changeSelect(e.target.value))}}
+        >
           <option value="">Selecione um filme</option>
           {films.map((film: any, index: number) => (
             <option key={index} value={film.url}>
