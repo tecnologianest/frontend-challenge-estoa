@@ -65,7 +65,7 @@ export default function CharactersList() {
       )}
 
       {!loading && quantityOfPages > 1 && (
-        <section className="md:py-8 box-border h-[100vh] overflow-y-auto sticky top-4">
+        <section className="md:py-8 box-border md:h-[100vh] overflow-y-auto sticky top-4">
           <div className="flex flex-col gap-4 md:flex-row justify-between w-full">
             <h1 className="font-semibold text-xl text-sky-400 mt-4 border-b-2 border-sky-400 inline-block pr-12">
               Star Wars personagens

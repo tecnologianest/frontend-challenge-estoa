@@ -26,8 +26,8 @@ export default function Specie({ specie }: SpecieProps) {
 
   return (
     <div>
-      {loading && <span>Especie: ...</span>}
-      {!loading && <span>Especie: {specieName}</span>}
+      {loading && <span className="text-slate-100">Especie: ...</span>}
+      {!loading && <span className="text-slate-100">Especie: {specieName}</span>}
     </div>
     );
 }
