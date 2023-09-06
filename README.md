@@ -1,42 +1,67 @@
-# Desafio front-end da Estoa
+# SWAPI Project
 
-Esse repositório é o nosso desafio para avaliar o quão bom desenvolvedor front-end você é.
+pt-br
 
-Provavelmente você já está participando do nosso processo de contratação, mas se você caiu aqui por acaso, leia o documento até o final e caso haja interesse, você pode começar daqui mesmo.
+### Desafio técnico para a Estoa com página de personagens Star Wars
+
+<img width=80% textAlign="center" src="./swapi-project/public/assets/screenshots/home_desktop.png" alt="desktop">
+
+## Introdução
+
+Este é um projeto baseado na Api do star wars SWAPI, Single Page Application com diversos features feito em Nextjs garantindo uma ótima experiencia de usuário e com diversas boas práticas do desenvolvimento web.
+
+O projeto foi desenvolvido em NExtJs, Tailwind Css, TypeStript e gerenciamento de estados globais com o Redux js, contando com as melhores práticas buscando performace, bons visuais e layout totalmente responsivo. As principais ferramentas utilizadas são: Nexts, React Js, Redux, TypeStript, rotas dinamicas para cada personagem, Tailwind Css, leitura de endpoints da API SWAPI, Axios, React Icons, Hooks Customizados, useState e useEffect, componentes do Next UI.
+
+### Principais funcionalidades:
+
+- Navegação suave entre as páginas com o Single page application
+- Listagem dos Personagens de Star Wars a partir dos dados da api
+- estado de loading modelo esqueleto do Next UI
+- Filtro dos personagens por nome
+- Filtro dos personagens por Filmes
+- Página para cada personagem com todos os detalhes
+- Layout totalmente responsivo
+
+### Obrigado por conferir o projeto!
+
+---
+
+<img width=80% textAlign="center" src="./swapi-project/public/assets/screenshots/detailsPage_desktop.png" alt="desktop">
+
+### Mobile home
+
+<img  height=500 width=30% textAlign="center" src="./swapi-project/public/assets/screenshots/home_mobile.png" alt="mobile">
+
+### Mobile description page
+
+<img  height=500 width=30% textAlign="center" src="./swapi-project/public/assets/screenshots/detailsPage_mobile.png" alt="mobile">
+
+## Instalação:
+
+    Para Instalar a aplicação localmente, clone o repositorio e se sertifique de ter o node instalado.
+    Siga as instruçãoes abaixo:
+
+    - Entre na pasta swapi-project   com o comando cd ./swapi-project 
+    - No terminal execute:
+    
+     - npm install
+     - npm run dev
 
 
-## Sobre o desafio
+## Techs:
 
-Esse é um desafio, não um teste ou uma prova de faculdade, portanto não há uma única resposta certa.
+ <div style="display: inline_block">
+  <img align="center" alt="NextJs" height="50" width="60" src="https://github.com/devicons/devicon/blob/master/icons/nextjs/nextjs-original.svg">
+  <img align="center" alt="redux" height="50" width="60" src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg">
+  <img align="center" alt="Typescript" height="50" width="60" src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg">
+   <img align="center" alt="Tailwind" height="50" width="60" src="https://github.com/devicons/devicon/blob/master/icons/tailwindcss/tailwindcss-plain.svg">
+  
+</div>
+<br>
 
-Daremos a você alguns requisitos que devem ser cumpridos, e pelos quais você será avaliado, mas deixamos livre a escolha do método de solução.
+### Developer: Cléber Severo
 
-O que nós esperamos aprender de você com o desafio:
+<a href="mailto:clebersevero1998@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a> <a href="https://www.linkedin.com/in/cleber-severo/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+<br>
 
-- Seu estilo de trabalho
-- Como você pensa e resolve problemas
-- Como você se comunica
-
-O que nós esperamos que você aprenda sobre a Estoa:
-
-- Como nós trabalhamos como um time.
-- Tenha uma visão próxima dos desafios que enfrentamos no dia-a-dia.
-
-## Próximos passos
-
-1. Faça um _fork_ desse repositório para sua conta pessoal.
-2. As instruções do desafio se encontram no arquivo [`CHALLENGE.md`](/CHALLENGE.md).
-2. Resolva o desafio da forma que você julgar mais adequada.
-3. Preferencialmente utilize uma _branch_ chamada `desafio` ou com o seu nome (`nome-sobrenome`) para o desenvolvimento. E submeta o _pull-request_ para essa mesma _branch_.
-
-## Considerações
-
-- Nós não iremos limitar a sua escolha por ferramentas e bibliotecas, porém é de suma importância que use React.js, faça escolhas que sejam condizentes com o desafio apresentado. Para que utilizar uma bazuca para matar uma formiga?
-- Tente escrever o melhor código possível para que possamos avaliar o seu _pull-request_ com mais facilidade. E lembre-se: Você vai ter que explicar pessoalmente para nós depois.
-- Também leve em consideração que estamos availando como será o seu modo de trabalho no nosso dia a dia. Então, use as melhores práticas de semântica, estruturação, legibilidade e componentização.
-
-## Dúvidas?
-
-Ficou com alguma dúvida sobre como irá funcionar o processo? Entre em contato que nós te ajudaremos com o processo.
-
-**Boa sorte!**
+<br>
