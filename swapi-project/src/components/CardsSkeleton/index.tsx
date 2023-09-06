@@ -3,8 +3,8 @@ import CardLoading from "./CardLoading";
 
 export default function CardsSkeleton() {
   return (
-    <section className="md:py-8 box-border overflow-y-auto sticky top-4">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-2 mt-8">
+    <section className="md:py-8 box-border overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
         <CardLoading />
         <CardLoading />
         <CardLoading />
