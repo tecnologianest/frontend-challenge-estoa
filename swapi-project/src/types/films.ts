@@ -1,8 +1,11 @@
-export interface IFilms {
-    results?: IFilm
+export interface IFilm {
+  title: string;
+  url: string;
 }
 
-export interface IFilm {
-    name: string
-    url: string
+export interface IFilms {
+  count?: number;
+  next?: string;
+  previous?: string;
+  results?: IFilm[];
 }
